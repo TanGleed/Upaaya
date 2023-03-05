@@ -1,0 +1,37 @@
+{
+  "name": "upaaya_server",
+  "version": "1.0.0",
+  "description": "Backend server for a cross-platform app that connects people in need of skilled labor with professionals where users can post jobs and recieve bids form skilled workders ranging from creative and digital to administrative and technical. The goal of Upaaya is to make it easy for people to find the right worker for their job at a reasonable rate.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "server": "nodemon ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TanGleed/Upaaya.git"
+  },
+  "keywords": [
+    "flutter",
+    "node.js",
+    "express.js",
+    "mongodb",
+    "riverpod",
+    "flutter_hook"
+  ],
+  "author": "tangle_team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TanGleed/Upaaya/issues"
+  },
+  "homepage": "https://github.com/TanGleed/Upaaya#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}

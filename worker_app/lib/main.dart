@@ -11,7 +11,7 @@ void main() {
     // For widgets to be able to read providers, we need to wrap the entire
     // application in a "ProviderScope" widget.
     // This is where the state of our providers will be stored.
-    ProviderScope(
+    const ProviderScope(
       child: MyApp(),
     ),
   );
@@ -19,6 +19,8 @@ void main() {
 
 // Extend HookConsumerWidget instead of HookWidget, which is exposed by Riverpod
 class MyApp extends HookConsumerWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // We can use hooks inside HookConsumerWidget
