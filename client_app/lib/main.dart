@@ -1,3 +1,4 @@
+import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/widget/navigation_drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -30,14 +31,7 @@ class MyApp extends HookConsumerWidget {
     final String value = ref.watch(exampleProvider);
 
     return MaterialApp(
-      home: Scaffold(
-        drawer: NavigationDrawerWidget(),
-        appBar: AppBar(title: Center(child: const Text('Upaaya-Cilent'))),
-        body: Center(
-          child: Text('$value ${counter.value}'),
-        ),
-      ),
-      theme: ThemeData(primarySwatch: Colors.grey),
+      home: Auth(),
     );
   }
 }
