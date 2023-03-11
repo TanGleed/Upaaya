@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/widgets/authFormFields.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +18,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final formkey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -32,6 +31,13 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  void register() {
+    bool validatedForm = formkey.currentState!.validate();
+    if (!validatedForm) {
+      return;
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalVariable.backgroundcolor,
@@ -39,6 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Form(
+              key: formkey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -75,18 +82,23 @@ class _RegisterPageState extends State<RegisterPage> {
                             horizontal: GlobalVariable.screenWidth * 0.05),
                         child: Column(
                           children: [
-                            FormFields()
-                                .formFields(emailController, false, "Email"),
+                            FormFields().formFields(
+                                nameController, false, false, "Full Name"),
                             const SizedBox(
                               height: 10,
                             ),
                             FormFields().formFields(
-                                passwordController, true, "Password"),
+                                emailController, false, true, "Email"),
                             const SizedBox(
                               height: 10,
                             ),
                             FormFields().formFields(
-                                passwordController, true, "Confirm Password"),
+                                passwordController, true, false, "Password"),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            FormFields().formFields(confirmPasswordController,
+                                true, false, "Confirm Password"),
                           ],
                         ),
                       ),
@@ -97,7 +109,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         padding: EdgeInsets.symmetric(
                             horizontal: GlobalVariable.screenWidth * 0.3),
                         child: GestureDetector(
-                          onTap: () {}, //APi Calls
+                          onTap: () {
+                            register();
+                          }, //APi Calls
                           child: Container(
                             padding: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
@@ -144,13 +158,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(
                         height: 50,
                       ),
-                      const Text(
-                        "Register With",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      // const Text(
+                      //   "Register With",
+                      //   style: TextStyle(
+                      //     fontSize: 14,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],

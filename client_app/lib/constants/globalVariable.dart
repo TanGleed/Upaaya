@@ -16,3 +16,8 @@ class GlobalVariable {
     orientation = _mediaQueryData.orientation;
   }
 }
+
+class ApiURL {
+  static const String apiURL = "0.0.0.0:4000";
+  static const String signupAPI = "/api/auth/signup";
+}
