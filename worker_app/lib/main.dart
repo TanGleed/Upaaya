@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:worker_app/features/auth/screens/auth.dart';
 import 'package:worker_app/pages/home_page.dart';
 import 'package:worker_app/widgets/nav_drawer_wid.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends HookConsumerWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: Auth(),
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
   }

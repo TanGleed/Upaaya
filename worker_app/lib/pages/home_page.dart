@@ -85,15 +85,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  // Container(
-                  //   height:,
-                  //   alignment: Alignment.center,
-                  //   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  //   child: FloatingActionButton(
-                  //     onPressed: () {},
-                  //     backgroundColor: Colors.deepPurple,
-                  //   ),
-                  // )
                 ],
               ),
             ),

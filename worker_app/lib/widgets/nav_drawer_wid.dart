@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:worker_app/features/auth/screens/auth.dart';
+import 'package:worker_app/features/auth/screens/login.dart';
 import 'package:worker_app/pages/profile_page.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -37,7 +39,13 @@ class NavigationDrawerWidget extends StatelessWidget {
             const SizedBox(height: 16),
             buildMenuItem(text: 'Terms and conditions', icon: Icons.note),
             const SizedBox(height: 16),
-            buildMenuItem(text: 'Logout', icon: Icons.logout),
+            buildMenuItem(
+                text: 'Logout',
+                icon: Icons.logout,
+                onClicked: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Auth()));
+                }),
             const SizedBox(height: 24),
           ])),
     );
