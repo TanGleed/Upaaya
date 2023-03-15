@@ -1,48 +1,34 @@
 const jobPostsServices = require("../services/jobPosts.services");
-const JobPostModel = require("../../models/jobPosts.model");
-const mongoose = require("mongoose");
 
-const getJobPosts = async (req, res) => {
-  const allJobPosts = await jobPostsServices.getJobPosts(req.params);
-
-  res.status(200).send({
-    status: "OK",
-    data: allJobPosts,
-  });
+const getJobPosts = async (req, res, next) => {
+  try {
+    const allJobPosts = await jobPostsServices.getJobPosts(req.params);
+    res.status(200).send({
+      status: "OK",
+      data: allJobPosts,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getJobPost = (req, res) => {
   res.status(200).send("Get one workout");
 };
 
-const createJobPost = async (req, res) => {
+const createJobPost = async (req, res, next) => {
   const { body } = req;
+  const { params } = req;
 
-  if (!body.title || !body.location || !body.tags) {
-    res.status(400).send({
-      status: "FAILED",
-      data: {
-        error:
-          "One of the following keys is missing or is empty in request body: 'title', 'location' and 'tags'",
-      },
+  try {
+    const createdJobPost = await jobPostsServices.createJobPost(body, params);
+    res.status(201).send({
+      statusMessage: "JobPost Created",
+      data: createdJobPost,
     });
-    return;
+  } catch (error) {
+    next(error);
   }
-
-  const newJobPost = new JobPostModel({
-    title: body.title,
-    location: body.location,
-    description: body.description,
-    tags: body.tags,
-    additionalInfo: body.additionalInfo,
-  });
-
-  const createdJobPost = await newJobPost.save();
-  res.status(201).json({
-    status: "OK",
-    message: "New JonPost Created",
-    data: createdJobPost,
-  });
 };
 
 const updateJobPost = (req, res) => {

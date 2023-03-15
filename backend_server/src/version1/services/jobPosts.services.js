@@ -1,22 +1,44 @@
 const jobPostsData = require("../database/jobPosts.data");
+const CustomError = require("../../errors/custom-error");
+const JobPost = require("../../models/jobPosts.model");
 
 const getJobPosts = async (params) => {
   try {
     const allJobPosts = await jobPostsData.getJobPosts(params);
     return allJobPosts;
   } catch (err) {
-    return null;
+    next(err);
   }
 };
 
-const createJobPost = (newJobPost) => {
-  const serviceInsertedJobPost = { ...newJobPost };
+const createJobPost = async (body, params) => {
+  const { title, location, description, tags, additionalInfo } = body;
+
+  if (!title) {
+    throw new CustomError("JOB_TITLE_NOT_PROVIDED");
+  }
+
+  if (!location) {
+    throw new CustomError("LOCATION_NOT_PROVIDED");
+  }
+
+  if (!tags) {
+    throw new CustomError("AT_LEAST_ONE_JOB_TAG_IS_REQUIRED");
+  }
+
+  const newJobPost = new JobPost({
+    title,
+    location,
+    description,
+    tags,
+    additionalInfo,
+  });
 
   try {
-    const createdJobPost = jobPostsData.createJobPost(serviceInsertedJobPost);
+    const createdJobPost = await newJobPost.save();
     return createdJobPost;
   } catch (error) {
-    throw error;
+    next(error);
   }
 };
 

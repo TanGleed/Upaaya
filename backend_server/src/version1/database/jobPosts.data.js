@@ -2,14 +2,13 @@
 //const mongoose = require("mongoose");
 const JobPost = require("../../models/jobPosts.model");
 
-const getJobPosts = () => {
+const getJobPosts = (params) => {
   return Promise.resolve(JobPost.find() || null);
 };
 
-const createJobPost = async (newJobPost) => {
-  const JobPost = { ...newJobPost };
-
-  return insertedJobPost;
+const createJobPost = (newJobPost, params) => {
+  // const jobPost = { ...newJobPost };
+  // return jobPost.save();
 };
 
 module.exports = {
