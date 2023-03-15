@@ -1,14 +1,16 @@
-//const JOBS = require("../../models/jobs.json");
-//const mongoose = require("mongoose");
+// Description: This file contains the database functions for the jobPosts model
+
+// Import the jobPost model
 const JobPost = require("../../models/jobPosts.model");
 
+// Create the getJobPosts function
 const getJobPosts = (params) => {
   return Promise.resolve(JobPost.find() || null);
 };
 
-const createJobPost = (newJobPost, params) => {
-  // const jobPost = { ...newJobPost };
-  // return jobPost.save();
+// Create the createJobPost function
+const createJobPost = (jobPost, params) => {
+  return Promise.resolve(jobPost.save() || null);
 };
 
 module.exports = {

@@ -1,3 +1,5 @@
+// Description: This is the main file of the backend server. It is the entry point of the server.
+
 // IMPORTS FROM PACKAGES
 const express = require("express");
 const colors = require("colors");

@@ -1,3 +1,6 @@
+// Description: Custom error class
+
+// Import the error codes
 class CustomError extends Error {
   constructor(code) {
     super();
@@ -5,4 +8,5 @@ class CustomError extends Error {
   }
 }
 
+// Export the custom error
 module.exports = CustomError;
