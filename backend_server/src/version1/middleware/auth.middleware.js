@@ -35,7 +35,8 @@ function generateToken(userModel) {
   );
 }
 
-module.exports = {
-  authToken,
-  generateToken,
+module.exports =
+{
+    authToken,
+    generateToken
 };

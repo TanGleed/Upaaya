@@ -1,8 +1,7 @@
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/login.dart';
 import 'package:client_app/features/auth/screens/register.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/material.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
