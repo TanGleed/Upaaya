@@ -7,8 +7,9 @@ const dotenv = require("dotenv").config();
 
 // IMPORTS FROM OTHER FILES
 const connectDB = require("./src/config/config");
+const errorHandler = require("./src/version1/middleware/errorHandler.middleware");
 const jobPostsRouter = require("./src/version1/routes/jobPosts.routes");
-const authRouter =require("./src/version1/routes/auth.routes");
+const authRouter = require("./src/version1/routes/auth.routes");
 
 // INIT
 const PORT = process.env.PORT || 5000;
@@ -24,9 +25,13 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/api/v1/jobpost", jobPostsRouter);
-app.use("/api/v1/auth",authRouter);
+app.use("/api/v1/auth", authRouter);
+app.post("/api/login", (req, res, next) => {
+  next(new Error("FAILED"));
+});
+
 // Error handler
-//app.use(errorHandler);
+app.use(errorHandler);
 
 // npm run server
 app.listen(PORT, hostname, () => {
