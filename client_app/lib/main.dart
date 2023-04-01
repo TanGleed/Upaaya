@@ -1,3 +1,4 @@
+import 'package:client_app/Pages/Home_Page.dart';
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/auth/screens/otp.dart';
 import 'package:client_app/router.dart';
@@ -34,7 +35,7 @@ class MyApp extends HookConsumerWidget {
 
     return MaterialApp(
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Auth(),
+      home: HomePage(),
     );
   }
 }

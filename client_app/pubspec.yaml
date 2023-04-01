@@ -40,7 +40,8 @@ dependencies:
   http: ^0.13.5
   snippet_coder_utils: ^1.0.12
   provider: ^6.0.3
-
+  intl: ^0.17.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
