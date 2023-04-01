@@ -47,5 +47,5 @@ function generateToken(userModel)
 module.exports =
 {
     authToken,
-    generateToken,
+    generateToken
 };

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Screen Config
 class GlobalVariable {
   static late MediaQueryData _mediaQueryData;
   static late double screenWidth;
@@ -15,9 +16,37 @@ class GlobalVariable {
     screenHeight = _mediaQueryData.size.height;
     orientation = _mediaQueryData.orientation;
   }
+
+  double getProportionateScreenWidth(double inputWidth) {
+    double screenWidth = GlobalVariable.screenWidth;
+    // 375 is the layout width that designer use
+    return (inputWidth / 375.0) * screenWidth;
+  }
+
+  double getProportionateScreenHeight(double inputHeight) {
+    double screenHeight = GlobalVariable.screenHeight;
+    // 812 is the layout height that designer use
+    return (inputHeight / 812.0) * screenHeight;
+  }
 }
 
+//API URLS
 class ApiURL {
-  static const String apiURL = "0.0.0.0:4000";
-  static const String signupAPI = "/api/auth/signup";
+  static const String apiURL = "127.0.0.1:5000";
+  static const String signupAPI = "/api/v1/auth/register";
+  static const String uniqueemailAPI = "/api/v1/auth/uniqueemail";
+  static const String sendOTPAPI = "api/v1/auth/sendOTP";
+  static const String verifyOTPAPI = "api/v1/auth/verifyOTP";
+  static const String loginAPI = "api/v1/auth/login";
+  static const String resetpassAPI = "api/v1/auth/resetpassword";
+}
+
+//Keyboard
+class KeyboardUtil {
+  static void hideKeyboard(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+  }
 }
