@@ -22,7 +22,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   void validate(RegisterModal modal) {
     bool validatedForm = formkey.currentState!.validate();
     if (validatedForm) {
-      print(modal.email.text);
       isAsyncprocess = true;
       setState(() {});
       AuthAPIService.uniqueEmail(modal).then((value) => {
