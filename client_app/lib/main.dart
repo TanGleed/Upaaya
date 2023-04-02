@@ -35,7 +35,7 @@ class MyApp extends HookConsumerWidget {
 
     return MaterialApp(
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: HomePage(),
+      home: Auth(),
     );
   }
 }

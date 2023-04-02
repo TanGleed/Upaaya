@@ -1,3 +1,4 @@
+import 'package:client_app/Pages/Home_Page.dart';
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/forgotpass.dart';
 import 'package:client_app/features/auth/services/auth_api_service.dart';
@@ -43,7 +44,12 @@ class _LoginPageState extends State<LoginPage> {
                   {
                     setState(() {
                       isAsyncProcess = false;
-                    })
+                    }),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const HomePage(),
+                        ))
                   }
                 else if (response == "Invalid Password")
                   {
@@ -95,11 +101,11 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: GlobalVariable.backgroundcolor,
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: ProgressHUD(
-              key: UniqueKey(),
-              inAsyncCall: isAsyncProcess,
+        child: ProgressHUD(
+          inAsyncCall: isAsyncProcess,
+          key: UniqueKey(),
+          child: Center(
+            child: SingleChildScrollView(
               child: Form(
                 key: formkey,
                 child: Column(
