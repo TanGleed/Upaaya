@@ -26,9 +26,7 @@ app.use(morgan("dev"));
 // Routes
 app.use("/api/v1/jobpost", jobPostsRouter);
 app.use("/api/v1/auth", authRouter);
-app.post("/api/login", (req, res, next) => {
-  next(new Error("FAILED"));
-});
+
 
 // Error handler
 app.use(errorHandler);

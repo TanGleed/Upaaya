@@ -10,4 +10,5 @@ router.post("/sendOTP",Controller.sendOTP);
 router.post("/verifyOTP",Controller.verifyOTP);
 router.post("/login",Controller.login);
 router.post("/resetpassword",Controller.resetpassword);
+
 module.exports = router;

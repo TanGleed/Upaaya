@@ -1,8 +1,6 @@
-import 'package:client_app/Pages/Profile_Page.dart';
-import 'package:client_app/Pages/Request_Page.dart';
+import 'package:client_app/features/homepage/screens/profile_page.dart';
+import 'package:client_app/features/homepage/screens/request_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(horizontal: 20);
