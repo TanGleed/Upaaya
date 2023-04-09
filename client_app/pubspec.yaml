@@ -38,7 +38,12 @@ dependencies:
   hooks_riverpod: ^2.1.3
   google_fonts:
   http: ^0.13.5
-
+  snippet_coder_utils: ^1.0.12
+  provider: ^6.0.3
+  intl: ^0.17.0
+  geolocator: ^9.0.2
+  geocoding: ^2.1.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
