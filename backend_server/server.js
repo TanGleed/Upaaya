@@ -10,6 +10,7 @@ const connectDB = require("./src/config/config");
 const errorHandler = require("./src/version1/middleware/errorHandler.middleware");
 const jobPostsRouter = require("./src/version1/routes/jobPosts.routes");
 const authRouter = require("./src/version1/routes/auth.routes");
+const jobRoutes = require('./src/version1/routes/jobFetch.routes');
 
 // INIT
 const PORT = process.env.PORT || 5000;
@@ -26,9 +27,8 @@ app.use(morgan("dev"));
 // Routes
 app.use("/api/v1/jobpost", jobPostsRouter);
 app.use("/api/v1/auth", authRouter);
-app.post("/api/login", (req, res, next) => {
-  next(new Error("FAILED"));
-});
+
+app.use('/api/v1/jobs', jobRoutes);
 
 // Error handler
 app.use(errorHandler);
