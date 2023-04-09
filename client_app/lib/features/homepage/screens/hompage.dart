@@ -1,7 +1,5 @@
-import 'package:client_app/widget/navigation_drawer_widget.dart';
+import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

@@ -1,7 +1,7 @@
-import 'package:client_app/Pages/Home_Page.dart';
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/forgotpass.dart';
 import 'package:client_app/features/auth/services/auth_api_service.dart';
+import 'package:client_app/features/homepage/screens/hompage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:client_app/features/auth/widgets/authFormFields.dart';

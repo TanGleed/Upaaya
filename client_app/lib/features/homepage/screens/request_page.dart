@@ -1,9 +1,8 @@
-import 'package:client_app/Pages/Profile_Page.dart';
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
+
+import '../../../constants/globalVariable.dart';
 
 String cdata = DateFormat("yyyy-MM-dd").format(DateTime.now());
 String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
