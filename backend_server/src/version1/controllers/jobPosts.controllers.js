@@ -3,6 +3,7 @@
 // @Description: This file contains all the controllers for the jobPosts
 
 const jobPostsServices = require("../services/jobPosts.services");
+const handleUpload = require("../middleware/jobPost.middleware");
 
 // @desc: Get all jobPosts
 // @route: GET /api/v1/jobPosts
@@ -10,7 +11,7 @@ const jobPostsServices = require("../services/jobPosts.services");
 const getJobPosts = async (req, res, next) => {
   try {
     // try to get all the jobPosts
-    const allJobPosts = await jobPostsServices.getJobPosts(req.params);
+    const allJobPosts = await jobPostsServices.getJobPosts();
     res.status(200).send({
       // send the response
       status: "OK",
@@ -25,23 +26,14 @@ const getJobPosts = async (req, res, next) => {
 // @desc: Get a single jobPost
 // @route: GET /api/v1/jobPosts/:id
 // @access: Public
-const getJobPost = (req, res) => {
-  res.status(200).send("Get one workout");
-};
-
-// @desc: Create a jobPost
-// @route: POST /api/v1/jobPosts
-// @access: Private
-const createJobPost = async (req, res, next) => {
-  const { body } = req; // get the body of the request
-  const { params } = req; // get the params of the request
-
+const getJobPost = async (req, res, next) => {
   try {
-    // try to create a jobPost
-    const createdJobPost = await jobPostsServices.createJobPost(body, params);
-    res.status(201).send({
-      statusMessage: "JobPost Created",
-      data: createdJobPost,
+    // try to get a single jobPost
+    const singleJobPost = await jobPostsServices.getJobPost(req.params);
+    res.status(200).send({
+      // send the response
+      status: "OK",
+      data: singleJobPost,
     });
   } catch (error) {
     // catch any errors
@@ -49,18 +41,72 @@ const createJobPost = async (req, res, next) => {
   }
 };
 
+// @desc: Create a jobPost
+// @route: POST /api/v1/jobPosts
+// @access: Private
+const createJobPost = async (req, res, next) => {
+  try {
+    // Call handleUpload middleware to handle file uploads
+    await handleUpload(req, res, async (err) => {
+      if (err) {
+        return res.status(400).send({ message: err.message });
+      }
+
+      // Get the body of the request
+      const { body, files } = req;
+
+      // Create the job post
+      const createdJobPost = await jobPostsServices.createJobPost(body, files);
+
+      res.status(201).send({
+        statusMessage: "JobPost Created",
+        data: createdJobPost,
+      });
+    });
+  } catch (error) {
+    // catch any errors
+    next(error);
+    console.log(error);
+  }
+};
+
 // @desc: Update a jobPost
 // @route: PUT /api/v1/jobPosts/:id
 // @access: Private
 const updateJobPost = (req, res) => {
-  res.status(200).send("update a existing workout");
+  const { body } = req; // get the body of the request
+  const { params } = req; // get the params of the request
+
+  try {
+    // try to update a jobPost
+    const updatedJobPost = jobPostsServices.updateJobPost(body, params);
+    res.status(200).send({
+      statusMessage: "JobPost Updated",
+      data: updatedJobPost,
+    });
+  } catch (error) {
+    // catch any errors
+    next(error);
+  }
 };
 
 // @desc: Delete a jobPost
 // @route: DELETE /api/v1/jobPosts/:id
 // @access: Private
 const deleteJobPost = (req, res) => {
-  res.status(200).send("Get a existing workout");
+  const { params } = req; // get the params of the request
+
+  try {
+    // try to delete a jobPost
+    const deletedJobPost = jobPostsServices.deleteJobPost(params);
+    res.status(200).send({
+      statusMessage: "JobPost Deleted",
+      data: deletedJobPost,
+    });
+  } catch (error) {
+    // catch any errors
+    next(error);
+  }
 };
 
 // export all the controllers
