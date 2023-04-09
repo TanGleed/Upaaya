@@ -176,8 +176,8 @@ async function sendOTP(params,callback)
     
         auth:
         {
-          user: "cekinmell@gmail.com",
-          pass: "zundljojniarnvbd",
+          user: "sudeepbhattarai1792@gmail.com",
+          pass: "bjlxrlgfsndcglec",
         }
       });
     
@@ -186,6 +186,7 @@ async function sendOTP(params,callback)
     {
         if(error)
         {
+            console.log("error");
             
            return callback(error);
 
