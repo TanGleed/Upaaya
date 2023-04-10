@@ -1,6 +1,6 @@
+import 'package:client_app/api_service.dart/apiService.dart';
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/otp.dart';
-import 'package:client_app/features/auth/services/auth_api_service.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
 import 'package:client_app/features/auth/widgets/authFormFields.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     if (validatedForm) {
       isAsyncprocess = true;
       setState(() {});
-      AuthAPIService.uniqueEmail(modal).then((value) => {
+      APIService.uniqueEmail(modal).then((value) => {
             if (!value)
               {
                 sendotp(modal),
@@ -46,7 +46,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   void sendotp(RegisterModal modal) {
-    AuthAPIService.sendotp(modal).then((response) {
+    APIService.sendotp(modal).then((response) {
       if (response) {
         isAsyncprocess = false;
         setState(() {});
