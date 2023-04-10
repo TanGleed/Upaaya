@@ -1,3 +1,5 @@
+// Description: This is the main file of the backend server. It is the entry point of the server.
+
 // IMPORTS FROM PACKAGES
 const express = require("express");
 const colors = require("colors");
@@ -11,6 +13,8 @@ const errorHandler = require("./src/version1/middleware/errorHandler.middleware"
 const jobPostsRouter = require("./src/version1/routes/jobPosts.routes");
 const authRouter = require("./src/version1/routes/auth.routes");
 const homepageRouter= require("./src/version1/routes/category.routes");
+const jobRoutes = require('./src/version1/routes/jobFetch.routes');
+
 // INIT
 const PORT = process.env.PORT || 5000;
 const hostname = "127.0.0.1";
@@ -29,6 +33,7 @@ app.use("src/version1/uploads",express.static("uploads"));
 app.use("/api/v1/jobpost", jobPostsRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/category",homepageRouter );
+app.use('/api/v1/jobs', jobRoutes);
 
 // Error handler
 app.use(errorHandler);
