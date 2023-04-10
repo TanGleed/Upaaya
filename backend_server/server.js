@@ -18,7 +18,7 @@ const jobRoutes = require('./src/version1/routes/jobFetch.routes');
 
 // INIT
 const PORT = process.env.PORT || 5000;
-const hostname = "127.0.0.1";
+const hostname = "192.168.10.74";
 ;
 const app = express();
 
@@ -29,7 +29,8 @@ connectDB();
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use("src/version1/uploads",express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
+
 
 // Routes
 app.use("/api/v1/jobpost", jobPostsRouter);

@@ -1,39 +1,43 @@
-var admin= require("firebase-admin");
-var fcm= require("fcm-node");
+var admin = require("firebase-admin");
+var fcm = require("fcm-notification");
 
-var serviceAccount= require("../../config/notify.json");
-const certPath= admin.credential.cert(serviceAccount);
-var FCM= new fcm(certPath);
+var serviceAccount = require("../../config/notify.json");
+const certPath = admin.credential.cert(serviceAccount);
+var FCM = new fcm(certPath);
 
 //send notification
-async function sendPushNotification(params,callback){
-    try{
-        let message= {
-            notification:{
-                title:"Test Notification",
-                body:"Notification message"
+async function sendPushNotification(params, callback) {
+    try {
+        var payload = {
+            notification: {
+                title: "Test Notification",
+                body: "Notification message"
             },
-            data:{
+            token: params.fcm_token,
+            data: {
                 orderId: "123456",
                 orderDate: "2022-10-28"
             },
-            token: req.body.fcm_token,
-        };
-        FCM.send(message, function(err, res){
-            if(err){
-                throw(err);
+
+        }
+        
+        await FCM.send(payload, function (err, res) {
+            if (err) {
+               console.log(res);
+               console.log(err);
+                throw (err);
             }
-            else{
+            else
+            {
                 return callback(res);
             }
         });
     }
-    catch(error)
-    {
+    catch (error) {
         return callback(error);
     }
 }
 
-module.exports ={
+module.exports = {
     sendPushNotification,
 };
