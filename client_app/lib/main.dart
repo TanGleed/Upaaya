@@ -19,7 +19,6 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   FirebaseMessaging.instance.getToken().then((value) {
     print("getToken: $value");
   });
@@ -77,12 +76,7 @@ class MyApp extends HookConsumerWidget {
 
     return MaterialApp(
       onGenerateRoute: (settings) => generateRoute(settings),
-      // home: HomePage(),
-      navigatorKey: navigatorKey,
-      routes: {
-        '/': ((context) => HomePage()),
-        '/push-page': ((context) => HomePage()),
-      },
+      home: Auth(),
     );
   }
 }

@@ -12,16 +12,13 @@ const connectDB = require("./src/config/config");
 const errorHandler = require("./src/version1/middleware/errorHandler.middleware");
 const jobPostsRouter = require("./src/version1/routes/jobPosts.routes");
 const authRouter = require("./src/version1/routes/auth.routes");
-<<<<<<< HEAD
 const notifyRouter=require("./src/version1/routes/notify.routes");
-=======
 const homepageRouter= require("./src/version1/routes/category.routes");
 const jobRoutes = require('./src/version1/routes/jobFetch.routes');
 
->>>>>>> 8f4a6a9bfef43b52efacaa4a43f6128eb5004ea2
 // INIT
 const PORT = process.env.PORT || 5000;
-const hostname = "127.0.0.1";
+const hostname = "192.168.10.74";
 ;
 const app = express();
 
@@ -31,23 +28,16 @@ connectDB();
 // middleware
 app.use(bodyParser.json());
 app.use(morgan("dev"));
-<<<<<<< HEAD
 app.use(express.json());
-=======
-app.use("src/version1/uploads",express.static("uploads"));
->>>>>>> 8f4a6a9bfef43b52efacaa4a43f6128eb5004ea2
+app.use("/uploads", express.static("uploads"));
+
 
 // Routes
 app.use("/api/v1/jobpost", jobPostsRouter);
 app.use("/api/v1/auth", authRouter);
-<<<<<<< HEAD
 app.use("/api/v1/notify",notifyRouter);
-
-
-=======
 app.use("/api/v1/category",homepageRouter );
 app.use('/api/v1/jobs', jobRoutes);
->>>>>>> 8f4a6a9bfef43b52efacaa4a43f6128eb5004ea2
 
 // Error handler
 app.use(errorHandler);

@@ -63,38 +63,9 @@ async function getCategoryById(params, callback) {
         });
 }
 
-//Update Category
-async function updateCategory(params, callback) {
-    const categoryId = params.categoryId;
-    category
-        .findByIdAndUpdate(categoryId, params, { useFindAndModify: false })
-        .then((response) => {
-            if (!response) callback("Not Found Category with Id " + categoryId);
-            else callback(null, response);
-        })
-        .catch((error) => {
-            return callback(error);
-        });
-}
-
-//delete category
-async function deleteCategory(params, callback) {
-    const categoryId = params.categoryId;
-
-    category
-        .findByIdAndDelete(categoryId)
-        .then((response) => {
-            if (!response) callback("Not Found Category with Id " + categoryId);
-            else callback(null, response);
-        })
-        .catch((error) => {
-            return callback(error);
-        });
-}
-
 module.exports = {
     createCategory,
     getCategories,
     getCategoryById,
-    updateCategory,
+
 }

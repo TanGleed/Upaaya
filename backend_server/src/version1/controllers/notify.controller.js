@@ -44,6 +44,7 @@ exports.sendPushNotification = (req,res,next)=>
         {
             if(error)
             {
+                console.log(error); 
                 return next(error);
             }
             else
