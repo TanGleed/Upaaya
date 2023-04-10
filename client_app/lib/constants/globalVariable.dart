@@ -9,7 +9,7 @@ class GlobalVariable {
   static final backgroundcolor = Colors.grey[300];
   static final textFieldbackgroundcolor = Colors.grey[300];
   static final buttonsColors = Colors.deepPurple;
-
+  static final String appName = 'Upaaya';
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData.size.width;
@@ -32,13 +32,17 @@ class GlobalVariable {
 
 //API URLS
 class ApiURL {
+  static const String appName = "Upaaya";
   static const String apiURL = "127.0.0.1:5000";
+  static const String imageURL = "http://127.0.0.1:5000";
   static const String signupAPI = "/api/v1/auth/register";
   static const String uniqueemailAPI = "/api/v1/auth/uniqueemail";
   static const String sendOTPAPI = "api/v1/auth/sendOTP";
   static const String verifyOTPAPI = "api/v1/auth/verifyOTP";
   static const String loginAPI = "api/v1/auth/login";
   static const String resetpassAPI = "api/v1/auth/resetpassword";
+  static const String categoryAPI = "api/v1/category";
+  static const int pageSize = 10;
 }
 
 //Keyboard

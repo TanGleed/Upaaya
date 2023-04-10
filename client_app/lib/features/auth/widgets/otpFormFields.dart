@@ -1,11 +1,9 @@
+import 'package:client_app/api_service.dart/apiService.dart';
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/auth/screens/resetpassword.dart';
-import 'package:client_app/features/auth/services/auth_api_service.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
@@ -63,7 +61,7 @@ class _OTPFormFieldState extends State<OTPFormField> {
   void register() {
     isAsyncCallProcess = true;
     setState(() {});
-    AuthAPIService.register(widget.modal).then((response) => {
+    APIService.register(widget.modal).then((response) => {
           if (response)
             {
               isAsyncCallProcess = false,
@@ -99,7 +97,7 @@ class _OTPFormFieldState extends State<OTPFormField> {
   }
 
   void apicall(RegisterModal modal) {
-    AuthAPIService.verifyotp(modal, pin).then((response) => {
+    APIService.verifyotp(modal, pin).then((response) => {
           if (response == "Success")
             {
               isAsyncCallProcess = false,

@@ -1,6 +1,6 @@
+import 'package:client_app/api_service.dart/apiService.dart';
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/forgotpass.dart';
-import 'package:client_app/features/auth/services/auth_api_service.dart';
 import 'package:client_app/features/homepage/screens/hompage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,59 +38,58 @@ class _LoginPageState extends State<LoginPage> {
     if (validatedForm) {
       isAsyncProcess = true;
       setState(() {});
-      AuthAPIService.login(emailController, passwordController)
-          .then((response) => {
-                if (response == "Success")
-                  {
-                    setState(() {
-                      isAsyncProcess = false;
-                    }),
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => HomePage(),
-                        ))
-                  }
-                else if (response == "Invalid Password")
-                  {
-                    FormHelper.showSimpleAlertDialog(
-                        context,
-                        "Authentication failed",
-                        "Password didn't match!! \nPlease Enter a valid password",
-                        "OK", () {
-                      setState(() {
-                        isAsyncProcess = false;
-                      });
-                      Navigator.pop(context);
-                    })
-                  }
-                else if (response == "Email Not Registered")
-                  {
-                    FormHelper.showSimpleAlertDialog(
-                        context,
-                        "Authentication failed",
-                        "Email Not Registered!!\n  Please Register Your Email",
-                        "OK", () {
-                      setState(() {
-                        isAsyncProcess = false;
-                      });
-                      Navigator.pop(context);
-                    })
-                  }
-                else
-                  {
-                    FormHelper.showSimpleAlertDialog(
-                        context,
-                        "Authentication failed",
-                        "Login Failed!!\n Please try again",
-                        "OK", () {
-                      setState(() {
-                        isAsyncProcess = false;
-                      });
-                      Navigator.pop(context);
-                    })
-                  }
-              });
+      APIService.login(emailController, passwordController).then((response) => {
+            if (response == "Success")
+              {
+                setState(() {
+                  isAsyncProcess = false;
+                }),
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => HomePage(),
+                    ))
+              }
+            else if (response == "Invalid Password")
+              {
+                FormHelper.showSimpleAlertDialog(
+                    context,
+                    "Authentication failed",
+                    "Password didn't match!! \nPlease Enter a valid password",
+                    "OK", () {
+                  setState(() {
+                    isAsyncProcess = false;
+                  });
+                  Navigator.pop(context);
+                })
+              }
+            else if (response == "Email Not Registered")
+              {
+                FormHelper.showSimpleAlertDialog(
+                    context,
+                    "Authentication failed",
+                    "Email Not Registered!!\n  Please Register Your Email",
+                    "OK", () {
+                  setState(() {
+                    isAsyncProcess = false;
+                  });
+                  Navigator.pop(context);
+                })
+              }
+            else
+              {
+                FormHelper.showSimpleAlertDialog(
+                    context,
+                    "Authentication failed",
+                    "Login Failed!!\n Please try again",
+                    "OK", () {
+                  setState(() {
+                    isAsyncProcess = false;
+                  });
+                  Navigator.pop(context);
+                })
+              }
+          });
     } else {
       return;
     }
