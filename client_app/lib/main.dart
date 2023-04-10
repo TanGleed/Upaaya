@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:client_app/features/auth/screens/auth.dart';
+import 'package:client_app/features/homepage/screens/hompage.dart';
 
 import 'package:client_app/router.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -10,7 +15,39 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // By using a provider, this allows us to mock/override the value exposed.
 final exampleProvider = Provider((_) => 'Upaaya Client');
 
-void main() {
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  FirebaseMessaging.instance.getToken().then((value) {
+    print("getToken: $value");
+  });
+
+//While the application is runnig in background
+  FirebaseMessaging.onMessageOpenedApp.listen(
+    (RemoteMessage message) async {
+      print("onMessageOpenedApp: $message");
+      Navigator.pushNamed(
+        navigatorKey.currentState!.context,
+        '/push-page',
+        arguments: {"message", json.encode(message.data)},
+      );
+    },
+  );
+
+//While the application is closed
+  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+    if (message != null) {
+      Navigator.pushNamed(
+        navigatorKey.currentState!.context,
+        '/push-page',
+        arguments: {"message", json.encode(message.data)},
+      );
+    }
+  });
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     // For widgets to be able to read providers, we need to wrap the entire
     // application in a "ProviderScope" widget.
@@ -19,6 +56,12 @@ void main() {
       child: MyApp(),
     ),
   );
+}
+
+//Handling background process
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("_firebaseMessagingBackgroundHandler: $message");
 }
 
 // Extend HookConsumerWidget instead of HookWidget, which is exposed by Riverpod
@@ -34,7 +77,12 @@ class MyApp extends HookConsumerWidget {
 
     return MaterialApp(
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Auth(),
+      // home: HomePage(),
+      navigatorKey: navigatorKey,
+      routes: {
+        '/': ((context) => HomePage()),
+        '/push-page': ((context) => HomePage()),
+      },
     );
   }
 }
