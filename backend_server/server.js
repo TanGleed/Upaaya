@@ -27,7 +27,6 @@ connectDB();
 // middleware
 app.use(bodyParser.json());
 app.use(morgan("dev"));
-app.use("src/version1/uploads",express.static("uploads"));
 
 // Routes
 app.use("/api/v1/jobpost", jobPostsRouter);

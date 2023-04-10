@@ -1,5 +1,5 @@
 const categoriesservice= require ("../services/category.services");
-const upload = require("../middleware/category.upload");
+const upload = require("../middleware/category.middleware");
 
 
 //create category

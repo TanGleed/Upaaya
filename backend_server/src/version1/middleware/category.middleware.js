@@ -3,9 +3,7 @@ const path = require("path");
 
 //defining storage
 const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "src/version1/uploads/categories");
-  },
+  destination:"./uploads/jobPosts",
   filename: (req, file, callback) => {
     callback(null, Date.now() + "-" + file.originalname);
   },
