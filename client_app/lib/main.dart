@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/hompage.dart';
+import 'package:client_app/features/homepage/screens/request_page.dart';
 
 import 'package:client_app/router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +19,7 @@ final exampleProvider = Provider((_) => 'Upaaya Client');
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
   FirebaseMessaging.instance.getToken().then((value) {
     print("getToken: $value");
@@ -30,21 +32,23 @@ void main() async {
       Navigator.pushNamed(
         navigatorKey.currentState!.context,
         '/push-page',
-        arguments: {"message", json.encode(message.data)},
+        arguments: {"message": json.encode(message.data)},
       );
     },
   );
 
 //While the application is closed
-  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-    if (message != null) {
-      Navigator.pushNamed(
-        navigatorKey.currentState!.context,
-        '/push-page',
-        arguments: {"message", json.encode(message.data)},
-      );
-    }
-  });
+  FirebaseMessaging.instance.getInitialMessage().then(
+    (RemoteMessage? message) {
+      if (message != null) {
+        Navigator.pushNamed(
+          navigatorKey.currentState!.context,
+          '/push-page',
+          arguments: {"message": json.encode(message.data)},
+        );
+      }
+    },
+  );
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
@@ -76,7 +80,12 @@ class MyApp extends HookConsumerWidget {
 
     return MaterialApp(
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Auth(),
+      navigatorKey: navigatorKey,
+      //home: Auth(),
+      routes: {
+        '/': ((context) => HomePage()),
+        '/push-page': ((context) => RequestPage()),
+      },
     );
   }
 }

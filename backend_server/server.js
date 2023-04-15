@@ -18,7 +18,7 @@ const jobRoutes = require('./src/version1/routes/jobFetch.routes');
 
 // INIT
 const PORT = process.env.PORT || 5000;
-const hostname = "192.168.10.74";
+const hostname = "0.0.0.0";
 ;
 const app = express();
 

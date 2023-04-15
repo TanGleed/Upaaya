@@ -17,7 +17,7 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: ListView(
           children: [
             buildTop(),
             buildBody(),

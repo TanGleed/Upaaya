@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
       Map? pushArguments = arguments as Map;
 
       setState(() {
-        message = pushArguments[message];
+        message = pushArguments["message"];
       });
     }
   }
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           body: ListView(
-            children: [JobCategories()],
+            children: [Text("Push Message: $message"), JobCategories()],
           )),
       theme: ThemeData(primarySwatch: Colors.grey),
     );
