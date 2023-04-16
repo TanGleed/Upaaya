@@ -34,7 +34,7 @@ class Job {
 }
 
 class JobService {
-  static const String _baseUrl = 'http://localhost:3000/jobs';
+  static const String _baseUrl = '192.168.10.65';
 
   static Future<List<Job>> getAllJobs() async {
     final response = await http.get(Uri.parse(_baseUrl));
