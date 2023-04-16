@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
       Map? pushArguments = arguments as Map;
 
       setState(() {
-        message = pushArguments[message];
+        message = pushArguments["message"];
       });
     }
   }
