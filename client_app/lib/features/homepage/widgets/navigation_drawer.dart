@@ -1,3 +1,4 @@
+import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:client_app/features/homepage/screens/request_page.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,12 @@ class NavigationDrawerWidget extends StatelessWidget {
     const image =
         'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400';
     return Drawer(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      width: GlobalVariable.screenWidth * 0.65,
       child: Material(
           color: Color.fromRGBO(169, 169, 169, 1),
           child: ListView(padding: padding, children: <Widget>[

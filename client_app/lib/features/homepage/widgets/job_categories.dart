@@ -90,10 +90,6 @@ Widget _buildCategoryList(List<Category> categories, WidgetRef ref) {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Icon(
-                        Icons.keyboard_arrow_right,
-                        size: 13,
-                      )
                     ],
                   )
                 ],
