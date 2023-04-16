@@ -48,7 +48,7 @@ dependencies:
   flutter_svg: ^2.0.4
   json_annotation: ^4.8.0
   freezed_annotation: ^2.2.0
-  
+  animated_bottom_navigation_bar: ^1.2.0
 
 dev_dependencies:
   flutter_test:
