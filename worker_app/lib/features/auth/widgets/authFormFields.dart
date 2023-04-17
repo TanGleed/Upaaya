@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:worker_app/constants/globalVariable.dart';
+
+import '../../../constants/globalVariable.dart';
 
 class FormFields {
   Container formFields(
