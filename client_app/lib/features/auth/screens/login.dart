@@ -39,7 +39,6 @@ class _LoginPageState extends State<LoginPage> {
       isAsyncProcess = true;
       setState(() {});
       APIService.login(emailController, passwordController).then((response) => {
-            print("error"),
             if (response == "Success")
               {
                 setState(() {
