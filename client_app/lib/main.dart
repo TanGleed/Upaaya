@@ -2,29 +2,28 @@ import 'dart:convert';
 
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/hompage.dart';
-import 'package:client_app/features/homepage/screens/request_page.dart';
-
 import 'package:client_app/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'features/auth/services/sharedpreferences.dart';
+
 // We create a "provider", which will store a value (here "Hello world").
 // By using a provider, this allows us to mock/override the value exposed.
 final exampleProvider = Provider((_) => 'Upaaya Client');
-
+Widget _defaultHome = const Auth();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
-  FirebaseMessaging.instance.getToken().then((value) {
-    print("getToken: $value");
-  });
-
+  FirebaseMessaging.instance.getToken().then((value) {});
+  bool result = await SharedPrefer.isLoggedIn();
+  if (result) {
+    _defaultHome = HomePage();
+  }
 //While the application is runnig in background
   FirebaseMessaging.onMessageOpenedApp.listen(
     (RemoteMessage message) async {
@@ -81,11 +80,7 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp(
       onGenerateRoute: (settings) => generateRoute(settings),
       navigatorKey: navigatorKey,
-      //home: Auth(),
-      routes: {
-        '/': ((context) => HomePage()),
-        '/push-page': ((context) => RequestPage()),
-      },
+      home: _defaultHome,
     );
   }
 }
