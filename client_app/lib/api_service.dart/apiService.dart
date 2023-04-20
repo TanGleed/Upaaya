@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'package:client_app/features/auth/services/sharedpreferences.dart';
 import 'package:client_app/features/homepage/models/category.dart';
 import 'package:http/http.dart' as http;
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../features/auth/services/loginresponsemodel.dart';
 
 final apiService = Provider((ref) => APIService());
 
@@ -103,6 +106,7 @@ class APIService {
           "password": password.text,
         }));
     if (response.statusCode == 200) {
+      await SharedPrefer.setLoginDetails(loginResponseJson(response.body));
       return "Success";
     } else if (response.statusCode == 404) {
       return "Email Not Registered";

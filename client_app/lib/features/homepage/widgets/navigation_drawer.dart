@@ -1,4 +1,5 @@
 import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/features/auth/services/sharedpreferences.dart';
 import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:client_app/features/homepage/screens/request_page.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,10 @@ class NavigationDrawerWidget extends StatelessWidget {
             const SizedBox(height: 16),
             buildMenuItem(text: 'Payments', icon: Icons.payment),
             const SizedBox(height: 16),
-            buildMenuItem(text: 'About us', icon: Icons.info_outlined),
+            buildMenuItem(
+              text: 'About us',
+              icon: Icons.info_outlined,
+            ),
             const SizedBox(height: 16),
             Divider(color: Colors.white70),
             const SizedBox(height: 16),
@@ -48,7 +52,15 @@ class NavigationDrawerWidget extends StatelessWidget {
             const SizedBox(height: 16),
             buildMenuItem(text: 'Terms and conditions', icon: Icons.note),
             const SizedBox(height: 16),
-            buildMenuItem(text: 'Logout', icon: Icons.logout),
+            buildMenuItem(
+              text: 'Logout',
+              icon: Icons.logout,
+              onClicked: () async {
+                await SharedPrefer.logout(context);
+                // ignore: use_build_context_synchronously
+                Navigator.popUntil(context, (route) => false);
+              },
+            ),
             const SizedBox(height: 24),
           ])),
     );

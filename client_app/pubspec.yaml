@@ -41,8 +41,6 @@ dependencies:
   snippet_coder_utils: ^1.0.12
   provider: ^6.0.3
   intl: ^0.17.0
-  geolocator: ^9.0.2
-  geocoding: ^2.1.0
   firebase_core: ^2.0.0
   firebase_messaging: ^14.0.0
   flutter_svg: ^2.0.4
@@ -50,7 +48,8 @@ dependencies:
   freezed_annotation: ^2.2.0
   animated_bottom_navigation_bar: ^1.2.0
   firebase_analytics: ^10.2.0
-
+  shared_preferences: ^2.0.15
+  api_cache_manager: ^1.0.2
   
 
 dev_dependencies:

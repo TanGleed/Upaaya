@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalVariable().init(context);
     return MaterialApp(
       home: Scaffold(
           backgroundColor: GlobalVariable.backgroundcolor,
