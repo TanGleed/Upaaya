@@ -6,10 +6,25 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:worker_app/constants/globalVariable.dart';
 import 'package:worker_app/features/auth/services/authmodel.dart';
 
+import '../models/job.dart';
+
 final apiService = Provider((ref) => APIService());
 
 class APIService {
   static var client = http.Client();
+
+  Future<List<Job>> getJobs(int page, int pageSize) async {
+    var url = Uri.http(ApiURL.apiURL, ApiURL.getJobsAPI);
+    var response = await client.get(url);
+
+    if (response.statusCode == 200) {
+      final jobsJson = jsonDecode(response.body) as List<dynamic>;
+      final jobs = jobsJson.map((jobJson) => Job.fromJson(jobJson)).toList();
+      return jobs;
+    } else {
+      throw Exception('Failed to load jobs');
+    }
+  }
 
   //registers user
   static Future<bool> register(RegisterModal modal) async {
