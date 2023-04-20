@@ -1,8 +1,9 @@
-const Job = require('../../models/jobFetch.model');
+const JobFetchData = require("../database/jobFetch.data");
 
 async function getAllJobs() {
   try {
-    return await Job.find();
+    const allJobs = await JobFetchData.getJobs();
+    return allJobs;
   } catch (error) {
     throw error;
   }

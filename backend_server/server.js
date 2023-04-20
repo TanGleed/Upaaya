@@ -12,14 +12,13 @@ const connectDB = require("./src/config/config");
 const errorHandler = require("./src/version1/middleware/errorHandler.middleware");
 const jobPostsRouter = require("./src/version1/routes/jobPosts.routes");
 const authRouter = require("./src/version1/routes/auth.routes");
-const notifyRouter=require("./src/version1/routes/notify.routes");
-const homepageRouter= require("./src/version1/routes/category.routes");
-const jobRoutes = require('./src/version1/routes/jobFetch.routes');
+const notifyRouter = require("./src/version1/routes/notify.routes");
+const homepageRouter = require("./src/version1/routes/category.routes");
+const jobRoutes = require("./src/version1/routes/jobFetch.routes");
 
 // INIT
-const PORT = process.env.PORT || 5000;
-const hostname = "192.168.10.65";
-;
+const PORT = process.env.PORT || 7000;
+const hostname = "192.168.1.68";
 const app = express();
 
 // Connections
@@ -31,17 +30,15 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
-
 // Routes
 app.use("/api/v1/jobpost", jobPostsRouter);
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/notify",notifyRouter);
-app.use("/api/v1/category",homepageRouter );
-app.use('/api/v1/jobs', jobRoutes);
+app.use("/api/v1/notify", notifyRouter);
+app.use("/api/v1/category", homepageRouter);
+app.use("/api/v1/jobs", jobRoutes);
 
 // Error handler
 app.use(errorHandler);
-
 
 // npm run server
 app.listen(PORT, hostname, () => {
