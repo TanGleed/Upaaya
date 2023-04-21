@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -45,48 +47,55 @@ class HomePage extends ConsumerWidget {
                   context,
                   MaterialPageRoute(builder: (context) => DescPage(job: job)),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      CircleAvatar(
-                        radius: 27.5,
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.green,
-                        backgroundImage: NetworkImage(job.media),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              job.id,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            width: 55,
+                            height: 55,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.green,
+                              backgroundImage: NetworkImage(job.media),
                             ),
-                            const SizedBox(height: 5),
-                            Text(
-                              job.location,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
+                          ),
+                          SizedBox(width: 5),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                job.id,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              job.description,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
+                              Text(
+                                job.location,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
+                              Text(
+                                job.description,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),

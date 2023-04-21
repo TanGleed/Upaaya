@@ -10,6 +10,7 @@ import '../models/job.dart';
 
 final apiService = Provider((ref) => APIService());
 
+//job api
 class APIService {
   static var client = http.Client();
 
