@@ -6,7 +6,6 @@ const schemaOptions = {
   timestamps: true,
   toJSON: { virtuals: true },
   toObject: { virtuals: true },
-  versionKey: false,
 };
 
 // Create the job post schema
@@ -15,37 +14,31 @@ const jobPostSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      trim: true,
     },
     location: {
       type: String,
       required: true,
       index: true,
+      trim: true,
     },
     description: {
       type: String,
       required: true,
+      trim: true,
     },
-    media: {
-      type: [
-        {
-          type: String,
-          validate: {
-            validator: function (value) {
-              return /\.(jpg|jpeg|png|gif|bmp|mp4|avi|mkv|mov)$/i.test(value);
-            },
-            message: "Invalid media file type",
-          },
-        },
-      ],
-    },
-    tags: {
-      type: [
-        {
-          type: String,
-          required: true,
-        },
-      ],
-    },
+    media: [
+      {
+        type: String,
+      },
+    ],
+
+    tags: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     additionalInfo: {
       type: String,
     },

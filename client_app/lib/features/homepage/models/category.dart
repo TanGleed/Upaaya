@@ -1,4 +1,4 @@
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'category.freezed.dart';

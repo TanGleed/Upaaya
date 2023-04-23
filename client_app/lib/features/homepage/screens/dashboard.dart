@@ -1,14 +1,8 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/screens/hompage.dart';
 import 'package:client_app/features/homepage/screens/settings_page.dart';
-import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../widgets/job_categories.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
