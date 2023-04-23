@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:worker_app/models/job.dart';
 
 class DescPage extends StatefulWidget {
-  const DescPage({super.key});
+  const DescPage({super.key, required Job job});
 
   @override
   State<DescPage> createState() => _DescPageState();
