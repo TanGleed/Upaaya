@@ -17,8 +17,8 @@ const homepageRouter = require("./src/version1/routes/category.routes");
 const jobRoutes = require("./src/version1/routes/jobFetch.routes");
 
 // INIT
-const PORT = process.env.PORT || 7000;
-const hostname = "172.20.10.6";
+const PORT = process.env.PORT || 5000;
+const hostname = "0.0.0.0";
 const app = express();
 
 // Connections
