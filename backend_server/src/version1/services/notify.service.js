@@ -1,42 +1,14 @@
-var admin = require('firebase-admin');
-//var fcm = require('fcm-notification');
 
-var serviceAccount = require("../../config/notify.json");
-const certPath = admin.credential.cert(serviceAccount);
-//var FCM = new fcm(certPath);
+var admin = require("firebase-admin");
 
-//send notification
-async function sendPushNotification(params, callback) {
-    try {
-        var message = {
-            notification: {
-                title: "Test Notification",
-                body: "Notification message"
-            },
-            data: {
-                orderId: "123456",
-                orderDate: "2022-10-28"
-            },
-            token: params.fcm_token,
+var serviceAccount = require('../../config/notify.json');
 
-        };
-       admin.messaging().send(message, function (err, res) {
-            if (err) {
-               console.log(res);
-               console.log(err);
-                throw (err);
-            }
-            else
-            {
-                return callback(res);
-            }
-        });
-    }
-    catch (error) {
-        return callback(error);
-    }
-}
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
-module.exports = {
-    sendPushNotification,
+exports.sendPushNotification = (message) => {
+  admin.messaging().send(message)
+  .then((response) => console.log('Successfully sent message:', response))
+  .catch((error) => console.log('Error sending message:', error));
 };
