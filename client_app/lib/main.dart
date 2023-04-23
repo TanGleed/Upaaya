@@ -19,7 +19,9 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseMessaging.instance.getToken().then((value) {});
+  FirebaseMessaging.instance.getToken().then((value) {
+    print("token: $value");
+  });
   bool result = await SharedPrefer.isLoggedIn();
   if (result) {
     _defaultHome = HomePage();
@@ -80,7 +82,7 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp(
       onGenerateRoute: (settings) => generateRoute(settings),
       navigatorKey: navigatorKey,
-      home: _defaultHome,
+      home: HomePage(),
     );
   }
 }
