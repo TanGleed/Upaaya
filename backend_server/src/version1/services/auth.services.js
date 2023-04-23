@@ -1,97 +1,73 @@
-const { user }=require("../../models/auth.model");
-const { otp } =require("../../models/otp.model");
-const auth   = require("../middleware/auth.middleware");
+const { user } = require("../../models/auth.model");
+const { otp } = require("../../models/otp.model");
+const auth = require("../middleware/auth.middleware");
 const bcrypt = require("bcryptjs");
 const otpGenerator = require("otp-generator");
 const nodemailer = require("nodemailer");
 
+//singup
+async function register(params, callback) {
+  //checks user with same email if any
+  let userRegistered = await user.findOne({ email: params.email });
 
-
-//singup 
-async function register(params ,callback)
-{
-    
-    //checks user with same email if any
-    let userRegistered = await user.findOne({email:params.email});
-    
-    if(userRegistered){
-        return callback(
-            {
-                message:"Email Already Registered",
-            }
-        );
-    }
-    //encrptying password
-    const salt =bcrypt.genSaltSync(10);
-    params.password =bcrypt.hashSync(params.password,salt);
-    const Userschema = new user (params);
-    Userschema .save().then(
-        (response)=>
-        {
-            return callback(null ,response);
-        }
-    ).catch(
-        (error)=>
-        {
-        return callback(error);
-        }
-    );
-    
+  if (userRegistered) {
+    return callback({
+      message: "Email Already Registered",
+    });
+  }
+  //encrptying password
+  const salt = bcrypt.genSaltSync(10);
+  params.password = bcrypt.hashSync(params.password, salt);
+  const Userschema = new user(params);
+  Userschema.save()
+    .then((response) => {
+      return callback(null, response);
+    })
+    .catch((error) => {
+      return callback(error);
+    });
 }
 
 //email uniqueness
-async function uniqueemail(params,callback)
-{
-    user.findOne({email:params.email}).then(
-        (response)=>
-        {
-            
-            return callback(response);       
-        }
-    ).catch(
-        (error)=>
-        {
-            
-            return callback(error);
-        }
-    )
-    
+async function uniqueemail(params, callback) {
+  user
+    .findOne({ email: params.email })
+    .then((response) => {
+      return callback(response);
+    })
+    .catch((error) => {
+      return callback(error);
+    });
 }
 
 //sendotp
-async function sendOTP(params,callback)
-{
-    await otp.findOneAndDelete(
-        {
-            email:params.email,
-        }
-    )
-    //creating otp 
-    const OTP =otpGenerator.generate(
-        4,
-        {
-            lowerCaseAlphabets: false,
-            upperCaseAlphabets:false,
-            specialChars: false
-        }
-    );
-    const tmout = 2*60*1000;
-    //const data = params.email+OTP;
-    //const hashOTP =crypto.createHmac("sha256",key).update(data).digest("hec");
-    const salt =bcrypt.genSaltSync(10);
-    const hashOTP =bcrypt.hashSync(OTP,salt);
-    const newOTP =  otp({
-        email:params.email,
-        otp :hashOTP,
-        createdat :Date.now(),
-    });
-    newOTP.save();
-    //Mail template
-    const mailOptions ={
-        from :"sudeepbhattarai806@gmail.com",
-        to : params.email, 
-        subject: "Verify Your Email" ,
-        html:`<!doctype html>
+async function sendOTP(params, callback) {
+  await otp.findOneAndDelete({
+    email: params.email,
+  });
+  //creating otp
+  const OTP = otpGenerator.generate(4, {
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
+  const tmout = 2 * 60 * 1000;
+  //const data = params.email+OTP;
+  //const hashOTP =crypto.createHmac("sha256",key).update(data).digest("hec");
+  const salt = bcrypt.genSaltSync(10);
+  const hashOTP = bcrypt.hashSync(OTP, salt);
+  const newOTP = otp({
+    email: params.email,
+    otp: hashOTP,
+    createdat: Date.now(),
+  });
+  newOTP.save();
+  //Mail template
+  const mailOptions = {
+    from: "sudeepbhattarai806@gmail.com",
+    to: params.email,
+    subject: "Verify Your Email",
+    html: `<!doctype html>
         <!doctype html>
         <html lang="en-US">
         
@@ -168,177 +144,120 @@ async function sendOTP(params,callback)
         </body>
         </html>
            `,
+  };
+
+  //defining transporter
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+
+    auth: {
+      user: "sudeepbhattarai1792@gmail.com",
+      pass: "bjlxrlgfsndcglec",
+    },
+  });
+
+  //sending mail
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log("error");
+
+      return callback(error);
+    } else {
+      return callback(null, hashOTP);
     }
-
-    //defining transporter
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-    
-        auth:
-        {
-          user: "sudeepbhattarai1792@gmail.com",
-          pass: "bjlxrlgfsndcglec",
-        }
-      });
-    
-    //sending mail
-    transporter.sendMail(mailOptions,function(error,info)
-    {
-        if(error)
-        {
-            console.log("error");
-            
-           return callback(error);
-
-        }
-        else
-        {
-           
-           return callback (null,hashOTP);
-        }
-    });
-    
+  });
 }
 
 //verify otp
-async function verifyOTP(params,callback)
-{
-    try{
-        let email =params.email;
-        let OTP= params.otp;
-        if(!(OTP))
-        {
-            throw Error("Empty OTP");
+async function verifyOTP(params, callback) {
+  try {
+    let email = params.email;
+    let OTP = params.otp;
+    if (!OTP) {
+      throw Error("Empty OTP");
+    } else {
+      const otprecord = await otp.findOne({
+        email: email,
+      });
+      const expiry = otprecord.createdat;
+      const hashOTP = otprecord.otp;
+      const tmout = 2 * 60 * 1000;
+      const currenttime = Date.now();
+      if (currenttime - expiry > tmout) {
+        await otp.findOneAndDelete({
+          email: email,
+        });
+        throw new Error("OTP Expired");
+      } else {
+        const isvalidOTP = await bcrypt.compare(OTP, hashOTP);
+        if (!isvalidOTP) {
+          throw new Error("Invalid OTP");
+        } else {
+          await otp.findOneAndDelete({
+            email: email,
+          });
+          return callback(null, hashOTP);
         }
-        else
-        {
-            const otprecord = await otp.findOne(
-                {
-                    email: email
-                }
-            );
-            const expiry  = otprecord.createdat;
-            const hashOTP = otprecord.otp;
-            const tmout = 2*60*1000;
-            const currenttime =Date.now();
-            if(currenttime-expiry>tmout)
-            {
-                await otp.findOneAndDelete(
-                    {
-                        email:email
-                    }
-                )
-                throw new Error("OTP Expired");
-                
-            }
-            else
-            {
-                const isvalidOTP =await bcrypt.compare(OTP,hashOTP);
-                if(!isvalidOTP)
-                {
-
-                    throw new Error("Invalid OTP");
-                }
-                else
-                {
-                    await otp.findOneAndDelete(
-                        {
-                            email:email
-                        }
-                    )
-                    return callback (null,hashOTP);
-                }
-            }
-        }
-
-    }catch (error)
-    {
-        
-        return callback(error);
+      }
     }
+  } catch (error) {
+    return callback(error);
+  }
 }
 //logim
-async function login (
-    params ,callback
-)
-{
-    try
-    {
-        let userschema = await user.findOne({email:params.email});
-        
-        if(userschema!=null)
-        {
-            
-            const hashedpass =userschema.password;
-            if(bcrypt.compareSync(params.password,hashedpass))
-            {
-                let usertoken = auth.generateToken(userschema.toJSON());
-                return callback(null,{ ...userschema.toJSON(),usertoken});
-            }
-            else
-            {
-                throw new Error("Invalid Password");
-            }
-        }
-        else
-        {
-            throw Error("Email Not Registered");
-        }
+async function login(params, callback) {
+  try {
+    let userschema = await user.findOne({ email: params.email });
 
-        
+    if (userschema != null) {
+      const hashedpass = userschema.password;
+      if (bcrypt.compareSync(params.password, hashedpass)) {
+        let usertoken = auth.generateToken(userschema.toJSON());
+        return callback(null, { ...userschema.toJSON(), usertoken });
+      } else {
+        throw new Error("Invalid Password");
+      }
+    } else {
+      throw Error("Email Not Registered");
     }
-    catch(error)
-    {
-        return callback(error);
-    }
+  } catch (error) {
+    return callback(error);
+  }
 }
 
-async function resetpassword(
-    params,
-    callback
-)
-{
-    try
-    {       
-     //encrptying password
-    const salt =bcrypt.genSaltSync(10);
-    params.password =bcrypt.hashSync(params.password,salt); 
+async function resetpassword(params, callback) {
+  try {
+    //encrptying password
+    const salt = bcrypt.genSaltSync(10);
+    params.password = bcrypt.hashSync(params.password, salt);
     //updating
-    const updated= await user.findOneAndUpdate(
-        {
-        email:params.email
+    const updated = await user.findOneAndUpdate(
+      {
+        email: params.email,
+      },
+      {
+        $set: {
+          password: params.password,
         },
-        {
-            $set:
-            {
-                password: params.password
-            }
-        },
-        {
-            lean:true
-        }
-
+      },
+      {
+        lean: true,
+      }
     );
-    if(updated)
-    {
-        return callback(null ,"Successful");
+    if (updated) {
+      return callback(null, "Successful");
+    } else {
+      throw Error("Unsuccessful");
     }
-    else
-    {
-        throw Error("Unsuccessful")
-    }
-        
-
-    }catch(error)
-    {
-        return callback(error);
-    }
+  } catch (error) {
+    return callback(error);
+  }
 }
-module.exports ={
-    register,
-    uniqueemail,
-    sendOTP,
-    verifyOTP,
-    login,
-    resetpassword,
+module.exports = {
+  register,
+  uniqueemail,
+  sendOTP,
+  verifyOTP,
+  login,
+  resetpassword,
 };

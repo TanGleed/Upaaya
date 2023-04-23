@@ -25,7 +25,7 @@ void main() async {
   });
   bool result = await SharedPrefer.isLoggedIn();
   if (result) {
-    _defaultHome = DashBoard();
+    _defaultHome = const DashBoard();
   }
 //While the application is runnig in background
   FirebaseMessaging.onMessageOpenedApp.listen(

@@ -8,8 +8,8 @@ class GlobalVariable {
   static Orientation? orientation;
   static final backgroundcolor = Colors.grey[300];
   static final textFieldbackgroundcolor = Colors.grey[300];
-  static final buttonsColors = Colors.deepPurple;
-  static final String appName = 'Upaaya';
+  static const buttonsColors = Colors.deepPurple;
+  static const String appName = 'Upaaya';
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData.size.width;

@@ -3,7 +3,7 @@ const path = require("path");
 
 //defining storage
 const storage = multer.diskStorage({
-  destination:"./uploads/categories",
+  destination: "./uploads/categories",
   filename: (req, file, callback) => {
     callback(null, Date.now() + "-" + file.originalname);
   },
@@ -25,7 +25,7 @@ const fileFilter = (req, file, callback) => {
   callback(null, true);
 };
 
-//upload 
+//upload
 let upload = multer({
   storage: storage,
   fileFilter: fileFilter,

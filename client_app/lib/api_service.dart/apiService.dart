@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:client_app/features/auth/services/sharedpreferences.dart';
 import 'package:client_app/features/homepage/models/category.dart';
 import 'package:http/http.dart' as http;
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

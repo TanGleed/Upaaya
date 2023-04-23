@@ -1,5 +1,4 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/screens/settings_page.dart';
 import 'package:client_app/features/homepage/widgets/job_categories.dart';
 import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
@@ -45,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent,
         elevation: 0,
-        title: Text(
+        title: const Text(
           GlobalVariable.appName,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -59,7 +58,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: ListView(children: [JobCategories()]),
+      body: ListView(children: const [JobCategories()]),
     );
   }
 }
