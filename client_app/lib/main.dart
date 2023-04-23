@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:client_app/features/auth/screens/auth.dart';
+import 'package:client_app/features/homepage/screens/dashboard.dart';
 import 'package:client_app/features/homepage/screens/hompage.dart';
 import 'package:client_app/router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,7 +23,7 @@ void main() async {
   FirebaseMessaging.instance.getToken().then((value) {});
   bool result = await SharedPrefer.isLoggedIn();
   if (result) {
-    _defaultHome = HomePage();
+    _defaultHome = DashBoard();
   }
 //While the application is runnig in background
   FirebaseMessaging.onMessageOpenedApp.listen(
