@@ -4,6 +4,8 @@ import 'package:client_app/features/auth/screens/register.dart';
 import 'package:flutter/material.dart';
 
 class Auth extends StatefulWidget {
+  static const String routeName = '/auth-screen';
+
   const Auth({super.key});
 
   @override

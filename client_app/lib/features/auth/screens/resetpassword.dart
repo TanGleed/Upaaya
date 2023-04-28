@@ -1,6 +1,7 @@
 import 'package:client_app/api_service.dart/apiService.dart';
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/auth.dart';
+import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/features/auth/widgets/authFormFields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -31,7 +32,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     if (validatedForm) {
       isAsyncprocess = true;
       setState(() {});
-      APIService.resetpassword(widget.email, newConfirmpassword)
+      AuthServices.resetpassword(widget.email, newConfirmpassword)
           .then((value) => {
                 if (value)
                   {

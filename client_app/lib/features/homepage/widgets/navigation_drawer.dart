@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:client_app/constants/globalVariable.dart';
-import 'package:client_app/features/auth/services/sharedpreferences.dart';
+import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:client_app/features/homepage/screens/request_page.dart';
+import 'package:client_app/features/homepage/screens/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(horizontal: 20);
@@ -34,19 +38,25 @@ class NavigationDrawerWidget extends StatelessWidget {
                           image: image,
                         )))),
             const SizedBox(height: 16),
-            buildMenuItem(
-                text: 'Requests',
-                icon: Icons.add_task,
-                onClicked: () => selectedItem(context, 0)),
-            const SizedBox(height: 16),
-            buildMenuItem(text: 'Payments', icon: Icons.payment),
-            const SizedBox(height: 16),
+            // buildMenuItem(
+            //     text: 'Requests',
+            //     icon: Icons.add_task,
+            //     onClicked: () => selectedItem(context, 0)),
+            // const SizedBox(height: 16),
+            // buildMenuItem(text: 'Payments', icon: Icons.payment),
+            // const SizedBox(height: 16),
             buildMenuItem(
               text: 'About us',
               icon: Icons.info_outlined,
             ),
             const SizedBox(height: 16),
             Divider(color: Colors.white70),
+            const SizedBox(height: 16),
+            buildMenuItem(
+              text: 'Settings',
+              icon: Icons.settings_outlined,
+              onClicked: () => selectedItem(context, 1),
+            ),
             const SizedBox(height: 16),
             buildMenuItem(text: 'Contact', icon: Icons.phone),
             const SizedBox(height: 16),
@@ -56,9 +66,10 @@ class NavigationDrawerWidget extends StatelessWidget {
               text: 'Logout',
               icon: Icons.logout,
               onClicked: () async {
-                await SharedPrefer.logout(context);
-                // ignore: use_build_context_synchronously
-                Navigator.popUntil(context, (route) => false);
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove("email");
+                Navigator.pushNamedAndRemoveUntil(
+                    context, Auth.routeName, (route) => false);
               },
             ),
             const SizedBox(height: 24),
@@ -88,6 +99,9 @@ class NavigationDrawerWidget extends StatelessWidget {
           builder: (context) => RequestPage(),
         ));
         break;
+      case 1:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => SettingsPage()));
     }
   }
 

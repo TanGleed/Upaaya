@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
+  static const String routeName = '/homepage-screen';
+
   const HomePage({super.key});
 
   @override
@@ -15,15 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String message = "";
-  int activeindex = 3;
-  static const iconslist = <IconData>[
-    Icons.home_rounded,
-    Icons.settings,
-  ];
-  final List<Widget> widgetList = const [
-    HomePage(),
-    SettingsPage(),
-  ];
+
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();

@@ -2,6 +2,7 @@ import 'package:client_app/api_service.dart/apiService.dart';
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/otp.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
+import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/features/auth/widgets/authFormFields.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     if (validatedForm) {
       isAsyncprocess = true;
       setState(() {});
-      APIService.uniqueEmail(modal).then((value) => {
+      AuthServices.uniqueEmail(modal).then((value) => {
             if (!value)
               {
                 sendotp(modal),
@@ -46,17 +47,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   void sendotp(RegisterModal modal) {
-    APIService.sendotp(modal).then((response) {
+    AuthServices.sendotp(modal).then((response) {
       if (response) {
         isAsyncprocess = false;
         setState(() {});
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => VerifyOTP(
-                      value: modal,
-                      isregisterscreen: false,
-                    )));
+        Navigator.pushNamed(context, VerifyOTP.routeName,
+            arguments: VerifyOTP(
+              isregisterscreen: false,
+              value: modal,
+            ));
       } else {
         FormHelper.showSimpleAlertDialog(
             context, "OTP Error !!", "OTP Couldn't be sent", "ok", () {

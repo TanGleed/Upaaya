@@ -2,6 +2,7 @@ import 'package:client_app/api_service.dart/apiService.dart';
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/screens/otp.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
+import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/features/auth/widgets/authFormFields.dart';
 import 'package:flutter/material.dart';
 
@@ -33,17 +34,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void sendotp(RegisterModal modal) {
-    APIService.sendotp(modal).then((response) {
+    AuthServices.sendotp(modal).then((response) {
       if (response) {
         isAsyncallonprogress = false;
         setState(() {});
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => VerifyOTP(
-                      value: modal,
-                      isregisterscreen: true,
-                    )));
+        Navigator.pushNamed(context, VerifyOTP.routeName,
+            arguments: VerifyOTP(isregisterscreen: true, value: modal));
       } else {
         FormHelper.showSimpleAlertDialog(
             context, "OTP Error !!", "OTP Couldn't be sent", "ok", () {
@@ -62,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
       setState(() {
         isAsyncallonprogress = true;
       });
-      APIService.uniqueEmail(modal).then((response) {
+      AuthServices.uniqueEmail(modal).then((response) {
         if (response) {
           sendotp(modal);
         } else {
