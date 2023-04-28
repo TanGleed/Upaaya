@@ -6,7 +6,7 @@ class UserProvider extends ChangeNotifier {
   User get user => _user;
   void setLoginDetails(String jsonData) {
     _user = User.userResponseJson(jsonData);
-    print(_user.email);
+
     notifyListeners();
   }
 

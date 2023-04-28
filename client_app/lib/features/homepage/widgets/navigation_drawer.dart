@@ -67,7 +67,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               icon: Icons.logout,
               onClicked: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove("email");
+                prefs.remove("token");
                 Navigator.pushNamedAndRemoveUntil(
                     context, Auth.routeName, (route) => false);
               },

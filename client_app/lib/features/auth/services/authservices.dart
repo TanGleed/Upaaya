@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
 import 'package:client_app/providers/UserProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthServices {
@@ -90,8 +90,11 @@ class AuthServices {
   }
 
   //login
-  static Future<String> login(TextEditingController email,
-      TextEditingController password, BuildContext context) async {
+  static Future<String> login(
+    TextEditingController email,
+    TextEditingController password,
+    BuildContext context,
+  ) async {
     Map<String, String> requestheaders = {'content-type': 'application/json'};
     var url = Uri.http(ApiURL.apiURL, ApiURL.loginAPI);
     var response = await client.post(url,
@@ -103,8 +106,9 @@ class AuthServices {
 
     if (response.statusCode == 200) {
       SharedPreferences pref = await SharedPreferences.getInstance();
-      print(response.body);
-      pref.setString("email", email.text);
+      final user = jsonDecode(response.body);
+      pref.setString("token", user['data']['usertoken']);
+
       // ignore: use_build_context_synchronously
       Provider.of<UserProvider>(context, listen: false)
           .setLoginDetails(response.body);

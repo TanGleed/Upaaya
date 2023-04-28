@@ -1,13 +1,15 @@
 import 'dart:convert';
 
+import 'package:client_app/constants/globalVariable.dart';
 import 'package:client_app/features/homepage/models/category.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:client_app/constants/globalVariable.dart';
 
-final apiService = Provider((ref) => APIService());
+final homepageAPI = Provider(
+  (ref) => HomePageServies(),
+);
 
-class APIService {
+class HomePageServies {
   static var client = http.Client();
 
   //get categories
