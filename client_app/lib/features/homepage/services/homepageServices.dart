@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/models/category.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
