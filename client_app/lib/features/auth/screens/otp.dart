@@ -1,5 +1,4 @@
-import 'package:client_app/api_service.dart/apiService.dart';
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
 import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/features/auth/widgets/otpFormFields.dart';

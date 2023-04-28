@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
 import 'package:client_app/providers/UserProvider.dart';
@@ -27,7 +25,7 @@ void main() async {
   });
   SharedPreferences pref = await SharedPreferences.getInstance();
   String result = pref.getString("email") ?? "";
-  if (result != null) {
+  if (result == "") {
     _defaultHome = const DashBoard();
   }
 // While the application is runnig in background

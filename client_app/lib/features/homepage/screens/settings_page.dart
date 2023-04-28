@@ -1,4 +1,4 @@
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/providers/UserProvider.dart';
 import 'package:flutter/material.dart';

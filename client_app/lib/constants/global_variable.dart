@@ -8,8 +8,8 @@ class GlobalVariable {
   static Orientation? orientation;
   static final backgroundcolor = Colors.grey[300];
   static final textFieldbackgroundcolor = Colors.grey[300];
-  static final buttonsColors = Colors.deepPurple;
-  static final String appName = 'Upaaya';
+  static const buttonsColors = Colors.deepPurple;
+  static const String appName = 'Upaaya';
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData.size.width;
@@ -33,8 +33,8 @@ class GlobalVariable {
 //API URLS
 class ApiURL {
   static const String appName = "Upaaya";
-  static const String apiURL = "127.0.0.1:5000";
-  static const String imageURL = "http://127.0.0.1:5000";
+  static const String apiURL = "192.168.1.68:7000";
+  static const String imageURL = "http://192.168.1.68:7000";
   static const String signupAPI = "/api/v1/auth/register";
   static const String uniqueemailAPI = "/api/v1/auth/uniqueemail";
   static const String sendOTPAPI = "api/v1/auth/sendOTP";

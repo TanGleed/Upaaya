@@ -3,7 +3,8 @@
 // @Description: This file contains all the controllers for the jobPosts
 
 const jobPostsServices = require("../services/jobPosts.services");
-const handleUpload = require("../middleware/jobPost.middleware");
+const JobPost = require("../../models/jobPosts.model");
+const uploadMiddleware = require("../middleware/jobPost.middleware");
 
 // @desc: Get all jobPosts
 // @route: GET /api/v1/jobPosts
@@ -44,29 +45,32 @@ const getJobPost = async (req, res, next) => {
 // @desc: Create a jobPost
 // @route: POST /api/v1/jobPosts
 // @access: Private
-const createJobPost = async (req, res, next) => {
+// Controller function for handling job post creation
+const createJobPost = (req, res) => {
   try {
-    // Call handleUpload middleware to handle file uploads
-    await handleUpload(req, res, async (err) => {
+    uploadMiddleware(req, res, async (err) => {
       if (err) {
-        return res.status(400).send({ message: err.message });
+        throw new Error(err.message);
+      } else {
+        const { title, location, description, tags, additionalInfo } = req.body;
+
+        const media = req.files.map((file) => file.filename);
+
+        const jobPost = await JobPost.create({
+          title,
+          location,
+          description,
+          media,
+          tags,
+          additionalInfo,
+        });
+
+        res.status(201).json({ jobPost });
       }
-
-      // Get the body of the request
-      const { body, files } = req;
-
-      // Create the job post
-      const createdJobPost = await jobPostsServices.createJobPost(body, files);
-
-      res.status(201).send({
-        statusMessage: "JobPost Created",
-        data: createdJobPost,
-      });
     });
   } catch (error) {
-    // catch any errors
-    next(error);
     console.log(error);
+    res.status(400).json({ message: error.message });
   }
 };
 
