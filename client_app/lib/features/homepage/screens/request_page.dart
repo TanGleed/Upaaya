@@ -14,8 +14,9 @@ class RequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: GlobalVariable.backgroundcolor,
         appBar: AppBar(
-          title: Text('Requests'),
+          title: const Text('Requests'),
           centerTitle: true,
           backgroundColor: GlobalVariable.buttonsColors,
         ),

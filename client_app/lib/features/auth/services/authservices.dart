@@ -1,19 +1,14 @@
 import 'dart:convert';
-import 'package:client_app/features/auth/services/sharedpreferences.dart';
-import 'package:client_app/features/homepage/models/category.dart';
+import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
+import 'package:client_app/providers/UserProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../features/auth/services/loginresponsemodel.dart';
-
-final apiService = Provider((ref) => APIService());
-
-class APIService {
+class AuthServices {
   static var client = http.Client();
-
   //registers user
   static Future<bool> register(RegisterModal modal) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
@@ -96,7 +91,10 @@ class APIService {
 
   //login
   static Future<String> login(
-      TextEditingController email, TextEditingController password) async {
+    TextEditingController email,
+    TextEditingController password,
+    BuildContext context,
+  ) async {
     Map<String, String> requestheaders = {'content-type': 'application/json'};
     var url = Uri.http(ApiURL.apiURL, ApiURL.loginAPI);
     var response = await client.post(url,
@@ -105,8 +103,15 @@ class APIService {
           "email": email.text,
           "password": password.text,
         }));
+
     if (response.statusCode == 200) {
-      await SharedPrefer.setLoginDetails(loginResponseJson(response.body));
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      final user = jsonDecode(response.body);
+      pref.setString("token", user['data']['usertoken']);
+
+      // ignore: use_build_context_synchronously
+      Provider.of<UserProvider>(context, listen: false)
+          .setLoginDetails(response.body);
       return "Success";
     } else if (response.statusCode == 404) {
       return "Email Not Registered";
@@ -131,29 +136,6 @@ class APIService {
       return true;
     } else {
       return false;
-    }
-  }
-
-  //get categories
-  Future<List<Category>?> getCategories(page, pageSize) async {
-    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
-
-    Map<String, String> queryString = {
-      'page': page.toString(),
-      'pageSize': pageSize.toString()
-    };
-    var url = Uri.http(ApiURL.apiURL, ApiURL.categoryAPI, queryString);
-    var response = await client.get(
-      url,
-      headers: requestHeaders,
-    );
-
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-
-      return categoriesFromJson(data["data"]);
-    } else {
-      return null;
     }
   }
 }

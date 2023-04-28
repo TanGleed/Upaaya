@@ -15,7 +15,7 @@ final jobProvider = FutureProvider.family<List<Job>?, PaginationModel>(
       );
       return jobs;
     } catch (e) {
-      return [];
+      return null;
     }
   },
 );

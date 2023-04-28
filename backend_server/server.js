@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
+const cors=require("cors")
 
 // IMPORTS FROM OTHER FILES
 const connectDB = require("./src/config/config");
@@ -28,7 +29,10 @@ connectDB();
 // middleware
 app.use(express.json());
 app.use(bodyParser.json());
+<<<<<<< HEAD
+=======
 app.use(bodyParser.urlencoded({ extended: true }));
+>>>>>>> d846a7cb59ee88e92853221cc85a14d49187a6a6
 app.use(cors());
 app.use(morgan("dev"));
 app.use("/uploads", express.static("uploads"));
