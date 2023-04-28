@@ -6,6 +6,7 @@ const colors = require("colors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
+const cors=require("cors")
 
 // IMPORTS FROM OTHER FILES
 const connectDB = require("./src/config/config");
@@ -27,6 +28,7 @@ connectDB();
 
 // middleware
 app.use(bodyParser.json());
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
