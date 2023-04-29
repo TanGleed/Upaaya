@@ -5,7 +5,7 @@ import 'package:client_app/features/homepage/screens/request_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
-  final padding = EdgeInsets.symmetric(horizontal: 20);
+  final padding = EdgeInsets.symmetric(horizontal: 10);
   // const NavigationDrawerWidget({super.key});
 
   @override

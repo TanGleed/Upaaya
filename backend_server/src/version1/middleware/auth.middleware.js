@@ -4,7 +4,8 @@ const Token = "RAND_KEY";
 
 function authToken(req, res, next) {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  console.log(authHeader);
+  const token = authHeader.slice(7, authHeader.length);
 
   if (!token) {
     return res.status(403).send({
@@ -12,13 +13,14 @@ function authToken(req, res, next) {
     });
   }
 
-  jwt.verify(token, Token, (err, user) => {
+  jwt.verify(token, Token, (err, decoded) => { //(err,user)
     if (err) {
       return res.status(401).send({
         message: "Unauthorized",
       });
     }
-    req.user = user.data;
+   // req.user = user.data;
+    req.decoded= decoded;
     next();
   });
 }

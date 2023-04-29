@@ -15,6 +15,8 @@ const authRouter = require("./src/version1/routes/auth.routes");
 const notifyRouter = require("./src/version1/routes/notify.routes");
 const homepageRouter = require("./src/version1/routes/category.routes");
 const jobRoutes = require("./src/version1/routes/jobFetch.routes");
+const ProfileRoutes = require("./src/version1/routes/profile.routes");
+
 
 // INIT
 const PORT = process.env.PORT || 5000;
@@ -36,7 +38,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/notify", notifyRouter);
 app.use("/api/v1/category", homepageRouter);
 app.use("/api/v1/jobs", jobRoutes);
-
+app.use("/api/v1/profile", ProfileRoutes);
 // Error handler
 app.use(errorHandler);
 

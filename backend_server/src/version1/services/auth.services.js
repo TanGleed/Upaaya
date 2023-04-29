@@ -257,7 +257,7 @@ async function verifyOTP(params,callback)
         return callback(error);
     }
 }
-//logim
+//login
 async function login (
     params ,callback
 )
