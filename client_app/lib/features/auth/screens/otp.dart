@@ -1,6 +1,6 @@
-import 'package:client_app/api_service.dart/apiService.dart';
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
+import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/features/auth/widgets/otpFormFields.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
   void sendotp(RegisterModal modal) {
     isAsyncprocess = true;
     setState(() {});
-    APIService.sendotp(modal).then((response) {
+    AuthServices.sendotp(modal).then((response) {
       if (response) {
         showResendOTP = false;
         isAsyncprocess = false;

@@ -1,4 +1,4 @@
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:flutter/material.dart';
 
 class ChangeProfile extends StatelessWidget {

@@ -1,33 +1,56 @@
 const multer = require("multer");
+
+// Set storage engine for multer
 const storage = multer.diskStorage({
-  destination: process.env.UPLOADS_DIR || "./uploads/jobPosts",
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
+  destination: (req, file, cb) => {
+    cb(null, "uploads/jobPosts");
   },
-});
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 10, // 10MB max file size
-  },
-  fileFilter: function (req, file, cb) {
-    if (
-      !file.originalname.match(/\.(jpg|jpeg|png|gif|bmp|mp4|avi|mkv|mov)$/i)
-    ) {
-      return cb(new Error("Invalid file type"));
-    }
-    cb(null, true);
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
   },
 });
 
-const handleUpload = (req, res, next) => {
-  upload.array("media", 3)(req, res, (err) => {
+// Filter for accepted file types
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/gif" ||
+    file.mimetype === "video/mp4"
+  ) {
+    cb(null, true);
+  } else {
+    cb(new Error("Invalid file type"), false);
+  }
+};
+
+// Set upload middleware
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 10, // 10 MB
+  },
+  fileFilter: fileFilter,
+}).array("media");
+
+const uploadMiddleware = (req, res, next) => {
+  upload(req, res, (err) => {
     if (err) {
-      console.error(err);
-      return res.status(500).json({ message: "Error uploading files" });
+      res.status(400).send({
+        status: "ERROR",
+        message: err.message,
+      });
+    }
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({
+        error: "Please select at least one file to upload",
+      });
     }
     next();
   });
 };
 
-module.exports = handleUpload;
+// Export the upload middleware
+
+module.exports = uploadMiddleware;

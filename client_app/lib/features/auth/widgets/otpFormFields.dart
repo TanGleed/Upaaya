@@ -1,8 +1,8 @@
-import 'package:client_app/api_service.dart/apiService.dart';
-import 'package:client_app/constants/globalVariable.dart';
+import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/auth/screens/resetpassword.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
+import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -61,7 +61,7 @@ class _OTPFormFieldState extends State<OTPFormField> {
   void register() {
     isAsyncCallProcess = true;
     setState(() {});
-    APIService.register(widget.modal).then((response) => {
+    AuthServices.register(widget.modal).then((response) => {
           if (response)
             {
               isAsyncCallProcess = false,
@@ -72,10 +72,11 @@ class _OTPFormFieldState extends State<OTPFormField> {
                 "Successfully Regsitered!! You will be redirected to login",
                 "OK",
                 () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => const Auth()),
-                      (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    Auth.routeName,
+                    (route) => false,
+                  );
                 },
               )
             }
@@ -97,7 +98,7 @@ class _OTPFormFieldState extends State<OTPFormField> {
   }
 
   void apicall(RegisterModal modal) {
-    APIService.verifyotp(modal, pin).then((response) => {
+    AuthServices.verifyotp(modal, pin).then((response) => {
           if (response == "Success")
             {
               isAsyncCallProcess = false,

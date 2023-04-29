@@ -2,7 +2,7 @@ import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../constants/globalVariable.dart';
+import '../../../constants/global_variable.dart';
 
 String cdata = DateFormat("yyyy-MM-dd").format(DateTime.now());
 String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
@@ -14,8 +14,9 @@ class RequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: GlobalVariable.backgroundcolor,
         appBar: AppBar(
-          title: Text('Requests'),
+          title: const Text('Requests'),
           centerTitle: true,
           backgroundColor: GlobalVariable.buttonsColors,
         ),

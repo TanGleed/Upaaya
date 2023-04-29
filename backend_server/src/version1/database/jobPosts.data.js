@@ -1,6 +1,7 @@
 // Description: This file contains the database functions for the jobPosts model
 
 // Import the jobPost model
+const CustomError = require("../../errors/custom-error");
 const JobPost = require("../../models/jobPosts.model");
 
 // Create the getJobPosts function
@@ -32,6 +33,7 @@ const createJobPost = async (jobPostData) => {
     const createdJobPost = await jobPostData.save();
     return createdJobPost;
   } catch (err) {
+    console.log(err);
     throw new Error("Error creating job post");
   }
 };

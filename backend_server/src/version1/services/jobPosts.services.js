@@ -6,7 +6,6 @@ const jobPostsData = require("../database/jobPosts.data");
 const CustomError = require("../../errors/custom-error");
 // Import the jobPost model
 const JobPost = require("../../models/jobPosts.model");
-const handleUpload = require("../middleware/jobPost.middleware");
 
 // Create the getJobPosts function
 const getJobPosts = async () => {
@@ -33,9 +32,14 @@ const getJobPost = async (params) => {
 };
 
 // Create the createJobPost function
-const createJobPost = async (body, files) => {
-  const { title, location, description, tags, additionalInfo } = body; // destructure the body
-
+const createJobPost = async ({
+  title,
+  location,
+  description,
+  media,
+  tags,
+  additionalInfo,
+}) => {
   // Validate title, location, and tags
   if (!title) {
     throw new CustomError("JOB_TITLE_NOT_PROVIDED");
@@ -54,18 +58,19 @@ const createJobPost = async (body, files) => {
     title,
     location,
     description,
-    media: files.map((file) => file.filename),
+    media,
     tags,
     additionalInfo,
   });
 
   try {
     // try to save the jobPost
-    const createdJobPost = await jobPostsData.createJobPost(newJobPost); // save the jobPost
+    const createdJobPost = await newJobPost.save(); // save the jobPost
     return createdJobPost;
   } catch (error) {
     // catch any errors
-    next(error);
+    console.log(error);
+    throw new Error("JOB_POST_CREATION_FAILED");
   }
 };
 
