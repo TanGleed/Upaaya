@@ -1,7 +1,8 @@
 import 'package:client_app/constants/global_variable.dart';
-import 'package:client_app/features/homepage/screens/settings_page.dart';
+
 import 'package:client_app/features/homepage/widgets/job_categories.dart';
 import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
+import 'package:client_app/features/homepage/widgets/upload_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,7 +22,6 @@ class _HomePageState extends State<HomePage> {
   ];
   final List<Widget> widgetList = const [
     HomePage(),
-    SettingsPage(),
   ];
   @override
   Future<void> didChangeDependencies() async {
@@ -58,7 +58,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: ListView(children: const [JobCategories()]),
+      body: ListView(children: const [
+        JobCategories(),
+      ]),
     );
   }
 }
