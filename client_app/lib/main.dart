@@ -1,37 +1,36 @@
 import 'dart:convert';
+import 'package:client_app/constants/styles.dart';
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
 import 'package:client_app/providers/UserProvider.dart';
+import 'package:client_app/providers/darktheme_provider.dart';
 import 'package:client_app/router.dart';
+import 'package:client_app/sharedpreferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as pro;
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-// We create a "provider", which will store a value (here "Hello world").
-// By using a provider, this allows us to mock/override the value exposed.
-
-final exampleProvider = pro.Provider((_) => 'Upaaya Client');
 Widget _defaultHome = const Auth();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+bool mode = false;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseMessaging.instance.getToken().then((value) {
-    print("token: $value");
-  });
-  SharedPreferences pref = await SharedPreferences.getInstance();
-  String result = pref.getString("email") ?? "";
-  if (result == "") {
+
+  FirebaseMessaging.instance.getToken().then((value) {});
+
+  String result = await LoginSharedPreferences().getloginToken();
+  if (result != "Invalid Token") {
     _defaultHome = const DashBoard();
   }
+
 // While the application is runnig in background
   FirebaseMessaging.onMessageOpenedApp.listen(
     (RemoteMessage message) async {
-      print("onMessageOpenedApp: $message");
       Navigator.pushNamed(
         navigatorKey.currentState!.context,
         '/push-page',
@@ -73,7 +72,6 @@ void main() async {
 //Handling background process
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print("_firebaseMessagingBackgroundHandler: $message");
 }
 
 // Extend HookConsumerWidget instead of HookWidget, which is exposed by Riverpod
@@ -83,8 +81,8 @@ class MyApp extends pro.HookConsumerWidget {
   @override
   Widget build(BuildContext context, pro.WidgetRef ref) {
     // We can use hooks inside HookConsumerWidget
-    final counter = useState(0);
 
+    final counter = useState(0);
     // final String value = ref.watch(exampleProvider);
 
     return MaterialApp(

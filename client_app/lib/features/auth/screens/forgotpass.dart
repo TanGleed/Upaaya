@@ -9,6 +9,7 @@ import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
+  static const String routeName = '/forgotpassword-screen';
   const ForgotPasswordPage({super.key});
 
   @override

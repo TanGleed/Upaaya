@@ -1,11 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/screens/hompage.dart';
-<<<<<<< HEAD
 import 'package:client_app/features/homepage/screens/request_page.dart';
-=======
-import 'package:client_app/features/homepage/screens/settings_page.dart';
->>>>>>> d846a7cb59ee88e92853221cc85a14d49187a6a6
 import 'package:flutter/material.dart';
 
 class DashBoard extends StatefulWidget {

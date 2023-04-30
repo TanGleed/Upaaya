@@ -16,13 +16,11 @@ class ProfilePage extends StatelessWidget {
         title: Text(name),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: ListView(
-          children: [
-            buildTop(),
-            buildBody(),
-          ],
-        ),
+      body: ListView(
+        children: [
+          buildTop(),
+          buildBody(),
+        ],
       ));
 
   Widget buildBody() {

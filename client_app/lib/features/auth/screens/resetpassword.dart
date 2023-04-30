@@ -2,15 +2,19 @@ import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/features/auth/widgets/authFormFields.dart';
+import 'package:client_app/features/homepage/screens/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 class ResetPasswordPage extends StatefulWidget {
+  static const String routeName = '/reset-screen';
   final TextEditingController email;
+  final bool isChangepassowrd;
   const ResetPasswordPage({
     required this.email,
+    required this.isChangepassowrd,
     super.key,
   });
 
@@ -36,18 +40,37 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   {
                     isAsyncprocess = false,
                     setState(() {}),
-                    FormHelper.showSimpleAlertDialog(
-                      context,
-                      'Successfull',
-                      "Successfully Updated!! You will be redirected to login",
-                      "OK",
-                      () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (_) => const Auth()),
-                            (route) => false);
-                      },
-                    )
+                    if (!widget.isChangepassowrd)
+                      {
+                        FormHelper.showSimpleAlertDialog(
+                          context,
+                          'Successfull',
+                          "Successfully Updated!! You will be redirected to login",
+                          "OK",
+                          () {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (_) => const Auth()),
+                                (route) => false);
+                          },
+                        )
+                      }
+                    else
+                      {
+                        FormHelper.showSimpleAlertDialog(
+                          context,
+                          'Successfull',
+                          "Successfully Updated!! You will be redirected to login",
+                          "OK",
+                          () {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const SettingsPage()),
+                                (route) => false);
+                          },
+                        )
+                      }
                   }
                 else
                   {
@@ -107,7 +130,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 height: 1.5),
           ),
           const Text(
-            "Enter new password to return to you account \nand return to login",
+            "Enter new password to Login in to your Account",
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -124,7 +147,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             height: GlobalVariable.screenHeight * 0.01,
           ),
           Center(
-            child: FormHelper.submitButton("Reset Password", () {
+            child: FormHelper.submitButton("Change Password", () {
               resetpass();
             },
                 btnColor: Colors.deepPurple,
