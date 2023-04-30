@@ -1,13 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:client_app/constants/global_variable.dart';
-import 'package:client_app/features/auth/screens/auth.dart';
-import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:client_app/features/homepage/screens/request_page.dart';
 import 'package:client_app/features/homepage/screens/settings_page.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(

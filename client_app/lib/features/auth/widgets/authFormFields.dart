@@ -42,7 +42,7 @@ class FormFields {
               borderRadius: BorderRadius.circular(15),
               borderSide: const BorderSide(
                 width: 2,
-                color: Colors.black,
+                color: Colors.deepPurpleAccent,
               ),
             ),
             prefixIcon: password

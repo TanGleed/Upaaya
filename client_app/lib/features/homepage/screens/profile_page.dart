@@ -1,40 +1,40 @@
 import 'package:client_app/constants/global_variable.dart';
 import 'package:flutter/material.dart';
 
+import 'changeProfile.dart';
+
 class ProfilePage extends StatelessWidget {
   final String name;
   final String image;
-  final double coverHeight = 240;
-  final double profileHeight = 120;
-
+  final double coverHeight = 220;
+  final double profileHeight = 110;
   const ProfilePage({super.key, required this.name, required this.image});
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: Text(name),
-        centerTitle: true,
-      ),
-      body: ListView(
-        children: [
-          buildTop(),
-          buildBody(),
-        ],
-      ));
+        appBar: AppBar(
+          backgroundColor: GlobalVariable.backgroundcolor,
+          title: Text(name),
+          centerTitle: true,
+        ),
+        body: ListView(
+          children: [buildTop(), buildBody(), const changeButton()],
+        ),
+      );
 
+  //body
   Widget buildBody() {
     return Column(
       children: [
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Text(
           name,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 22.0,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 5.0),
+        const SizedBox(height: 5.0),
         Text(
           '9800000000',
           style: TextStyle(
@@ -42,15 +42,15 @@ class ProfilePage extends StatelessWidget {
             color: Colors.grey[600],
           ),
         ),
-        SizedBox(height: 20.0),
-        Text(
+        const SizedBox(height: 10.0),
+        const Text(
           'About Me',
           style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 5.0),
+        const SizedBox(height: 5.0),
         Container(
           alignment: Alignment.center,
           width: 300,
@@ -80,6 +80,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+//top
   Widget buildTop() {
     return Stack(
       clipBehavior: Clip.none,
@@ -108,6 +109,37 @@ class ProfilePage extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+// button
+class changeButton extends StatelessWidget {
+  const changeButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80),
+      child: InkWell(
+        child: Container(
+            height: 50,
+            width: 150,
+            decoration: BoxDecoration(
+                color: GlobalVariable.buttonsColors,
+                borderRadius: BorderRadius.circular(20)),
+            child: const Center(
+                child: Text('Change Profile',
+                    style: TextStyle(color: Colors.white, fontSize: 18)))),
+        onTap: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChangeProfile()),
+          )
+        },
+      ),
     );
   }
 }
