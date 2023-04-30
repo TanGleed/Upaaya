@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 
+
 // IMPORTS FROM OTHER FILES
 const connectDB = require("./src/config/config");
 const errorHandler = require("./src/version1/middleware/errorHandler.middleware");
@@ -16,10 +17,12 @@ const authRouter = require("./src/version1/routes/auth.routes");
 const notifyRouter = require("./src/version1/routes/notify.routes");
 const homepageRouter = require("./src/version1/routes/category.routes");
 const jobRoutes = require("./src/version1/routes/jobFetch.routes");
+const ProfileRoutes = require("./src/version1/routes/profile.routes");
+
 
 // INIT
 const PORT = process.env.PORT || 4000;
-const hostname = "192.168.1.68";
+const hostname = "127.0.0.1";
 const app = express();
 
 // Connections
@@ -29,7 +32,7 @@ connectDB();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+
 app.use(morgan("dev"));
 app.use("/uploads", express.static("uploads"));
 
@@ -39,7 +42,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/notify", notifyRouter);
 app.use("/api/v1/category", homepageRouter);
 app.use("/api/v1/jobs", jobRoutes);
-
+app.use("/api/v1/profile", ProfileRoutes);
 // Error handler
 app.use(errorHandler);
 

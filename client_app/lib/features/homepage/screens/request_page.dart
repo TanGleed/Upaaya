@@ -14,8 +14,9 @@ class RequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: GlobalVariable.backgroundcolor,
         appBar: AppBar(
-          title: Text('Requests'),
+          title: const Text('Requests'),
           centerTitle: true,
           backgroundColor: GlobalVariable.buttonsColors,
         ),
@@ -28,41 +29,42 @@ class RequestPage extends StatelessWidget {
           return listViewItem(index);
         },
         separatorBuilder: (context, index) {
-          return Divider(height: 0);
+          return const Divider(height: 0);
         },
         itemCount: 10);
   }
 
   Widget listViewItem(int index) {
     return InkWell(
-      onTap: () => ProfilePage(name: 'name', image: ''),
+      onTap: () => const ProfilePage(name: 'name', image: ''),
       child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               photo(),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       namePrice(index),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Column(
                         children: [
                           Text(cdata,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w300,
                               )),
                           Text(tdata,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w300,
                               ))

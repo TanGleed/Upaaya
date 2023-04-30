@@ -1,12 +1,13 @@
 import 'package:client_app/constants/global_variable.dart';
-
+import 'package:client_app/features/homepage/screens/settings_page.dart';
 import 'package:client_app/features/homepage/widgets/job_categories.dart';
 import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
-import 'package:client_app/features/homepage/widgets/upload_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
+  static const String routeName = '/homepage-screen';
+
   const HomePage({super.key});
 
   @override
@@ -15,14 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String message = "";
-  int activeindex = 3;
-  static const iconslist = <IconData>[
-    Icons.home_rounded,
-    Icons.settings,
-  ];
-  final List<Widget> widgetList = const [
-    HomePage(),
-  ];
+
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
@@ -58,9 +52,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: ListView(children: const [
-        JobCategories(),
-      ]),
+      body: ListView(children: const [JobCategories()]),
     );
   }
 }

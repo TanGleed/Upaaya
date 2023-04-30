@@ -49,9 +49,9 @@ dependencies:
   animated_bottom_navigation_bar: ^1.2.0
   firebase_analytics: ^10.2.0
   shared_preferences: ^2.0.15
-  api_cache_manager: ^1.0.2
   settings_ui: ^2.0.2
-
+  khalti: ^1.1.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

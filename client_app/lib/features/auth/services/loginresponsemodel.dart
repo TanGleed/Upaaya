@@ -26,20 +26,20 @@ class LoginResponseModel {
 class Data {
   late final String name;
   late final String email;
-  late final String userId;
+  // late final String userId;
   late final String usertoken;
 
   Data({
     required this.name,
     required this.email,
-    required this.userId,
+    // required this.userId,
     required this.usertoken,
   });
 
   Data.fromJson(Map<String, dynamic> json) {
     name = json["name"];
     email = json["email"];
-    userId = json["_id"];
+    // userId = json["_id"];
     usertoken = json["usertoken"];
   }
 
@@ -48,7 +48,7 @@ class Data {
 
     _data['name'] = name;
     _data['email'] = email;
-    _data['_Id'] = userId;
+    // _data['_id'] = userId;
     _data['usertoken'] = name;
 
     return _data;
