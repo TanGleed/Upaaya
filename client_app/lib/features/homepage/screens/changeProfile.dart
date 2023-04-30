@@ -11,7 +11,7 @@ class ChangeProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Change Profile'),
+          title: const Text('Change Profile'),
           centerTitle: true,
           backgroundColor: GlobalVariable.backgroundcolor,
         ),
@@ -21,34 +21,34 @@ class ChangeProfile extends StatelessWidget {
             shrinkWrap: true,
             children: [
               imageProfile(context),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               buildTextfield(
                 icon: Icons.person_2,
-                hintText: 'Raman Ragav',
+                hintText: 'Your Name',
                 controller: _nameController,
                 labeltext: 'Name',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               buildTextfield(
                 icon: Icons.phone_android,
-                hintText: '98...(unique)',
+                hintText: 'Contact',
                 controller: _contactController,
                 labeltext: 'Contact number',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               buildTextfield(
                 icon: Icons.date_range,
-                hintText: '2000/10/10',
+                hintText: 'birth data',
                 controller: _DOBController,
                 labeltext: 'DoB',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               buildTextfield(
@@ -112,29 +112,29 @@ Widget bottomSheet(BuildContext context) {
   return Container(
     height: 100.0,
     width: MediaQuery.of(context).size.width,
-    margin: EdgeInsets.symmetric(
+    margin: const EdgeInsets.symmetric(
       horizontal: 20,
       vertical: 20,
     ),
     child: Column(children: [
-      Text(
+      const Text(
         "Choose Profile photo",
         style: TextStyle(
           fontSize: 20.0,
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 20,
       ),
       Row(
         children: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.camera),
+            icon: const Icon(Icons.camera),
           ),
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.image),
+            icon: const Icon(Icons.image),
           ),
         ],
       )

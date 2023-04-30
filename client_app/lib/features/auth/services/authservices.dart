@@ -1,4 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
+
+import 'package:client_app/sharedpreferences.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:client_app/constants/global_variable.dart';
@@ -105,13 +109,10 @@ class AuthServices {
         }));
 
     if (response.statusCode == 200) {
-      SharedPreferences pref = await SharedPreferences.getInstance();
       final user = jsonDecode(response.body);
-      pref.setString("token", user['data']['usertoken']);
-
-      // ignore: use_build_context_synchronously
       Provider.of<UserProvider>(context, listen: false)
           .setLoginDetails(response.body);
+      LoginSharedPreferences().setloginToken(user['data']['usertoken']);
       return "Success";
     } else if (response.statusCode == 404) {
       return "Email Not Registered";
@@ -137,5 +138,11 @@ class AuthServices {
     } else {
       return false;
     }
+  }
+
+  //logout
+  static Future<void> logout(BuildContext context) async {
+    Provider.of<UserProvider>(context, listen: false).logout();
+    LoginSharedPreferences().clearloginToken();
   }
 }

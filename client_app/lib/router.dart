@@ -1,11 +1,12 @@
 import 'package:client_app/features/auth/screens/auth.dart';
+import 'package:client_app/features/auth/screens/forgotpass.dart';
 import 'package:client_app/features/auth/screens/login.dart';
 import 'package:client_app/features/auth/screens/otp.dart';
+import 'package:client_app/features/auth/screens/resetpassword.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
 import 'package:client_app/features/homepage/screens/hompage.dart';
+import 'package:client_app/features/homepage/screens/settings_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:http/retry.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -34,11 +35,27 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const HomePage(),
       );
+    case ForgotPasswordPage.routeName:
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => const ForgotPasswordPage());
     case DashBoard.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const DashBoard(),
       );
+    case SettingsPage.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const SettingsPage(),
+      );
+    case ResetPasswordPage.routeName:
+      final args = routeSettings.arguments as ResetPasswordPage;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => ResetPasswordPage(
+                email: args.email,
+                isChangepassowrd: args.isChangepassowrd,
+              ));
     default:
       return MaterialPageRoute(
         settings: routeSettings,

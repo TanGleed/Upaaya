@@ -97,7 +97,7 @@ class _OTPFormFieldState extends State<OTPFormField> {
         });
   }
 
-  void apicall(RegisterModal modal) {
+  void apicall(RegisterModal modal, bool isChangepassword) {
     AuthServices.verifyotp(modal, pin).then((response) => {
           if (response == "Success")
             {
@@ -107,8 +107,10 @@ class _OTPFormFieldState extends State<OTPFormField> {
                   : Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) =>
-                              ResetPasswordPage(email: modal.email))),
+                          builder: (_) => ResetPasswordPage(
+                                email: modal.email,
+                                isChangepassowrd: isChangepassword,
+                              ))),
             }
           else if (response == "Invalid OTP")
             {
@@ -196,7 +198,7 @@ class _OTPFormFieldState extends State<OTPFormField> {
                     setState(() {
                       isAsyncCallProcess = true;
                     });
-                    apicall(widget.modal);
+                    apicall(widget.modal, !widget.isregisterScreen);
                   },
                   child: Text(
                     'Continue',

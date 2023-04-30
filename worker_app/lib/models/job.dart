@@ -7,8 +7,13 @@ import '../constants/globalVariable.dart';
 part 'job.freezed.dart';
 part 'job.g.dart';
 
-List<Job> jobFromJson(String str) =>
-    List<Job>.from(json.decode(str).map((x) => Job.fromJson(x)));
+List<Job> jobFromJson(dynamic str) {
+  return List<Job>.from(
+    (str).map(
+      (x) => Job.fromJson(x),
+    ),
+  );
+}
 
 @freezed
 abstract class Job with _$Job {
@@ -25,6 +30,6 @@ abstract class Job with _$Job {
   factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
 }
 
-extension JobX on Job {
+extension JobExt on Job {
   String get fullImageUrl => ApiURL.imageURL + media;
 }

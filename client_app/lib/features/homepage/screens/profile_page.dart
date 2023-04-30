@@ -8,7 +8,6 @@ class ProfilePage extends StatelessWidget {
   final String image;
   final double coverHeight = 220;
   final double profileHeight = 110;
-
   const ProfilePage({super.key, required this.name, required this.image});
 
   @override
@@ -27,15 +26,15 @@ class ProfilePage extends StatelessWidget {
   Widget buildBody() {
     return Column(
       children: [
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Text(
           name,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 22.0,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 5.0),
+        const SizedBox(height: 5.0),
         Text(
           '9800000000',
           style: TextStyle(
@@ -43,15 +42,15 @@ class ProfilePage extends StatelessWidget {
             color: Colors.grey[600],
           ),
         ),
-        SizedBox(height: 10.0),
-        Text(
+        const SizedBox(height: 10.0),
+        const Text(
           'About Me',
           style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 5.0),
+        const SizedBox(height: 5.0),
         Container(
           alignment: Alignment.center,
           width: 300,
@@ -131,7 +130,7 @@ class changeButton extends StatelessWidget {
             decoration: BoxDecoration(
                 color: GlobalVariable.buttonsColors,
                 borderRadius: BorderRadius.circular(20)),
-            child: Center(
+            child: const Center(
                 child: Text('Change Profile',
                     style: TextStyle(color: Colors.white, fontSize: 18)))),
         onTap: () => {

@@ -14,16 +14,25 @@ final apiService = Provider((ref) => APIService());
 class APIService {
   static var client = http.Client();
 
-  Future<List<Job>> getJobs(int page, int pageSize) async {
-    var url = Uri.http(ApiURL.apiURL, ApiURL.getJobsAPI);
-    var response = await client.get(url);
+  //get jobd
+  Future<List<Job>?> getJobs(page, pageSize) async {
+    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
+
+    Map<String, String> queryString = {
+      'page': page.toString(),
+      'pageSize': pageSize.toString()
+    };
+    var url = Uri.http(ApiURL.apiURL, ApiURL.getJobsAPI, queryString);
+    var response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
 
     if (response.statusCode == 200) {
-      final jobsJson = jsonDecode(response.body) as List<dynamic>;
-      final jobs = jobsJson.map((jobJson) => Job.fromJson(jobJson)).toList();
-      return jobs;
+      var data = jsonDecode(response.body);
+      return jobFromJson(data["data"]);
     } else {
-      throw Exception('Failed to load jobs');
+      return null;
     }
   }
 
