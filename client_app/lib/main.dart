@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
+import 'package:client_app/features/homepage/services/job_post_notifier.dart';
 
 import 'package:client_app/providers/UserProvider.dart';
 import 'package:client_app/router.dart';
@@ -64,6 +65,7 @@ void main() async {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => UserProvider()),
+          ChangeNotifierProvider(create: (_) => JobPostNotifier()),
         ],
         child: const MyApp(),
       ),
