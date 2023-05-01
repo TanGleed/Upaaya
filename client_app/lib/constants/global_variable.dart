@@ -42,6 +42,7 @@ class ApiURL {
   static const String loginAPI = "api/v1/auth/login";
   static const String resetpassAPI = "api/v1/auth/resetpassword";
   static const String categoryAPI = "api/v1/category";
+  static const String jobAPI = "api/v1/jobpost";
   static const int pageSize = 10;
 }
 
