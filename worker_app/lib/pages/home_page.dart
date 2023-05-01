@@ -68,7 +68,6 @@ class HomePage extends ConsumerWidget {
                         child: CircleAvatar(
                           backgroundColor: Colors.green,
                           foregroundColor: Colors.green,
-                          backgroundImage: NetworkImage(job.media),
                         ),
                       ),
                       SizedBox(width: 5),

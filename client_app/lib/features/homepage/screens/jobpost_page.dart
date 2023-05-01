@@ -1,3 +1,4 @@
+import 'package:client_app/features/homepage/widgets/job_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -76,8 +77,9 @@ class JobPostPage extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
+                      const JobCategories(),
                       const SizedBox(
-                        height: 100,
+                        height: 20,
                       ),
                       AppTextField(
                         textController: locationController,
