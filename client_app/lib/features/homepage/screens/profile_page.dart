@@ -13,7 +13,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backgroundColor: GlobalVariable.backgroundcolor,
+          backgroundColor: Colors.deepPurpleAccent,
           title: Text(name),
           centerTitle: true,
         ),

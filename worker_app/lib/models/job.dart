@@ -24,12 +24,7 @@ abstract class Job with _$Job {
     required String description,
     required List<String> tags,
     required String additionalInfo,
-    required String media,
   }) = _Job;
 
   factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
-}
-
-extension JobExt on Job {
-  String get fullImageUrl => ApiURL.imageURL + media;
 }

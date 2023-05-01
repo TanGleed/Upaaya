@@ -13,7 +13,6 @@ _$_Job _$$_JobFromJson(Map<String, dynamic> json) => _$_Job(
       description: json['description'] as String,
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       additionalInfo: json['additionalInfo'] as String,
-      media: json['media'] as String,
     );
 
 Map<String, dynamic> _$$_JobToJson(_$_Job instance) => <String, dynamic>{
@@ -23,5 +22,4 @@ Map<String, dynamic> _$$_JobToJson(_$_Job instance) => <String, dynamic>{
       'description': instance.description,
       'tags': instance.tags,
       'additionalInfo': instance.additionalInfo,
-      'media': instance.media,
     };
