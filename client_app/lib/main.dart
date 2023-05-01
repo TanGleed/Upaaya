@@ -1,15 +1,16 @@
 import 'dart:convert';
-import 'package:client_app/constants/styles.dart';
+
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
+
 import 'package:client_app/providers/UserProvider.dart';
-import 'package:client_app/providers/darktheme_provider.dart';
 import 'package:client_app/router.dart';
 import 'package:client_app/sharedpreferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart' as pro;
 import 'package:provider/provider.dart';
 
@@ -20,12 +21,13 @@ bool mode = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  //for map
 
   FirebaseMessaging.instance.getToken().then((value) {});
 
   String result = await LoginSharedPreferences().getloginToken();
   if (result != "Invalid Token") {
-    _defaultHome = const DashBoard();
+    _defaultHome = DashBoard();
   }
 
 // While the application is runnig in background

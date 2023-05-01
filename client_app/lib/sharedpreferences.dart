@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginSharedPreferences {
@@ -23,6 +21,7 @@ class LoginSharedPreferences {
 
 class SettingSharedPreferences {
   static const mode = "theme_mode";
+  static const location = "location";
   setdarktheme(bool val) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setBool(mode, val);
@@ -33,4 +32,14 @@ class SettingSharedPreferences {
     bool theme = pref.getBool(mode) ?? false;
     return theme;
   }
+
+  // setlocation(Position val) async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   pref.setString(location, val.toString());
+  // }
+
+  // Future<String> getlocation() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   String Position =pref.getString(val.toString())
+  // }
 }
