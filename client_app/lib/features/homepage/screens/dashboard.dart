@@ -118,7 +118,7 @@ class _DashBoardState extends State<DashBoard> {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
           ),
           Positioned(
-            top: GlobalVariable.screenHeight * 0.03,
+            top: GlobalVariable.screenHeight * 0.05,
             left: GlobalVariable.screenWidth * 0.05,
             child: Container(
               decoration: BoxDecoration(
@@ -136,7 +136,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
           ),
           Positioned(
-            top: GlobalVariable.screenHeight * 0.03,
+            top: GlobalVariable.screenHeight * 0.05,
             right: GlobalVariable.screenWidth * 0.05,
             child: Container(
               decoration: BoxDecoration(
@@ -147,9 +147,7 @@ class _DashBoardState extends State<DashBoard> {
                 icon: SvgPicture.asset(
                   "assets/icons/notification.svg",
                 ),
-                onPressed: () {
-                  _scaffoldState.currentState?.openDrawer();
-                },
+                onPressed: () {},
               ),
             ),
           ),
