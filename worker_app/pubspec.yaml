@@ -50,6 +50,11 @@ dependencies:
   freezed_annotation: ^2.2.0
   animated_bottom_navigation_bar: ^1.2.0
   firebase_analytics: ^10.2.0
+  shared_preferences: ^2.0.15
+  settings_ui: ^2.0.2
+  google_maps_flutter: ^2.2.5
+  google_maps_flutter_web: ^0.4.0+8
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
