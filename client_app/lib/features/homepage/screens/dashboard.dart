@@ -1,9 +1,14 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/screens/hompage.dart';
+import 'package:client_app/features/homepage/screens/jobpost_page.dart';
+import 'package:client_app/features/homepage/screens/settings_page.dart';
+import 'package:client_app/features/homepage/widgets/upload_form.dart';
 import 'package:client_app/features/homepage/screens/request_page.dart';
+
 import 'package:client_app/features/homepage/widgets/job_categories.dart';
 import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -102,9 +107,8 @@ class _DashBoardState extends State<DashBoard> {
         body: Stack(children: [
           SlidingUpPanel(
             panelBuilder: (sc) {
-              return const SingleChildScrollView();
+              return JobPostPage();
             },
-            header: const JobCategories(),
             controller: panelController,
             minHeight: MediaQuery.of(context).size.height * 0.456,
             maxHeight: MediaQuery.of(context).size.height * 0.8,
