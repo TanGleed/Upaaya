@@ -3,15 +3,42 @@ import 'package:flutter/material.dart';
 
 import 'changeProfile.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final String name;
   final String image;
-  final double coverHeight = 220;
-  final double profileHeight = 110;
+
   const ProfilePage({super.key, required this.name, required this.image});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final double coverHeight = 220;
+
+  final double profileHeight = 110;
+
+  @override
   Widget build(BuildContext context) => Scaffold(
+<<<<<<< HEAD
+      appBar: AppBar(
+        backgroundColor: GlobalVariable.backgroundcolor,
+        title: Text(widget.name),
+        centerTitle: true,
+      ),
+      body: staticPage());
+
+  Widget staticPage() {
+    return ListView(
+      children: [buildTop(), buildBody(), buildButton()],
+    );
+  }
+=======
         appBar: AppBar(
           backgroundColor: Colors.deepPurpleAccent,
           title: Text(name),
@@ -21,6 +48,7 @@ class ProfilePage extends StatelessWidget {
           children: [buildTop(), buildBody(), const changeButton()],
         ),
       );
+>>>>>>> d51c0a0e740d40ac1c4b288842c80c42f9325071
 
   //body
   Widget buildBody() {
@@ -28,7 +56,7 @@ class ProfilePage extends StatelessWidget {
       children: [
         const SizedBox(height: 10.0),
         Text(
-          name,
+          widget.name,
           style: const TextStyle(
             fontSize: 22.0,
             fontWeight: FontWeight.bold,
@@ -104,23 +132,15 @@ class ProfilePage extends StatelessWidget {
             radius: profileHeight / 2,
             backgroundColor: GlobalVariable.backgroundcolor,
             backgroundImage: NetworkImage(
-              image, // Profile photo is here
+              widget.image, // Profile photo is here
             ),
           ),
         )
       ],
     );
   }
-}
 
-// button
-class changeButton extends StatelessWidget {
-  const changeButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget buildButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 80),
       child: InkWell(

@@ -24,11 +24,13 @@
 //     if (arguments != null) {
 //       Map? pushArguments = arguments as Map;
 
-//       setState(() {
-//         message = pushArguments["message"];
-//       });
-//     }
-//   }
+  //     setState(() {
+  //       message = pushArguments["message"];
+  //     });
+  //   }
+  //   GlobalVariable globalVariable = GlobalVariable();
+  //   globalVariable.init(context);
+  // }
 
 //   @override
 //   Widget build(BuildContext context) {

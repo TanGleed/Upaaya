@@ -3,20 +3,23 @@ import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:client_app/features/homepage/screens/request_page.dart';
 import 'package:client_app/features/homepage/screens/settings_page.dart';
+import 'package:client_app/providers/UserProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
-  final padding = EdgeInsets.symmetric(
-    horizontal: GlobalVariable().getProportionateScreenWidth(15),
-  );
+  final padding = EdgeInsets.symmetric();
+
+  NavigationDrawerWidget({super.key});
   // const NavigationDrawerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const name = 'Prabesh Timilsina';
-    const phone = '9800000000';
-    const image =
-        'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400';
+    final String email =
+        Provider.of<UserProvider>(context, listen: false).user.email;
+    final String name =
+        Provider.of<UserProvider>(context, listen: false).user.name;
+    const image = '';
     return Drawer(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
@@ -31,9 +34,9 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildHeader(
                 image: image,
                 name: name,
-                phone: phone,
+                email: email,
                 onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ProfilePage(
+                    builder: (context) => ProfilePage(
                           name: name,
                           image: image,
                         )))),
@@ -95,7 +98,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget buildHeader({
     required String image,
     required String name,
-    required String phone,
+    required String email,
     required VoidCallback onClicked,
   }) =>
       InkWell(
@@ -122,7 +125,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        phone,
+                        email,
                         style:
                             const TextStyle(fontSize: 14, color: Colors.white),
                       ),
