@@ -28,6 +28,8 @@ class _HomePageState extends State<HomePage> {
         message = pushArguments["message"];
       });
     }
+    GlobalVariable globalVariable = GlobalVariable();
+    globalVariable.init(context);
   }
 
   @override

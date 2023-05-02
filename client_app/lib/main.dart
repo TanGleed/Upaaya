@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:client_app/constants/styles.dart';
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
+import 'package:client_app/features/homepage/screens/hompage.dart';
 import 'package:client_app/providers/UserProvider.dart';
 import 'package:client_app/providers/darktheme_provider.dart';
 import 'package:client_app/router.dart';

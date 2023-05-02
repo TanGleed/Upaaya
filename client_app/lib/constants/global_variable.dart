@@ -33,8 +33,8 @@ class GlobalVariable {
 //API URLS
 class ApiURL {
   static const String appName = "Upaaya";
-  static const String apiURL = "127.0.0.1:5000";
-  static const String imageURL = "http://127.0.0.1:5000";
+  static const String apiURL = " 192.168.99.2:5000";
+  static const String imageURL = "http:// 192.168.99.2:5000";
   static const String signupAPI = "/api/v1/auth/register";
   static const String uniqueemailAPI = "/api/v1/auth/uniqueemail";
   static const String sendOTPAPI = "api/v1/auth/sendOTP";
@@ -42,6 +42,8 @@ class ApiURL {
   static const String loginAPI = "api/v1/auth/login";
   static const String resetpassAPI = "api/v1/auth/resetpassword";
   static const String categoryAPI = "api/v1/category";
+  static const String addprofileAPI = "api/v1/profile/add";
+  static const String getprofileAPI = "api/v1/profile/checkprofile";
   static const int pageSize = 10;
 }
 

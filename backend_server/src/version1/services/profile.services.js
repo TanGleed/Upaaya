@@ -1,5 +1,5 @@
 
-const Profile = require("../../models/profile.model");
+const {Profile} = require("../../models/profile.model");
 
 const addProfile = async (name, DOB, contact, address) => {
   const profile = Profile({
