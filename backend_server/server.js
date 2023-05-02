@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 
-
 // IMPORTS FROM OTHER FILES
 const connectDB = require("./src/config/config");
 const errorHandler = require("./src/version1/middleware/errorHandler.middleware");
@@ -19,10 +18,13 @@ const homepageRouter = require("./src/version1/routes/category.routes");
 const jobRoutes = require("./src/version1/routes/jobFetch.routes");
 const ProfileRoutes = require("./src/version1/routes/profile.routes");
 
-
 // INIT
 const PORT = process.env.PORT || 4000;
+<<<<<<< HEAD
 const hostname = "192.168.99.2";
+=======
+const hostname = "192.168.1.88";
+>>>>>>> d51c0a0e740d40ac1c4b288842c80c42f9325071
 const app = express();
 
 // Connections

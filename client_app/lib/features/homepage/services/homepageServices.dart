@@ -3,6 +3,7 @@ import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/models/category.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:client_app/features/homepage/models/jobpost/jobpost.dart';
 
 final homepageAPI = Provider(
   (ref) => HomePageServies(),
@@ -31,5 +32,22 @@ class HomePageServies {
     } else {
       return null;
     }
+  }
+
+  // post job
+  Future<http.Response> postJob(JobPost jobPost) async {
+    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
+    http.Response? response;
+    var url = Uri.http(ApiURL.apiURL, ApiURL.jobAPI);
+    try {
+      response = await client.post(
+        url,
+        headers: requestHeaders,
+        body: jsonEncode(jobPost.toJson()),
+      );
+    } catch (e) {
+      print(e.toString());
+    }
+    return response!;
   }
 }

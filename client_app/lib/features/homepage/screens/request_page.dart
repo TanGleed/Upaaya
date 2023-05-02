@@ -10,6 +10,7 @@ String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class RequestPage extends StatelessWidget {
+  static const String routeName = '/requestpage-screen';
   const RequestPage({super.key});
 
   @override

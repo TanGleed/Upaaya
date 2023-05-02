@@ -1,16 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:worker_app/models/job.dart';
+import 'package:worker_app/pages/dashboard.dart';
 
-class DescPage extends StatefulWidget {
-  const DescPage({super.key, required Job job});
+class DescPage extends StatelessWidget {
+  final Job job;
+  const DescPage({Key? key, required this.job}) : super(key: key);
 
-  @override
-  State<DescPage> createState() => _DescPageState();
-}
-
-class _DescPageState extends State<DescPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,7 @@ class _DescPageState extends State<DescPage> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
-                          "https://media.wd-40.ua/app/uploads/2021/12/23143818/Remove-broken-tap-featured.jpg"),
+                          "https://www.kraususa.com/media/wysiwyg/Kitchen_Sinks_undermount.jpg"),
                       fit: BoxFit.contain),
                 ),
               ),
@@ -53,7 +52,7 @@ class _DescPageState extends State<DescPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Broken Sink",
+                          job.title,
                           style: TextStyle(
                             color: Color.fromARGB(255, 49, 49, 49),
                             fontSize: 28,
@@ -77,7 +76,7 @@ class _DescPageState extends State<DescPage> {
                           width: 5,
                         ),
                         Text(
-                          "28 kilo, Dhulikhel",
+                          "Location: ${job.location}",
                           style: TextStyle(
                             color: Color.fromARGB(255, 68, 65, 65),
                             fontSize: 15,
@@ -102,7 +101,7 @@ class _DescPageState extends State<DescPage> {
                           width: 5,
                         ),
                         Text(
-                          "Plumbing",
+                          job.title,
                           style: TextStyle(
                             color: Color.fromARGB(255, 68, 65, 65),
                             fontSize: 15,
@@ -114,7 +113,7 @@ class _DescPageState extends State<DescPage> {
                       height: 20,
                     ),
                     Text(
-                      "Description",
+                      job.description,
                       style: TextStyle(
                           color: Color.fromARGB(255, 68, 65, 65),
                           fontSize: 20,
@@ -124,7 +123,7 @@ class _DescPageState extends State<DescPage> {
                       height: 10,
                     ),
                     Text(
-                      "This handy tool helps you create dummy text for all your layout needs. We are gradually adding new functionality and we welcome your suggestions and feedback.",
+                      job.additionalInfo,
                       style: TextStyle(
                         color: Color.fromARGB(255, 68, 65, 65),
                         fontSize: 15,
@@ -144,7 +143,7 @@ class _DescPageState extends State<DescPage> {
                       height: 10,
                     ),
                     Text(
-                      "Name:Aawishkar Tiwari",
+                      "Name:${job.id}",
                       style: TextStyle(
                         color: Color.fromARGB(255, 68, 65, 65),
                         fontSize: 15,
@@ -154,7 +153,7 @@ class _DescPageState extends State<DescPage> {
                       height: 3,
                     ),
                     Text(
-                      "Contact:980000000",
+                      "Contact:xxxxxxxxxx",
                       style: TextStyle(
                         color: Color.fromARGB(255, 68, 65, 65),
                         fontSize: 15,
@@ -167,12 +166,16 @@ class _DescPageState extends State<DescPage> {
             Positioned(
                 bottom: 50,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 75),
                       child: MaterialButton(
                         color: Colors.deepPurple,
-                        onPressed: () {},
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MapPage()),
+                        ),
                         child: Text(
                           'Accept',
                           style: TextStyle(color: Colors.white, fontSize: 15),

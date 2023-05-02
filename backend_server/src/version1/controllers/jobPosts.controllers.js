@@ -46,29 +46,28 @@ const getJobPost = async (req, res, next) => {
 // @route: POST /api/v1/jobPosts
 // @access: Private
 // Controller function for handling job post creation
-const createJobPost = (req, res) => {
+const createJobPost = async (req, res) => {
   try {
-    uploadMiddleware(req, res, async (err) => {
-      if (err) {
-        throw new Error(err.message);
-      } else {
-        const { title, location, description, tags, additionalInfo } = req.body;
+    // uploadMiddleware(req, res, async (err) => {
+    //   if (err) {
+    //     throw new Error(err.message);
+    //   } else {
+    const { title, location, description, tags, additionalInfo } = req.body;
 
-        const media = req.files.map((file) => file.filename);
+    //const media = req.files.map((file) => file.filename);
 
-        const jobPost = await JobPost.create({
-          title,
-          location,
-          description,
-          media,
-          tags,
-          additionalInfo,
-        });
-
-        res.status(201).json({ jobPost });
-      }
+    const jobPost = await JobPost.create({
+      title,
+      location,
+      description,
+      // media,
+      tags,
+      additionalInfo,
     });
+
+    res.status(201).json({ jobPost });
   } catch (error) {
+    // });
     console.log(error);
     res.status(400).json({ message: error.message });
   }

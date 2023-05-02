@@ -41,6 +41,12 @@ class NavigationDrawerWidget extends StatelessWidget {
                           image: image,
                         )))),
             SizedBox(height: GlobalVariable().getProportionateScreenHeight(40)),
+            buildMenuItem(
+                text: 'Request History',
+                icon: Icons.history_rounded,
+                onClicked: () {
+                  Navigator.of(context).pushNamed(RequestPage.routeName);
+                }),
             const Divider(color: Colors.white70),
             buildMenuItem(
               text: 'About us',

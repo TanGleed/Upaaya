@@ -25,6 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+<<<<<<< HEAD
       appBar: AppBar(
         backgroundColor: GlobalVariable.backgroundcolor,
         title: Text(widget.name),
@@ -37,6 +38,17 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [buildTop(), buildBody(), buildButton()],
     );
   }
+=======
+        appBar: AppBar(
+          backgroundColor: Colors.deepPurpleAccent,
+          title: Text(name),
+          centerTitle: true,
+        ),
+        body: ListView(
+          children: [buildTop(), buildBody(), const changeButton()],
+        ),
+      );
+>>>>>>> d51c0a0e740d40ac1c4b288842c80c42f9325071
 
   //body
   Widget buildBody() {

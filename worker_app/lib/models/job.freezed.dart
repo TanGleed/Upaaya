@@ -26,7 +26,6 @@ mixin _$Job {
   String get description => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   String get additionalInfo => throw _privateConstructorUsedError;
-  String get media => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,8 +43,7 @@ abstract class $JobCopyWith<$Res> {
       String location,
       String description,
       List<String> tags,
-      String additionalInfo,
-      String media});
+      String additionalInfo});
 }
 
 /// @nodoc
@@ -66,7 +64,6 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
     Object? description = null,
     Object? tags = null,
     Object? additionalInfo = null,
-    Object? media = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -93,10 +90,6 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
           ? _value.additionalInfo
           : additionalInfo // ignore: cast_nullable_to_non_nullable
               as String,
-      media: null == media
-          ? _value.media
-          : media // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -113,8 +106,7 @@ abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
       String location,
       String description,
       List<String> tags,
-      String additionalInfo,
-      String media});
+      String additionalInfo});
 }
 
 /// @nodoc
@@ -132,7 +124,6 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
     Object? description = null,
     Object? tags = null,
     Object? additionalInfo = null,
-    Object? media = null,
   }) {
     return _then(_$_Job(
       id: null == id
@@ -159,10 +150,6 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
           ? _value.additionalInfo
           : additionalInfo // ignore: cast_nullable_to_non_nullable
               as String,
-      media: null == media
-          ? _value.media
-          : media // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -176,8 +163,7 @@ class _$_Job implements _Job {
       required this.location,
       required this.description,
       required final List<String> tags,
-      required this.additionalInfo,
-      required this.media})
+      required this.additionalInfo})
       : _tags = tags;
 
   factory _$_Job.fromJson(Map<String, dynamic> json) => _$$_JobFromJson(json);
@@ -200,12 +186,10 @@ class _$_Job implements _Job {
 
   @override
   final String additionalInfo;
-  @override
-  final String media;
 
   @override
   String toString() {
-    return 'Job(id: $id, title: $title, location: $location, description: $description, tags: $tags, additionalInfo: $additionalInfo, media: $media)';
+    return 'Job(id: $id, title: $title, location: $location, description: $description, tags: $tags, additionalInfo: $additionalInfo)';
   }
 
   @override
@@ -221,14 +205,13 @@ class _$_Job implements _Job {
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.additionalInfo, additionalInfo) ||
-                other.additionalInfo == additionalInfo) &&
-            (identical(other.media, media) || other.media == media));
+                other.additionalInfo == additionalInfo));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, location, description,
-      const DeepCollectionEquality().hash(_tags), additionalInfo, media);
+      const DeepCollectionEquality().hash(_tags), additionalInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -251,8 +234,7 @@ abstract class _Job implements Job {
       required final String location,
       required final String description,
       required final List<String> tags,
-      required final String additionalInfo,
-      required final String media}) = _$_Job;
+      required final String additionalInfo}) = _$_Job;
 
   factory _Job.fromJson(Map<String, dynamic> json) = _$_Job.fromJson;
 
@@ -268,8 +250,6 @@ abstract class _Job implements Job {
   List<String> get tags;
   @override
   String get additionalInfo;
-  @override
-  String get media;
   @override
   @JsonKey(ignore: true)
   _$$_JobCopyWith<_$_Job> get copyWith => throw _privateConstructorUsedError;
