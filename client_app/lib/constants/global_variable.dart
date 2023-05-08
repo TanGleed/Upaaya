@@ -33,13 +33,8 @@ class GlobalVariable {
 //API URLS
 class ApiURL {
   static const String appName = "Upaaya";
-<<<<<<< HEAD
-  static const String apiURL = " 192.168.99.2:5000";
-  static const String imageURL = "http:// 192.168.99.2:5000";
-=======
   static const String apiURL = "192.168.1.68:4000";
   static const String imageURL = "http://192.168.1.68:4000";
->>>>>>> d51c0a0e740d40ac1c4b288842c80c42f9325071
   static const String signupAPI = "/api/v1/auth/register";
   static const String uniqueemailAPI = "/api/v1/auth/uniqueemail";
   static const String sendOTPAPI = "api/v1/auth/sendOTP";
@@ -47,13 +42,10 @@ class ApiURL {
   static const String loginAPI = "api/v1/auth/login";
   static const String resetpassAPI = "api/v1/auth/resetpassword";
   static const String categoryAPI = "api/v1/category";
-<<<<<<< HEAD
+  static const String jobAPI = "api/v1/jobpost";
+  static const int pageSize = 10;
   static const String addprofileAPI = "api/v1/profile/add";
   static const String getprofileAPI = "api/v1/profile/checkprofile";
-=======
-  static const String jobAPI = "api/v1/jobpost";
->>>>>>> d51c0a0e740d40ac1c4b288842c80c42f9325071
-  static const int pageSize = 10;
 }
 
 //Keyboard
