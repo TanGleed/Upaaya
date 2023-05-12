@@ -5,12 +5,17 @@ class User {
   final String email;
   final String userId;
   final String usertoken;
-
+  final String contactno;
+  final String dob;
+  final String address;
   User({
     required this.name,
     required this.email,
     required this.userId,
     required this.usertoken,
+    required this.address,
+    required this.contactno,
+    required this.dob,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -19,6 +24,9 @@ class User {
       email: json["data"]['email'] ?? " ",
       userId: json["data"]["_id"] ?? " ",
       usertoken: json["data"]["usertoken"] ?? " ",
+      address: json["data"]["address"] ?? " ",
+      contactno: json["data"]["contact"] ?? "",
+      dob: json["data"]["DOB"] ?? " ",
     );
   }
 

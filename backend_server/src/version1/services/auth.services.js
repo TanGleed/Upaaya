@@ -1,20 +1,23 @@
 const { user } = require("../../models/auth.model");
+const profileservice= require("../services/profile.services")
 const { otp } = require("../../models/otp.model");
 const auth = require("../middleware/auth.middleware");
 const bcrypt = require("bcryptjs");
 const otpGenerator = require("otp-generator");
 const nodemailer = require("nodemailer");
+const { param } = require("../routes/profile.routes");
 
 //singup
 async function register(params, callback) {
   //checks user with same email if any
   let userRegistered = await user.findOne({ email: params.email });
-
+  
   if (userRegistered) {
     return callback({
       message: "Email Already Registered",
     });
   }
+  
   //encrptying password
   const salt = bcrypt.genSaltSync(10);
   params.password = bcrypt.hashSync(params.password, salt);
@@ -208,11 +211,13 @@ async function verifyOTP(params, callback) {
 async function login(params, callback) {
   try {
     let userschema = await user.findOne({ email: params.email });
-
+    
     if (userschema != null) {
+      
       const hashedpass = userschema.password;
       if (bcrypt.compareSync(params.password, hashedpass)) {
         let usertoken = auth.generateToken(userschema.toJSON());
+        await profileservice.updateToken(usertoken,params.email);
         return callback(null, { ...userschema.toJSON(), usertoken });
       } else {
         throw new Error("Invalid Password");

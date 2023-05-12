@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:client_app/features/homepage/services/userServices.dart';
 import 'package:client_app/sharedpreferences.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -110,10 +111,14 @@ class AuthServices {
 
     if (response.statusCode == 200) {
       final user = jsonDecode(response.body);
-      Provider.of<UserProvider>(context, listen: false)
-          .setLoginDetails(response.body);
-      LoginSharedPreferences().setloginToken(user['data']['usertoken']);
-      return "Success";
+      final token = user['data']['usertoken'];
+      final name = user['data']['name'];
+      const SnackBar(
+        content: Text('Successfully logged In'),
+      );
+      LoginSharedPreferences().setloginToken(token, name);
+
+      return 'Success';
     } else if (response.statusCode == 404) {
       return "Email Not Registered";
     } else if (response.statusCode == 401) {
