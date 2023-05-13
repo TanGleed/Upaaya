@@ -1,16 +1,28 @@
+import 'dart:ui';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginSharedPreferences {
   static const login = "token";
-  setloginToken(String val) async {
+  static const useremail = "email";
+  setloginToken(String val, String email) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString(login, val);
+    pref.setString(useremail, email);
   }
 
   Future<String> getloginToken() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString(login) ?? "Invalid Token";
+
     return token;
+  }
+
+  Future<String> getemail() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String email = pref.getString(useremail) ?? "Invalid";
+
+    return email;
   }
 
   clearloginToken() async {

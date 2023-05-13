@@ -1,5 +1,5 @@
 const e = require("express");
-const   authservice  = require("../services/auth.services");
+const  authservice  = require("../services/auth.services");
 
 
 //signup

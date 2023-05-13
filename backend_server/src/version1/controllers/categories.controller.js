@@ -12,7 +12,7 @@ exports.create = (req, res, next) => {
     } else {
       const path =
         req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
-
+      
       var model = {
         categoryName: req.body.categoryName,
         categoryDescription: req.body.categoryDescription,

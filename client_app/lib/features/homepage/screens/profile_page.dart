@@ -1,13 +1,16 @@
 import 'package:client_app/constants/global_variable.dart';
+import 'package:client_app/providers/UserProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'changeProfile.dart';
 
 class ProfilePage extends StatefulWidget {
-  final String name;
-  final String image;
+  static const String routeName = '/profilepage-screen';
 
-  const ProfilePage({super.key, required this.name, required this.image});
+  const ProfilePage({
+    super.key,
+  });
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -19,21 +22,34 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
   }
 
+  String name = 'na';
+  String contact = 'na';
+  String address = 'na';
+  String image = '';
   final double coverHeight = 220;
-
   final double profileHeight = 110;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    name = provider.user.name;
+    contact = provider.user.contactno;
+    address = provider.user.address;
+    image = provider.user.avatar;
+    return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.deepPurpleAccent,
-          title: Text('name'),
+          backgroundColor: GlobalVariable.backgroundcolor,
+          title: Text(name),
           centerTitle: true,
         ),
-        body: ListView(
-            // children: [buildTop(), buildBody(), const changeButton()],
-            ),
-      );
+        body: staticPage());
+  }
+
+  Widget staticPage() {
+    return ListView(
+      children: [buildTop(), buildBody(), buildButton()],
+    );
+  }
 
   //body
   Widget buildBody() {
@@ -41,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         const SizedBox(height: 10.0),
         Text(
-          widget.name,
+          name,
           style: const TextStyle(
             fontSize: 22.0,
             fontWeight: FontWeight.bold,
@@ -49,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         const SizedBox(height: 5.0),
         Text(
-          '9800000000',
+          contact,
           style: TextStyle(
             fontSize: 18.0,
             color: Colors.grey[600],
@@ -83,12 +99,13 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         Text(
-          'Address: Bhaktapur \n',
+          address,
           style: TextStyle(
             fontSize: 16.0,
             color: Colors.grey[600],
           ),
         ),
+        const SizedBox(height: 20.0),
       ],
     );
   }
@@ -117,7 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
             radius: profileHeight / 2,
             backgroundColor: GlobalVariable.backgroundcolor,
             backgroundImage: NetworkImage(
-              widget.image, // Profile photo is here
+              image, // Profile photo is here
             ),
           ),
         )
