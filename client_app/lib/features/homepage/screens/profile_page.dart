@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<UserProvider>(context, listen: false);
+    var provider = Provider.of<UserProvider>(context, listen: true);
     name = provider.user.name;
     contact = provider.user.contactno;
     address = provider.user.address;

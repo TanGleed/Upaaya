@@ -12,18 +12,15 @@ class JobCategories extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.all(8),
-          child: Text(
-            "Categories",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+        const Text(
+          "Categories",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(0.0),
           child: _categoriesList(ref),
         )
       ],
