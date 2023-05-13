@@ -15,7 +15,7 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<UserProvider>(context, listen: false);
+    var provider = Provider.of<UserProvider>(context, listen: true);
     final name = provider.user.name;
     final image = provider.user.avatar;
     return Drawer(

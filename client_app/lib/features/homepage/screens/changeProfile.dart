@@ -83,7 +83,7 @@ class _ChangeProfileState extends State<ChangeProfile> {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<UserProvider>(context, listen: false);
+    var provider = Provider.of<UserProvider>(context, listen: true);
     // ignore: unused_local_variable
     image = provider.user.avatar;
     return Scaffold(

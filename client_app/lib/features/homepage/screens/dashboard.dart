@@ -1,5 +1,6 @@
 import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/screens/jobpost_page.dart';
+import 'package:client_app/features/homepage/widgets/job_categories.dart';
 import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,6 +42,11 @@ class _DashBoardState extends State<DashBoard> {
         backgroundColor: GlobalVariable.backgroundcolor,
         body: Stack(children: [
           SlidingUpPanel(
+            renderPanelSheet: false,
+            backdropEnabled: false,
+            backdropTapClosesPanel: false,
+            panelSnapping: false,
+            parallaxEnabled: false,
             panelBuilder: (sc) {
               return JobPostPage();
             },
