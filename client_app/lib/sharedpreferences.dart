@@ -4,11 +4,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginSharedPreferences {
   static const login = "token";
-  static const name = "name";
-  setloginToken(String val, String names) async {
+  static const useremail = "email";
+  setloginToken(String val, String email) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString(login, val);
-    pref.setString(name, names);
+    pref.setString(useremail, email);
   }
 
   Future<String> getloginToken() async {
@@ -18,11 +18,11 @@ class LoginSharedPreferences {
     return token;
   }
 
-  Future<String> getname() async {
+  Future<String> getemail() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String names = pref.getString(name) ?? "Invalid";
+    String email = pref.getString(useremail) ?? "Invalid";
 
-    return names;
+    return email;
   }
 
   clearloginToken() async {

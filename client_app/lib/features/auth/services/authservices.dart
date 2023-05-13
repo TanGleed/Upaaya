@@ -116,7 +116,7 @@ class AuthServices {
       const SnackBar(
         content: Text('Successfully logged In'),
       );
-      LoginSharedPreferences().setloginToken(token, name);
+      await LoginSharedPreferences().setloginToken(token, email.text);
 
       return 'Success';
     } else if (response.statusCode == 404) {

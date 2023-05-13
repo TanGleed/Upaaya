@@ -5,7 +5,6 @@ import 'package:client_app/features/homepage/models/category.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:client_app/features/homepage/models/jobpost/jobpost.dart';
-import 'package:image_picker/image_picker.dart';
 
 final homepageAPI = Provider(
   (ref) => HomePageServices(),

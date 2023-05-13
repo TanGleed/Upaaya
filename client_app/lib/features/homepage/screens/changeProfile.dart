@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:client_app/providers/UserProvider.dart';
+import 'package:client_app/sharedpreferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,9 +32,9 @@ class _ChangeProfileState extends State<ChangeProfile> {
 
   void changeuserdetails(BuildContext context) async {
     var provider = Provider.of<UserProvider>(context, listen: false);
-
+    String email = await LoginSharedPreferences().getemail();
     await provider.setUserDetails(_nameController.text, _dobController.text,
-        "sudeepbhattarai1792@gmail.com", _addressController.text);
+        email, _addressController.text);
     if (provider.setUser) {
       isasynccall = false;
       setState(() {});
