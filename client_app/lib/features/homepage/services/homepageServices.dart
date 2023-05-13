@@ -1,15 +1,17 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/models/category.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:client_app/features/homepage/models/jobpost/jobpost.dart';
+import 'package:image_picker/image_picker.dart';
 
 final homepageAPI = Provider(
-  (ref) => HomePageServies(),
+  (ref) => HomePageServices(),
 );
 
-class HomePageServies {
+class HomePageServices {
   static var client = http.Client();
 
   //get categories
@@ -45,9 +47,10 @@ class HomePageServies {
         headers: requestHeaders,
         body: jsonEncode(jobPost.toJson()),
       );
+      return response;
     } catch (e) {
-      print(e.toString());
+      log(e.toString() as num);
+      return http.Response('Error Job Posting', 500);
     }
-    return response!;
   }
 }

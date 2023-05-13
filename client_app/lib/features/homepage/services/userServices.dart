@@ -1,11 +1,11 @@
 import 'dart:convert';
+
+import 'dart:io';
 import 'package:client_app/constants/global_variable.dart';
-import 'package:client_app/providers/UserProvider.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../sharedpreferences.dart';
 
@@ -31,16 +31,15 @@ class UserServices {
     );
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
-      Provider.of<UserProvider>(context, listen: false)
-          .setLoginDetails(response.body);
+
       return true;
     } else {
       return false;
     }
   }
 
-  static Future<bool> udpateprofile(String name, String dob, String contact,
-      String address, BuildContext context) async {
+  static Future<http.Response> udpateprofile(
+      String name, String dob, String contact, String address) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
     var url = Uri.http(ApiURL.apiURL, ApiURL.updateUserProfileAPI);
     var id = await LoginSharedPreferences().getloginToken();
@@ -60,18 +59,17 @@ class UserServices {
     );
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
-      Provider.of<UserProvider>(context, listen: false)
-          .setLoginDetails(response.body);
-      return true;
+      // Provider.of<UserProvider>(context, listen: false)
+      //     .setUserDetails(response.body);
+      return response;
     } else {
-      return false;
+      return http.Response('Error Updating', 500);
     }
   }
 
-  static Future<bool> getProfile(BuildContext context) async {
+  static Future<http.Response> getProfile(String email) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
     var url = Uri.http(ApiURL.apiURL, ApiURL.getUserProfileAPI);
-    var email = "sudeepbhattarai1792@gmail.com";
     var response = await client.post(
       url,
       headers: requestHeaders,
@@ -82,31 +80,32 @@ class UserServices {
 
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
-      Provider.of<UserProvider>(context, listen: true)
-          .setLoginDetails(response.body);
 
-      return true;
+      return response;
     } else {
-      return false;
+      return http.Response('Cannot Find User', 500);
     }
   }
 
-  Future<bool> initializeuser(BuildContext context, token) async {
-    getProfile(context).then(
-      (value) {
-        if (value) {
-          const SnackBar(
-            content: Text('Successfully logged In'),
-          );
-          return true;
-        } else {
-          const SnackBar(
-            content: Text('InitializtionFailed Try loggiing In'),
-          );
-          return false;
-        }
-      },
-    );
-    return false;
+  static Future<http.BaseResponse> changeImage(
+    String email,
+    File imagefile,
+  ) async {
+    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
+    var url = Uri.http(ApiURL.apiURL, ApiURL.updateUserImageAPI);
+    var request = http.MultipartRequest('POST', url);
+    request.fields['contact'] = email;
+    request.files.add(http.MultipartFile.fromBytes(
+        'profileImage', File(imagefile.path).readAsBytesSync(),
+        filename: imagefile.path));
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      // ignore: use_build_context_synchronously
+
+      return response;
+    } else {
+      return http.Response('Cannot Find User', 500);
+    }
   }
 }

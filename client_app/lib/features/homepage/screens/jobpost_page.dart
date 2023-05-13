@@ -35,6 +35,7 @@ class JobPostPage extends StatelessWidget {
     );
     var provider = Provider.of<JobPostNotifier>(context, listen: false);
     await provider.post(job);
+
     if (provider.isJobPosted) {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -73,9 +74,8 @@ class JobPostPage extends StatelessWidget {
                     },
                   ),
                 )
-              : SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
+              : ListView(children: [
+                  Column(
                     children: [
                       const JobCategories(),
                       const SizedBox(
@@ -179,7 +179,7 @@ class JobPostPage extends StatelessWidget {
                       )
                     ],
                   ),
-                );
+                ]);
         },
       ),
     );

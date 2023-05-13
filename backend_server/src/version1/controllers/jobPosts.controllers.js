@@ -48,6 +48,7 @@ const getJobPost = async (req, res, next) => {
 // Controller function for handling job post creation
 const createJobPost = async (req, res) => {
   try {
+
     // uploadMiddleware(req, res, async (err) => {
     //   if (err) {
     //     throw new Error(err.message);

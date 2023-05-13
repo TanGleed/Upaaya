@@ -16,7 +16,8 @@ const authRouter = require("./src/version1/routes/auth.routes");
 const notifyRouter = require("./src/version1/routes/notify.routes");
 const homepageRouter = require("./src/version1/routes/category.routes");
 const jobRoutes = require("./src/version1/routes/jobFetch.routes");
-const profileRoutes = require("./src/version1/routes/profile.routes")
+const profileRoutes = require("./src/version1/routes/profile.routes");
+const { uploadimage } = require("./src/version1/controllers/profile.controller");
 
 // INIT
 const PORT = process.env.PORT || 4000;

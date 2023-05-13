@@ -112,16 +112,22 @@ catch (e)
 // };
 
 
-const updateProfileImage = async (contact, imagePath) => {
+ async function updateProfileImage (params,callback)  {
   try {
-    const updated = await Profile.findOneAndUpdate(
-      { contact: contact },
-      { $set: { img: imagePath } },
+    console.log(params.img);
+    const updated = await profile.findOneAndUpdate(
+      { contact: params.contact },
+      { $set: 
+        { 
+          img:params.img
+        } 
+      },
       { new: true }
     );
-    return updated;
+    // console.log(updated);
+    return callback(null,updated);
   } catch (err) {
-    throw new Error(err.message);
+    return callback(err);
   }
 };
 module.exports = {

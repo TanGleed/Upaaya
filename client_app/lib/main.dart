@@ -30,6 +30,7 @@ void main() async {
   FirebaseMessaging.instance.getToken().then((value) {});
   String result = await LoginSharedPreferences().getloginToken();
   String name = await LoginSharedPreferences().getname();
+
   if (result != "Invalid Token") {
     _defaultHome = DashBoard();
   }
@@ -100,5 +101,4 @@ class MyApp extends pro.HookConsumerWidget {
   }
 
   //initialze user
-  void getuserProfile() {}
 }

@@ -4,9 +4,10 @@ import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../services/userServices.dart';
+import '../../../providers/UserProvider.dart';
 
 class DashBoard extends StatefulWidget {
   static const String routeName = '/dashboard-screen';
@@ -31,6 +32,8 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    provider.getUserDetails('sudeepbhattarai1792@gmail.com');
     GlobalVariable().init(context);
     return Scaffold(
         key: _scaffoldState,

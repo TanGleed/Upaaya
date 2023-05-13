@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:client_app/constants/global_variable.dart';
+
 class User {
   final String name;
   final String email;
@@ -8,6 +10,7 @@ class User {
   final String contactno;
   final String dob;
   final String address;
+  final String avatar;
   User({
     required this.name,
     required this.email,
@@ -16,6 +19,7 @@ class User {
     required this.address,
     required this.contactno,
     required this.dob,
+    required this.avatar,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -27,6 +31,7 @@ class User {
       address: json["data"]["address"] ?? " ",
       contactno: json["data"]["contact"] ?? "",
       dob: json["data"]["DOB"] ?? " ",
+      avatar: ApiURL.imageURL + json["data"]["img"],
     );
   }
 

@@ -15,11 +15,9 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String email =
-        Provider.of<UserProvider>(context, listen: false).user.email;
-    final String name =
-        Provider.of<UserProvider>(context, listen: false).user.name;
-    const image = '';
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    final name = provider.user.name;
+    final image = provider.user.avatar;
     return Drawer(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
@@ -34,12 +32,8 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildHeader(
                 image: image,
                 name: name,
-                email: email,
-                onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ProfilePage(
-                          name: name,
-                          image: image,
-                        )))),
+                onClicked: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ProfilePage()))),
             SizedBox(height: GlobalVariable().getProportionateScreenHeight(40)),
             buildMenuItem(
                 text: 'Request History',
@@ -98,7 +92,6 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget buildHeader({
     required String image,
     required String name,
-    required String email,
     required VoidCallback onClicked,
   }) =>
       InkWell(
@@ -118,16 +111,13 @@ class NavigationDrawerWidget extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.white),
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 4,
-                      ),
-                      Text(
-                        email,
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ],
                   ),

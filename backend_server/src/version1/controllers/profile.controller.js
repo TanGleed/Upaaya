@@ -1,6 +1,6 @@
 
 const profileservice= require("../services/profile.services")
-
+const upload = require("../middleware/profile.middleware");
 
 exports.addProfile=(req,res,next)=>{
   profileservice.addProfile(
@@ -24,9 +24,42 @@ exports.addProfile=(req,res,next)=>{
       }
   );
 };
-
+exports.uploadimage= (req,res,next)=>{
+    console.log('hello');
+    upload(req, res, function (err) {
+        if (err) {
+          console.log(err);
+          next(err);
+        } else {
+            console.log(req.file);
+            const path =
+            req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
+        const user=
+        {
+            contact:req.body.contact,
+            img:path != "" ? "/" + path : "",
+        } ;
+        
+            
+            contact =req.body.contact;
+          profileservice.updateProfileImage(user, (error, results) => {
+            if (error) {
+              console.log(error);
+              return next(error);
+            } else {
+              return res.status(200).send({
+                message: "Succes",
+                data: results,
+              });
+            }
+          });
+        }
+      });
+}
 
 exports. getUserProfile = (req,res,next)=>{
+
+
     profileservice.getUserProfile(
         req.body,
         (error,result)=>
