@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
+import 'package:client_app/features/homepage/services/homepageServices.dart';
 import 'package:client_app/features/homepage/services/job_post_notifier.dart';
+import 'package:client_app/features/homepage/services/userServices.dart';
 
 import 'package:client_app/providers/UserProvider.dart';
 import 'package:client_app/router.dart';
@@ -17,6 +19,7 @@ import 'package:provider/provider.dart';
 
 Widget _defaultHome = const Auth();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+late final bool isinitalized;
 bool mode = false;
 
 void main() async {
@@ -25,8 +28,8 @@ void main() async {
   //for map
 
   FirebaseMessaging.instance.getToken().then((value) {});
-
   String result = await LoginSharedPreferences().getloginToken();
+
   if (result != "Invalid Token") {
     _defaultHome = DashBoard();
   }
@@ -95,4 +98,6 @@ class MyApp extends pro.HookConsumerWidget {
       home: _defaultHome,
     );
   }
+
+  //initialze user
 }

@@ -4,7 +4,7 @@ import 'package:client_app/features/auth/screens/login.dart';
 import 'package:client_app/features/auth/screens/otp.dart';
 import 'package:client_app/features/auth/screens/resetpassword.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
-import 'package:client_app/features/homepage/screens/hompage.dart';
+import 'package:client_app/features/homepage/screens/profile_page.dart';
 import 'package:client_app/features/homepage/screens/request_page.dart';
 import 'package:client_app/features/homepage/screens/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +31,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const Auth(),
       );
-    // case HomePage.routeName:
-    //   return MaterialPageRoute(
-    //     settings: routeSettings,
-    //     builder: (_) => const HomePage(),
-    //   );
+    case ProfilePage.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const ProfilePage(),
+      );
     case RequestPage.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const RequestPage());

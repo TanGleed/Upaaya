@@ -1,19 +1,14 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:client_app/constants/global_variable.dart';
-import 'package:client_app/features/homepage/screens/hompage.dart';
 import 'package:client_app/features/homepage/screens/jobpost_page.dart';
-import 'package:client_app/features/homepage/screens/settings_page.dart';
-import 'package:client_app/features/homepage/widgets/upload_form.dart';
-import 'package:client_app/features/homepage/screens/request_page.dart';
-
 import 'package:client_app/features/homepage/widgets/job_categories.dart';
 import 'package:client_app/features/homepage/widgets/navigation_drawer.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../../../providers/UserProvider.dart';
 
 class DashBoard extends StatefulWidget {
   static const String routeName = '/dashboard-screen';
@@ -24,7 +19,7 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-  GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
   final panelController = PanelController();
   late GoogleMapController _googleMapController;
   final CameraPosition _initialposition =
@@ -36,76 +31,22 @@ class _DashBoardState extends State<DashBoard> {
     return _googleMapController;
   }
 
-  // static const iconslist = <IconData>[
-  //   Icons.home_rounded,
-  //   Icons.history_rounded,
-  // ];
-  // final List<Widget> widgetList = const [
-  //   HomePage(),
-  //   RequestPage(),
-  //   //upload page
-  // ];
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    provider.getUserDetails('sudeepbhattarai1792@gmail.com');
     GlobalVariable().init(context);
     return Scaffold(
         key: _scaffoldState,
-        drawer: NavigationDrawerWidget(),
-        // appBar: AppBar(
-        //   backgroundColor: Colors.deepPurpleAccent,
-        //   elevation: 0,
-        //   centerTitle: true,
-        //   title: const Text(
-        //     GlobalVariable.appName,
-        //     style: TextStyle(fontWeight: FontWeight.bold),
-        //   ),
-        //   actions: [
-        //     IconButton(
-        //       color: Colors.black,
-        //       onPressed: () {
-        //         //notification page
-        //       },
-        //       icon: SvgPicture.asset("assets/icons/notification.svg"),
-        //     ),
-        //   ],
-        // ),
+        drawer: const NavigationDrawerWidget(),
         backgroundColor: GlobalVariable.backgroundcolor,
-        // floatingActionButton: FloatingActionButton(
-        //     clipBehavior: Clip.hardEdge,
-        //     focusColor: Colors.deepPurpleAccent,
-        //     backgroundColor: activeindex == 2
-        //         ? GlobalVariable.buttonsColors
-        //         : Colors.blueGrey,
-        //     child: const Icon(
-        //       Icons.camera_alt_outlined,
-        //       color: Colors.white,
-        //     ),
-        //     onPressed: () {
-        //       activeindex = 2;
-        //       setState(() {});
-        //     }),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // bottomNavigationBar: AnimatedBottomNavigationBar(
-        //   inactiveColor: Colors.blueGrey,
-        //   activeColor: GlobalVariable.buttonsColors,
-        //   icons: iconslist,
-        //   activeIndex: activeindex,
-        //   gapLocation: GapLocation.center,
-        //   notchSmoothness: NotchSmoothness.verySmoothEdge,
-        //   leftCornerRadius: 32,
-        //   rightCornerRadius: 32,
-        //   onTap: (index) {
-        //     activeindex = index;
-        //     setState(() {});
-        //   },
-        //   blurEffect: true,
-        //   notchMargin: 15,
-        //   height: GlobalVariable.screenHeight * 0.06,
-        //   iconSize: 30,
-        //   //other params
-        // ),
         body: Stack(children: [
           SlidingUpPanel(
+            renderPanelSheet: false,
+            backdropEnabled: false,
+            backdropTapClosesPanel: false,
+            panelSnapping: false,
+            parallaxEnabled: false,
             panelBuilder: (sc) {
               return JobPostPage();
             },
@@ -122,7 +63,7 @@ class _DashBoardState extends State<DashBoard> {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
           ),
           Positioned(
-            top: GlobalVariable.screenHeight * 0.03,
+            top: GlobalVariable.screenHeight * 0.05,
             left: GlobalVariable.screenWidth * 0.05,
             child: Container(
               decoration: BoxDecoration(
@@ -140,7 +81,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
           ),
           Positioned(
-            top: GlobalVariable.screenHeight * 0.03,
+            top: GlobalVariable.screenHeight * 0.05,
             right: GlobalVariable.screenWidth * 0.05,
             child: Container(
               decoration: BoxDecoration(
@@ -151,9 +92,7 @@ class _DashBoardState extends State<DashBoard> {
                 icon: SvgPicture.asset(
                   "assets/icons/notification.svg",
                 ),
-                onPressed: () {
-                  _scaffoldState.currentState?.openDrawer();
-                },
+                onPressed: () {},
               ),
             ),
           ),

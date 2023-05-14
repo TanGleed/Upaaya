@@ -3,7 +3,9 @@ import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/auth/screens/resetpassword.dart';
 import 'package:client_app/features/auth/services/authmodel.dart';
 import 'package:client_app/features/auth/services/authservices.dart';
+import 'package:client_app/features/homepage/services/userServices.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbols.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
@@ -64,21 +66,30 @@ class _OTPFormFieldState extends State<OTPFormField> {
     AuthServices.register(widget.modal).then((response) => {
           if (response)
             {
-              isAsyncCallProcess = false,
-              setState(() {}),
-              FormHelper.showSimpleAlertDialog(
-                context,
-                'Successfull',
-                "Successfully Regsitered!! You will be redirected to login",
-                "OK",
-                () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    Auth.routeName,
-                    (route) => false,
-                  );
-                },
-              )
+              UserServices.addprofile(widget.modal.name.text, '',
+                      widget.modal.email.text, '', context)
+                  .then((value) => {
+                        if (value)
+                          {
+                            isAsyncCallProcess = false,
+                            setState(() {}),
+                            FormHelper.showSimpleAlertDialog(
+                              context,
+                              'Successfull',
+                              "Successfully Regsitered!! You will be redirected to login",
+                              "OK",
+                              () {
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  Auth.routeName,
+                                  (route) => false,
+                                );
+                              },
+                            )
+                          }
+                        else
+                          {}
+                      }),
             }
           else
             {

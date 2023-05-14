@@ -1,32 +1,91 @@
 import 'dart:io';
 
 import 'package:client_app/constants/global_variable.dart';
-import 'package:client_app/features/homepage/services/userServices.dart';
+import 'package:client_app/features/homepage/screens/profile_page.dart';
+import 'package:client_app/providers/UserProvider.dart';
+import 'package:client_app/sharedpreferences.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:snippet_coder_utils/FormHelper.dart';
+import 'package:provider/provider.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 class ChangeProfile extends StatefulWidget {
+  const ChangeProfile({super.key});
+
   @override
   State<ChangeProfile> createState() => _ChangeProfileState();
 }
 
 class _ChangeProfileState extends State<ChangeProfile> {
-  late XFile _imageFile;
   final _globalKey = GlobalKey<FormState>();
   final ImagePicker _picker = ImagePicker();
+
   bool isasynccall = false;
   final TextEditingController _nameController = TextEditingController();
 
-  final TextEditingController _contactController = TextEditingController();
+  // final TextEditingController _contactController = TextEditingController();
 
-  final TextEditingController _DOBController = TextEditingController();
-
+  final TextEditingController _dobController = TextEditingController();
+  String image = '';
   final TextEditingController _addressController = TextEditingController();
+
+  void changeuserdetails(BuildContext context) async {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    String email = await LoginSharedPreferences().getemail();
+    await provider.setUserDetails(_nameController.text, _dobController.text,
+        email, _addressController.text);
+    if (provider.setUser) {
+      isasynccall = false;
+      setState(() {});
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Profile Updated Successfully'),
+        ),
+      );
+      Navigator.of(context).pushNamed(ProfilePage.routeName);
+    } else {
+      isasynccall = false;
+      setState(() {});
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Cannot Update Profile'),
+        ),
+      );
+    }
+  }
+
+  void changeImage(BuildContext context, File imagefile) async {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    await provider.changeImage("sudeepbhattarai1792@gmail.com", imagefile);
+    if (provider.imageChanged) {
+      isasynccall = false;
+      setState(() {});
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Image Changed Successfully'),
+        ),
+      );
+    } else {
+      isasynccall = false;
+      setState(() {});
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Cannot Update Image'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: true);
+    // ignore: unused_local_variable
+    image = provider.user.avatar;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Change Profile'),
@@ -57,19 +116,19 @@ class _ChangeProfileState extends State<ChangeProfile> {
                     const SizedBox(
                       height: 20,
                     ),
-                    buildTextfield(
-                      icon: Icons.phone_android,
-                      hintText: 'Contact',
-                      controller: _contactController,
-                      labeltext: 'Contact number',
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // buildTextfield(
+                    //   icon: Icons.phone_android,
+                    //   hintText: 'Contact',
+                    //   controller: _contactController,
+                    //   labeltext: 'Contact number',
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     buildTextfield(
                       icon: Icons.date_range,
                       hintText: 'birth data',
-                      controller: _DOBController,
+                      controller: _dobController,
                       labeltext: 'DoB',
                     ),
                     const SizedBox(
@@ -99,26 +158,7 @@ class _ChangeProfileState extends State<ChangeProfile> {
                         if (_globalKey.currentState!.validate()) {
                           isasynccall = true;
                           setState(() {});
-                          UserServices.addprofile(
-                                  _nameController.text,
-                                  _DOBController.text,
-                                  _contactController.text,
-                                  _addressController.text)
-                              .then((response) {
-                            if (response) {
-                            } else {
-                              FormHelper.showSimpleAlertDialog(
-                                  context,
-                                  "OTP Error !!",
-                                  "OTP Couldn't be sent",
-                                  "ok", () {
-                                setState(() {
-                                  isasynccall = false;
-                                  Navigator.pop(context);
-                                });
-                              });
-                            }
-                          });
+                          changeuserdetails(context);
                         }
                       },
                     ),
@@ -134,9 +174,9 @@ class _ChangeProfileState extends State<ChangeProfile> {
     final pickedFile = await _picker.pickImage(
       source: source,
     );
-    setState(() {
-      _imageFile = pickedFile!;
-    });
+    final imageFile = File(pickedFile!.path);
+    // ignore: use_build_context_synchronously
+    changeImage(context, imageFile);
   }
 
   Widget bottomSheet(BuildContext context) {
@@ -186,9 +226,7 @@ class _ChangeProfileState extends State<ChangeProfile> {
       child: Stack(children: [
         CircleAvatar(
           radius: 60.0,
-          backgroundImage: _imageFile != null
-              ? FileImage(File(_imageFile.path))
-              : AssetImage("assets/images/profile.png") as ImageProvider,
+          backgroundImage: NetworkImage(image),
         ),
         Positioned(
           bottom: 20.0,
@@ -215,8 +253,10 @@ class _ChangeProfileState extends State<ChangeProfile> {
       {IconData? icon,
       String? hintText,
       TextEditingController? controller,
-      String? labeltext}) {
+      String? labeltext,
+      String? val}) {
     return TextFormField(
+      initialValue: val,
       validator: (value) {
         if (value!.isEmpty) return "Can't be empty";
       },

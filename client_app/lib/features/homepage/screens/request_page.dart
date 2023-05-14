@@ -37,7 +37,7 @@ class RequestPage extends StatelessWidget {
 
   Widget listViewItem(int index) {
     return InkWell(
-      onTap: () => const ProfilePage(name: 'name', image: ''),
+      onTap: () => const ProfilePage(),
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
         child: Container(
