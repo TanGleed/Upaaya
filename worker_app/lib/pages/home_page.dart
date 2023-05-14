@@ -68,6 +68,8 @@ class HomePage extends ConsumerWidget {
                         child: CircleAvatar(
                           backgroundColor: Colors.green,
                           foregroundColor: Colors.green,
+                          child: Image(
+                              image: AssetImage('assets/images/user.png')),
                         ),
                       ),
                       SizedBox(width: 5),

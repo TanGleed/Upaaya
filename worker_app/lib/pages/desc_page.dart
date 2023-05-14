@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:worker_app/models/job.dart';
-import 'package:worker_app/pages/dashboard.dart';
+import 'package:worker_app/pages/map_page.dart';
 
 class DescPage extends StatelessWidget {
   final Job job;
@@ -13,7 +10,9 @@ class DescPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text('Description'),
+        ),
         body: Container(
           width: double.maxFinite,
           height: double.maxFinite,
@@ -26,8 +25,7 @@ class DescPage extends StatelessWidget {
                 height: 300,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(
-                          "https://www.kraususa.com/media/wysiwyg/Kitchen_Sinks_undermount.jpg"),
+                      image: AssetImage('assets/images/car.png'),
                       fit: BoxFit.contain),
                 ),
               ),

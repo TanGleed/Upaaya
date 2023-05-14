@@ -20,11 +20,7 @@ const ProfileRoutes = require("./src/version1/routes/profile.routes");
 
 // INIT
 const PORT = process.env.PORT || 4000;
-<<<<<<< HEAD
-const hostname = "192.168.99.2";
-=======
-const hostname = "192.168.1.88";
->>>>>>> d51c0a0e740d40ac1c4b288842c80c42f9325071
+const hostname = "192.168.0.27";
 const app = express();
 
 // Connections

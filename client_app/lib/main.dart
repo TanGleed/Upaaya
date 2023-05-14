@@ -2,12 +2,8 @@ import 'dart:convert';
 
 import 'package:client_app/features/auth/screens/auth.dart';
 import 'package:client_app/features/homepage/screens/dashboard.dart';
-<<<<<<< HEAD
-import 'package:client_app/features/homepage/screens/hompage.dart';
-=======
 import 'package:client_app/features/homepage/services/job_post_notifier.dart';
 
->>>>>>> d51c0a0e740d40ac1c4b288842c80c42f9325071
 import 'package:client_app/providers/UserProvider.dart';
 import 'package:client_app/router.dart';
 import 'package:client_app/sharedpreferences.dart';
