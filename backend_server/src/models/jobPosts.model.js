@@ -30,15 +30,24 @@ const jobPostSchema = new mongoose.Schema(
     media: [
       {
         type: String,
-      },
-    ],
-
-    tags: [
-      {
-        type: String,
         required: true,
       },
     ],
+
+    tags: {
+        type: String,
+        required: true,
+      },
+
+    latitude:{
+      type:String,
+      required:true,
+    },
+    longitude:
+    {
+      type:String,
+      required:true,
+    },
     additionalInfo: {
       type: String,
     },

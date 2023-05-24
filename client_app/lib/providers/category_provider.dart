@@ -1,9 +1,6 @@
 //get categories
-import 'package:client_app/features/auth/services/authservices.dart';
 import 'package:client_app/features/homepage/models/pagination.dart';
 import 'package:client_app/features/homepage/services/homepageServices.dart';
-import 'package:client_app/providers/UserProvider.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../features/homepage/models/category.dart';
 

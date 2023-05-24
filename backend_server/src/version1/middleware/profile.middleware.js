@@ -4,7 +4,7 @@ const path = require("path");
 const storage = multer.diskStorage({
   destination: "./uploads/profile",
   filename: (req, file, callback) => {
-    callback(null, Date.now() + "-" + file.originalname);
+    callback(null,file.originalname);
   },
 });
 
@@ -13,7 +13,7 @@ const fileFilter = (req, file, callback) => {
   if (!acceptableExt.includes(path.extname(file.originalname))) {
     return callback(new Error("Only .png, .jpg and .jpeg format allowed!"));
   }
-
+  console.log(file.originalname);
   const fileSize = parseInt(req.headers["content-length"]);
 
   if (fileSize > 10485760) {

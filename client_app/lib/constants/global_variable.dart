@@ -46,7 +46,7 @@ class ApiURL {
   static const String getUserProfileAPI = "api/v1/profile/getuser";
   static const String updateUserProfileAPI = "api/v1/profile/updateuser";
   static const String updateUserImageAPI = "api/v1/profile/updateimg";
-  static const String jobAPI = "api/v1/jobpost";
+  static const String jobAPI = "/api/v1/jobpost";
   static const int pageSize = 10;
 }
 

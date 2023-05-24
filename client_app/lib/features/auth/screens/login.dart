@@ -141,13 +141,21 @@ class _LoginPageState extends State<LoginPage> {
                           horizontal: GlobalVariable.screenWidth * 0.05),
                       child: Column(
                         children: [
-                          FormFields().formFields(
-                              emailController, false, true, "Email"),
+                          FormFields(
+                              icon: Icons.email,
+                              controller: emailController,
+                              password: false,
+                              email: true,
+                              hinttext: "Email"),
                           const SizedBox(
                             height: 10,
                           ),
-                          FormFields().formFields(
-                              passwordController, true, false, "Password"),
+                          FormFields(
+                              icon: Icons.key_rounded,
+                              controller: passwordController,
+                              password: true,
+                              email: false,
+                              hinttext: "Password"),
                         ],
                       ),
                     ),

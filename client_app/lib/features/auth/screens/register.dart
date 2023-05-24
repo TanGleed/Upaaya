@@ -125,26 +125,39 @@ class _RegisterPageState extends State<RegisterPage> {
                                         GlobalVariable.screenWidth * 0.05),
                                 child: Column(
                                   children: [
-                                    FormFields().formFields(
-                                        value.name, false, false, "Full Name"),
+                                    FormFields(
+                                        icon: Icons.person,
+                                        controller: value.name,
+                                        email: false,
+                                        password: false,
+                                        hinttext: "Full Name"),
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    FormFields().formFields(
-                                        value.email, false, true, "Email"),
+                                    FormFields(
+                                        icon: Icons.email,
+                                        controller: value.email,
+                                        password: false,
+                                        email: true,
+                                        hinttext: "Email"),
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    FormFields().formFields(value.password,
-                                        true, false, "Password"),
+                                    FormFields(
+                                        icon: Icons.key_sharp,
+                                        controller: value.password,
+                                        password: true,
+                                        email: false,
+                                        hinttext: "Password"),
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    FormFields().formFields(
-                                        value.confirmpassword,
-                                        true,
-                                        false,
-                                        "Confirm Password"),
+                                    FormFields(
+                                        icon: Icons.key_sharp,
+                                        controller: value.confirmpassword,
+                                        password: true,
+                                        email: false,
+                                        hinttext: "Confirm Password"),
                                   ],
                                 ),
                               ),

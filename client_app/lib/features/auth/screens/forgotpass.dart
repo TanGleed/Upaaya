@@ -130,7 +130,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         SizedBox(
           height: GlobalVariable.screenHeight * 0.05,
         ),
-        FormFields().formFields(value.email, false, true, "Enter Your Email"),
+        FormFields(
+            icon: Icons.email,
+            controller: value.email,
+            password: false,
+            email: true,
+            hinttext: "Enter Your Email"),
         SizedBox(
           height: GlobalVariable.screenHeight * 0.01,
         ),
