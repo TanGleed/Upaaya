@@ -1,15 +1,16 @@
 import 'package:client_app/features/homepage/models/category.dart';
 import 'package:client_app/features/homepage/models/pagination.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart' as pro;
+import 'package:provider/provider.dart';
 import '../../../providers/category_provider.dart';
+import '../services/job_post_notifier.dart';
 
-class JobCategories extends ConsumerWidget {
+class JobCategories extends pro.ConsumerWidget {
   const JobCategories({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context, pro.WidgetRef ref) {
     return Column(
       children: [
         const Text(
@@ -28,7 +29,7 @@ class JobCategories extends ConsumerWidget {
   }
 }
 
-Widget _categoriesList(WidgetRef ref) {
+Widget _categoriesList(pro.WidgetRef ref) {
   final categories = ref.watch(categoriesProvider(
     PaginationModel(
       page: 1,
@@ -49,7 +50,10 @@ Widget _categoriesList(WidgetRef ref) {
   );
 }
 
-Widget _buildCategoryList(List<Category> categories, WidgetRef ref) {
+Widget _buildCategoryList(
+  List<Category> categories,
+  pro.WidgetRef ref,
+) {
   return Container(
     height: 100,
     alignment: Alignment.centerLeft,
@@ -59,9 +63,12 @@ Widget _buildCategoryList(List<Category> categories, WidgetRef ref) {
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (context, index) {
+          var jobprovider = Provider.of<JobPostNotifier>(context, listen: true);
           var data = categories[index];
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              jobprovider.job.tags = data.categoryName;
+            },
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Column(

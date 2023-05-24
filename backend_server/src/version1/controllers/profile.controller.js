@@ -25,8 +25,9 @@ exports.addProfile=(req,res,next)=>{
   );
 };
 exports.uploadimage= (req,res,next)=>{
-    console.log('hello');
+
     upload(req, res, function (err) {
+        console.log(req.file);
         if (err) {
           console.log(err);
           next(err);
@@ -41,7 +42,7 @@ exports.uploadimage= (req,res,next)=>{
         } ;
         
             
-            contact =req.body.contact;
+        contact =req.body.contact;
           profileservice.updateProfileImage(user, (error, results) => {
             if (error) {
               console.log(error);
@@ -58,8 +59,6 @@ exports.uploadimage= (req,res,next)=>{
 }
 
 exports. getUserProfile = (req,res,next)=>{
-
-
     profileservice.getUserProfile(
         req.body,
         (error,result)=>

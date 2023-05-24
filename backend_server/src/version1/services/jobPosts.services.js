@@ -31,7 +31,7 @@ const getJobPost = async (params) => {
   }
 };
 
-// Create the createJobPost function
+//Create the createJobPost function
 const createJobPost = async ({
   title,
   location,
@@ -76,8 +76,8 @@ const createJobPost = async ({
 
 // Create the updateJobPost function
 const updateJobPost = async (body, params) => {
-  const { title, location, description, tags, additionalInfo } = body; // destructure the body
-
+  const { title, location, description, tags, additionalInfo,latitude,longitude } = body; // destructure the body
+  
   // Validate title, location, and tags
   if (!title) {
     throw new CustomError("JOB_TITLE_NOT_PROVIDED");
@@ -98,6 +98,8 @@ const updateJobPost = async (body, params) => {
     description,
     tags,
     additionalInfo,
+    latitude,
+    longitude,
   });
 
   try {

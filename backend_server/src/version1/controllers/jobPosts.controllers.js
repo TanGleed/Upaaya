@@ -4,7 +4,7 @@
 
 const jobPostsServices = require("../services/jobPosts.services");
 const JobPost = require("../../models/jobPosts.model");
-const uploadMiddleware = require("../middleware/jobPost.middleware");
+const upload =require ("../middleware/jobPost.middleware");
 
 // @desc: Get all jobPosts
 // @route: GET /api/v1/jobPosts
@@ -47,33 +47,36 @@ const getJobPost = async (req, res, next) => {
 // @access: Private
 // Controller function for handling job post creation
 const createJobPost = async (req, res) => {
-  try {
-
-    // uploadMiddleware(req, res, async (err) => {
-    //   if (err) {
-    //     throw new Error(err.message);
-    //   } else {
-    const { title, location, description, tags, additionalInfo } = req.body;
-
-    //const media = req.files.map((file) => file.filename);
-
-    const jobPost = await JobPost.create({
-      title,
-      location,
-      description,
-      // media,
-      tags,
-      additionalInfo,
-    });
-
-    res.status(201).json({ jobPost });
-  } catch (error) {
-    // });
+  try{
+  upload(req, res, async function (err) {
+    if (err) {
+      console.log(err);
+      next(err);
+    } else {
+   
+        const media = req.files.map((files)=>'/'+files.path);
+        const {title, location, description,tags,additionalInfo ,latitude,longitude} = req.body;
+        
+        const jobPost = await JobPost.create({
+          title,
+          location,
+          description,
+          media,
+          tags,
+          additionalInfo,
+          latitude,
+          longitude,
+        });
+        res.status(201).json({ jobPost });
+      }
+    })
+  }
+  catch(error)
+  {
     console.log(error);
     res.status(400).json({ message: error.message });
   }
-};
-
+}
 // @desc: Update a jobPost
 // @route: PUT /api/v1/jobPosts/:id
 // @access: Private
