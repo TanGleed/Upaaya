@@ -4,10 +4,15 @@ import 'dart:io';
 import 'package:client_app/constants/global_variable.dart';
 
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:http/http.dart' as http;
 
 import '../../../sharedpreferences.dart';
+
+final userAPI = Provider(
+  (ref) => UserServices(),
+);
 
 class UserServices {
   static var client = http.Client();
@@ -69,6 +74,7 @@ class UserServices {
 
   static Future<http.Response> getProfile(String email) async {
     Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
+
     var url = Uri.http(ApiURL.apiURL, ApiURL.getUserProfileAPI);
     var response = await client.post(
       url,
@@ -77,7 +83,6 @@ class UserServices {
         {"contact": email},
       ),
     );
-
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
 
@@ -91,7 +96,6 @@ class UserServices {
     String email,
     File imagefile,
   ) async {
-    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
     var url = Uri.http(ApiURL.apiURL, ApiURL.updateUserImageAPI);
     var request = http.MultipartRequest('POST', url);
     request.fields['contact'] = email;

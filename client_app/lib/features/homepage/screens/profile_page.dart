@@ -26,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String contact = 'na';
   String address = 'na';
   String image = '';
+  String dob = '';
   final double coverHeight = 220;
   final double profileHeight = 110;
 
@@ -35,6 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
     name = provider.user.name;
     contact = provider.user.contactno;
     address = provider.user.address;
+    dob = provider.user.dob;
     image = provider.user.avatar;
     return Scaffold(
         appBar: AppBar(
@@ -54,6 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
   //body
   Widget buildBody() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         const SizedBox(height: 10.0),
         Text(
@@ -84,22 +87,18 @@ class _ProfilePageState extends State<ProfilePage> {
           alignment: Alignment.center,
           width: 300,
           child: Text(
-            'Occupation: Plumber \n',
+            'Birth Date: $dob',
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.grey[600],
             ),
           ),
         ),
-        Text(
-          'Experience: 10 years \n',
-          style: TextStyle(
-            fontSize: 16.0,
-            color: Colors.grey[600],
-          ),
+        SizedBox(
+          height: GlobalVariable.screenHeight * 0.01,
         ),
         Text(
-          address,
+          'Address:$address',
           style: TextStyle(
             fontSize: 16.0,
             color: Colors.grey[600],

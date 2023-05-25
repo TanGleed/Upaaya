@@ -4,6 +4,9 @@ import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/widgets/job_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:client_app/features/homepage/services/job_post_notifier.dart';
@@ -29,7 +32,8 @@ class _JobPostPageState extends State<JobPostPage> {
 
   final TextEditingController additionalInfoController =
       TextEditingController();
-
+  double latitude = 0;
+  double longitude = 0;
   //String? selectedTag;
   List<File> imageFiles = [];
 
@@ -47,6 +51,7 @@ class _JobPostPageState extends State<JobPostPage> {
 
   void _getImage() async {
     var images = await ImagePicker().pickMultiImage();
+    // ignore: unnecessary_null_comparison
     if (images != null) {
       if (images.length <= 6) {
         setState(() {
@@ -72,19 +77,22 @@ class _JobPostPageState extends State<JobPostPage> {
     String title = titleController.text.trim();
     String description = descriptionController.text.trim();
     String location = locationController.text.trim();
-    List<String> tags = tagController.text.trim().split(',');
-    //String tag = selectedTag ?? '';
+    String tags = tagController.text.trim();
+    List<String> image = [];
     String additionalInfo = additionalInfoController.text.trim();
 
     JobPost job = JobPost(
+      latitude: latitude,
+      longitude: longitude,
       title: title,
       description: description,
       location: location,
       tags: tags,
       additionalInfo: additionalInfo,
+      media: imageFiles,
     );
     var provider = Provider.of<JobPostNotifier>(context, listen: false);
-    await provider.post(job);
+    await provider.post(job, imageFiles);
 
     if (provider.isJobPosted) {
       // ignore: use_build_context_synchronously
@@ -109,6 +117,11 @@ class _JobPostPageState extends State<JobPostPage> {
       backgroundColor: Colors.grey[300],
       body: Consumer<JobPostNotifier>(
         builder: (context, data, child) {
+          locationController.text = data.job.location;
+          latitude = data.job.latitude;
+          longitude = data.job.longitude;
+          tagController.text = data.job.tags;
+
           return data.isLoading
               ? Center(
                   child: SpinKitThreeBounce(
@@ -187,7 +200,7 @@ class _JobPostPageState extends State<JobPostPage> {
                         padding: EdgeInsets.only(
                             left: GlobalVariable.screenWidth * 0.1,
                             right: GlobalVariable.screenWidth * 0.7),
-                        child: Text(
+                        child: const Text(
                           'Add Images',
                           textAlign: TextAlign.left,
                           style: TextStyle(
@@ -207,7 +220,7 @@ class _JobPostPageState extends State<JobPostPage> {
                             Expanded(
                               child: GridView.builder(
                                 gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
                                   childAspectRatio: 1,
                                   crossAxisSpacing: 10,

@@ -136,18 +136,28 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           SizedBox(
             height: GlobalVariable.screenHeight * 0.07,
           ),
-          FormFields()
-              .formFields(newpassword, true, false, "Enter new Password"),
+          FormFields(
+            controller: newpassword,
+            email: false,
+            hinttext: 'Enter New Password',
+            icon: Icons.key_rounded,
+            password: true,
+          ),
           SizedBox(
             height: GlobalVariable.screenHeight * 0.01,
           ),
-          FormFields().formFields(
-              newConfirmpassword, true, false, "Confirm new Password"),
+          FormFields(
+            controller: newConfirmpassword,
+            email: false,
+            hinttext: 'Confirm New Password',
+            icon: Icons.key_rounded,
+            password: true,
+          ),
           SizedBox(
             height: GlobalVariable.screenHeight * 0.01,
           ),
           Center(
-            child: FormHelper.submitButton("Change Password", () {
+            child: FormHelper.submitButton("Confirm", () {
               resetpass();
             },
                 btnColor: Colors.deepPurple,
