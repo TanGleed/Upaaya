@@ -11,7 +11,7 @@ _$_Job _$$_JobFromJson(Map<String, dynamic> json) => _$_Job(
       title: json['title'] as String,
       location: json['location'] as String,
       description: json['description'] as String,
-      tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
+      tags: json['tags'] as String,
       media: (json['media'] as List<dynamic>).map((e) => e as String).toList(),
       additionalInfo: json['additionalInfo'] as String,
       latitude: json['latitude'] as String,

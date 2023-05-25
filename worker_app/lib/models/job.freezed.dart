@@ -24,7 +24,7 @@ mixin _$Job {
   String get title => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  List<String> get tags => throw _privateConstructorUsedError;
+  String get tags => throw _privateConstructorUsedError;
   List<String> get media => throw _privateConstructorUsedError;
   String get additionalInfo => throw _privateConstructorUsedError;
   String get latitude => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $JobCopyWith<$Res> {
       String title,
       String location,
       String description,
-      List<String> tags,
+      String tags,
       List<String> media,
       String additionalInfo,
       String latitude,
@@ -94,7 +94,7 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
       tags: null == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as String,
       media: null == media
           ? _value.media
           : media // ignore: cast_nullable_to_non_nullable
@@ -126,7 +126,7 @@ abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
       String title,
       String location,
       String description,
-      List<String> tags,
+      String tags,
       List<String> media,
       String additionalInfo,
       String latitude,
@@ -170,9 +170,9 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
           : description // ignore: cast_nullable_to_non_nullable
               as String,
       tags: null == tags
-          ? _value._tags
+          ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as String,
       media: null == media
           ? _value._media
           : media // ignore: cast_nullable_to_non_nullable
@@ -201,13 +201,12 @@ class _$_Job implements _Job {
       required this.title,
       required this.location,
       required this.description,
-      required final List<String> tags,
+      required this.tags,
       required final List<String> media,
       required this.additionalInfo,
       required this.latitude,
       required this.longitude})
-      : _tags = tags,
-        _media = media;
+      : _media = media;
 
   factory _$_Job.fromJson(Map<String, dynamic> json) => _$$_JobFromJson(json);
 
@@ -219,14 +218,8 @@ class _$_Job implements _Job {
   final String location;
   @override
   final String description;
-  final List<String> _tags;
   @override
-  List<String> get tags {
-    if (_tags is EqualUnmodifiableListView) return _tags;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tags);
-  }
-
+  final String tags;
   final List<String> _media;
   @override
   List<String> get media {
@@ -258,7 +251,7 @@ class _$_Job implements _Job {
                 other.location == location) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(other.tags, tags) || other.tags == tags) &&
             const DeepCollectionEquality().equals(other._media, _media) &&
             (identical(other.additionalInfo, additionalInfo) ||
                 other.additionalInfo == additionalInfo) &&
@@ -276,7 +269,7 @@ class _$_Job implements _Job {
       title,
       location,
       description,
-      const DeepCollectionEquality().hash(_tags),
+      tags,
       const DeepCollectionEquality().hash(_media),
       additionalInfo,
       latitude,
@@ -302,7 +295,7 @@ abstract class _Job implements Job {
       required final String title,
       required final String location,
       required final String description,
-      required final List<String> tags,
+      required final String tags,
       required final List<String> media,
       required final String additionalInfo,
       required final String latitude,
@@ -319,7 +312,7 @@ abstract class _Job implements Job {
   @override
   String get description;
   @override
-  List<String> get tags;
+  String get tags;
   @override
   List<String> get media;
   @override

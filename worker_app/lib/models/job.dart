@@ -22,7 +22,7 @@ abstract class Job with _$Job {
     required String title,
     required String location,
     required String description,
-    required List<String> tags,
+    required String tags,
     required List<String> media,
     required String additionalInfo,
     required String latitude,

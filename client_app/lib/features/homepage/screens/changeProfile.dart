@@ -59,7 +59,8 @@ class _ChangeProfileState extends State<ChangeProfile> {
 
   void changeImage(BuildContext context, File imagefile) async {
     var provider = Provider.of<UserProvider>(context, listen: false);
-    await provider.changeImage("sudeepbhattarai1792@gmail.com", imagefile);
+    String email = await LoginSharedPreferences().getemail();
+    await provider.changeImage(email, imagefile);
     if (provider.imageChanged) {
       isasynccall = false;
       setState(() {});

@@ -33,8 +33,8 @@ class GlobalVariable {
 //API URLS
 class ApiURL {
   static const String appName = "Upaaya";
-  static const String apiURL = "127.0.0.1:5000";
-  static const String imageURL = "http://127.0.0.1:5000";
+  static const String apiURL = "192.168.137.113:5000";
+  static const String imageURL = "http://192.168.137.113:5000";
   static const String signupAPI = "/api/v1/auth/register";
   static const String uniqueemailAPI = "/api/v1/auth/uniqueemail";
   static const String sendOTPAPI = "api/v1/auth/sendOTP";

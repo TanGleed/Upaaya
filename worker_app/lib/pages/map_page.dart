@@ -4,9 +4,20 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:worker_app/constants/globalVariable.dart';
+import 'package:worker_app/services/Mapservices.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+  final double desLat;
+  final double desLng;
+  final double sourcelat;
+  final double sourcelng;
+  const MapPage({
+    super.key,
+    required this.desLat,
+    required this.desLng,
+    required this.sourcelat,
+    required this.sourcelng,
+  });
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -14,9 +25,6 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   final Completer<GoogleMapController> _controller = Completer();
-
-  static const LatLng sourceLocation = LatLng(27.6195, 85.5386);
-  static const LatLng destination = LatLng(27.6332, 85.5277);
 
   List<LatLng> polylineCoordinates = [];
 
@@ -58,8 +66,8 @@ class _MapPageState extends State<MapPage> {
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       ApiURL.google_api_key,
-      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-      PointLatLng(destination.latitude, destination.longitude),
+      PointLatLng(widget.sourcelat, widget.sourcelng),
+      PointLatLng(widget.desLat, widget.desLng),
     );
 
     if (result.points.isNotEmpty) {
@@ -82,8 +90,6 @@ class _MapPageState extends State<MapPage> {
 
   @override
   void initState() {
-    // getCurrentLocation();
-    // setCustomMarkerIcon();
     getPolyPoints();
     super.initState();
   }
@@ -108,10 +114,10 @@ class _MapPageState extends State<MapPage> {
             //     :
             GoogleMap(
           initialCameraPosition: CameraPosition(
-            target: sourceLocation,
+            target: LatLng(widget.sourcelat, widget.sourcelng),
             // LatLng(currentLocation!.latitude!,
             //     currentLocation!.longitude!),
-            zoom: 13.5,
+            zoom: 16,
           ),
           polylines: {
             Polyline(
@@ -132,11 +138,11 @@ class _MapPageState extends State<MapPage> {
             // ),
             Marker(
               markerId: MarkerId("source"),
-              position: sourceLocation,
+              position: LatLng(widget.sourcelat, widget.sourcelng),
             ),
             Marker(
               markerId: MarkerId("destination"),
-              position: destination,
+              position: LatLng(widget.desLat, widget.desLng),
             ),
           },
           // onMapCreated: (mapController) {

@@ -4,7 +4,7 @@ import 'package:worker_app/models/job.dart';
 import 'package:worker_app/pages/desc_page.dart';
 import 'package:worker_app/widgets/nav_drawer_wid.dart';
 import '../models/pagination.dart';
-import '../provider.dart';
+import '../providers/provider.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
