@@ -25,7 +25,10 @@ mixin _$Job {
   String get location => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
+  List<String> get media => throw _privateConstructorUsedError;
   String get additionalInfo => throw _privateConstructorUsedError;
+  String get latitude => throw _privateConstructorUsedError;
+  String get longitude => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +46,10 @@ abstract class $JobCopyWith<$Res> {
       String location,
       String description,
       List<String> tags,
-      String additionalInfo});
+      List<String> media,
+      String additionalInfo,
+      String latitude,
+      String longitude});
 }
 
 /// @nodoc
@@ -63,7 +69,10 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
     Object? location = null,
     Object? description = null,
     Object? tags = null,
+    Object? media = null,
     Object? additionalInfo = null,
+    Object? latitude = null,
+    Object? longitude = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -86,9 +95,21 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      media: null == media
+          ? _value.media
+          : media // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       additionalInfo: null == additionalInfo
           ? _value.additionalInfo
           : additionalInfo // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -106,7 +127,10 @@ abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
       String location,
       String description,
       List<String> tags,
-      String additionalInfo});
+      List<String> media,
+      String additionalInfo,
+      String latitude,
+      String longitude});
 }
 
 /// @nodoc
@@ -123,7 +147,10 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
     Object? location = null,
     Object? description = null,
     Object? tags = null,
+    Object? media = null,
     Object? additionalInfo = null,
+    Object? latitude = null,
+    Object? longitude = null,
   }) {
     return _then(_$_Job(
       id: null == id
@@ -146,9 +173,21 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      media: null == media
+          ? _value._media
+          : media // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       additionalInfo: null == additionalInfo
           ? _value.additionalInfo
           : additionalInfo // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -163,8 +202,12 @@ class _$_Job implements _Job {
       required this.location,
       required this.description,
       required final List<String> tags,
-      required this.additionalInfo})
-      : _tags = tags;
+      required final List<String> media,
+      required this.additionalInfo,
+      required this.latitude,
+      required this.longitude})
+      : _tags = tags,
+        _media = media;
 
   factory _$_Job.fromJson(Map<String, dynamic> json) => _$$_JobFromJson(json);
 
@@ -184,12 +227,24 @@ class _$_Job implements _Job {
     return EqualUnmodifiableListView(_tags);
   }
 
+  final List<String> _media;
+  @override
+  List<String> get media {
+    if (_media is EqualUnmodifiableListView) return _media;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_media);
+  }
+
   @override
   final String additionalInfo;
+  @override
+  final String latitude;
+  @override
+  final String longitude;
 
   @override
   String toString() {
-    return 'Job(id: $id, title: $title, location: $location, description: $description, tags: $tags, additionalInfo: $additionalInfo)';
+    return 'Job(id: $id, title: $title, location: $location, description: $description, tags: $tags, media: $media, additionalInfo: $additionalInfo, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -204,14 +259,28 @@ class _$_Job implements _Job {
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
+            const DeepCollectionEquality().equals(other._media, _media) &&
             (identical(other.additionalInfo, additionalInfo) ||
-                other.additionalInfo == additionalInfo));
+                other.additionalInfo == additionalInfo) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, location, description,
-      const DeepCollectionEquality().hash(_tags), additionalInfo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      location,
+      description,
+      const DeepCollectionEquality().hash(_tags),
+      const DeepCollectionEquality().hash(_media),
+      additionalInfo,
+      latitude,
+      longitude);
 
   @JsonKey(ignore: true)
   @override
@@ -234,7 +303,10 @@ abstract class _Job implements Job {
       required final String location,
       required final String description,
       required final List<String> tags,
-      required final String additionalInfo}) = _$_Job;
+      required final List<String> media,
+      required final String additionalInfo,
+      required final String latitude,
+      required final String longitude}) = _$_Job;
 
   factory _Job.fromJson(Map<String, dynamic> json) = _$_Job.fromJson;
 
@@ -249,7 +321,13 @@ abstract class _Job implements Job {
   @override
   List<String> get tags;
   @override
+  List<String> get media;
+  @override
   String get additionalInfo;
+  @override
+  String get latitude;
+  @override
+  String get longitude;
   @override
   @JsonKey(ignore: true)
   _$$_JobCopyWith<_$_Job> get copyWith => throw _privateConstructorUsedError;

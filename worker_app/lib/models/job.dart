@@ -23,7 +23,10 @@ abstract class Job with _$Job {
     required String location,
     required String description,
     required List<String> tags,
+    required List<String> media,
     required String additionalInfo,
+    required String latitude,
+    required String longitude,
   }) = _Job;
 
   factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
