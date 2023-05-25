@@ -49,7 +49,8 @@ class HomePageServices {
     request.fields['latitude'] = jobPost.latitude.toString();
     request.fields['longitude'] = jobPost.longitude.toString();
     request.fields['tags'] = jobPost.tags;
-
+    request.fields['clientemail'] = jobPost.clientemail;
+    request.fields['jobStatus'] = jobPost.jobStatus;
     // Add media files to the request as files
     for (var file in jobPost.media) {
       var stream = http.ByteStream(file.openRead());

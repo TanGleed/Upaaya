@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:client_app/constants/global_variable.dart';
 import 'package:client_app/features/homepage/widgets/job_categories.dart';
+import 'package:client_app/sharedpreferences.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geocoding/geocoding.dart';
@@ -78,9 +80,9 @@ class _JobPostPageState extends State<JobPostPage> {
     String description = descriptionController.text.trim();
     String location = locationController.text.trim();
     String tags = tagController.text.trim();
-    List<String> image = [];
     String additionalInfo = additionalInfoController.text.trim();
-
+    String clientemail = await LoginSharedPreferences().getemail();
+    String jobStatus = "Submitted";
     JobPost job = JobPost(
       latitude: latitude,
       longitude: longitude,
@@ -90,6 +92,8 @@ class _JobPostPageState extends State<JobPostPage> {
       tags: tags,
       additionalInfo: additionalInfo,
       media: imageFiles,
+      clientemail: clientemail,
+      jobStatus: jobStatus,
     );
     var provider = Provider.of<JobPostNotifier>(context, listen: false);
     await provider.post(job, imageFiles);

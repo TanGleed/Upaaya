@@ -20,6 +20,8 @@ class JobPostNotifier extends ChangeNotifier {
     additionalInfo: '',
     media: [],
     longitude: 0.0,
+    clientemail: '',
+    jobStatus: '',
   );
   JobPost get job => _jobPost;
 
