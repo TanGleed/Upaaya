@@ -1,14 +1,29 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:worker_app/constants/globalVariable.dart';
 
 import 'package:worker_app/models/job.dart';
 import 'package:worker_app/pages/map_page.dart';
+import 'package:worker_app/services/Mapservices.dart';
 
-class DescPage extends StatelessWidget {
+class DescPage extends StatefulWidget {
   final Job job;
   const DescPage({Key? key, required this.job}) : super(key: key);
 
   @override
+  State<DescPage> createState() => _DescPageState();
+}
+
+class _DescPageState extends State<DescPage> {
+  double sourcelat = 27.6195;
+  double sourcelng = 85.5386;
+  void setlocation() async {}
+
+  @override
   Widget build(BuildContext context) {
+    List<String> imageList = widget.job.media;
     return Scaffold(
       appBar: AppBar(
         title: Text('Description'),
@@ -21,15 +36,32 @@ class DescPage extends StatelessWidget {
             Positioned(
               left: 10,
               right: 10,
-              child: Container(
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/car.png',
-                      ),
-                      fit: BoxFit.contain),
-                ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CarouselSlider(
+                    items: imageList
+                        .map(
+                          (e) => ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: Image.network(
+                              ApiURL.imageURL + e,
+                              height: MediaQuery.of(context).size.height * 0.4,
+                              width: double.maxFinite,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      enableInfiniteScroll: false,
+                      enlargeCenterPage: true,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                    ),
+                  )
+                ],
               ),
             ),
             Positioned(
@@ -52,7 +84,7 @@ class DescPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          job.title,
+                          widget.job.title,
                           style: TextStyle(
                             color: Color.fromARGB(255, 49, 49, 49),
                             fontSize: 28,
@@ -76,7 +108,7 @@ class DescPage extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          "Location: ${job.location}",
+                          "Location: ${widget.job.location}",
                           style: TextStyle(
                             color: Color.fromARGB(255, 68, 65, 65),
                             fontSize: 15,
@@ -101,7 +133,7 @@ class DescPage extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          job.title,
+                          widget.job.title,
                           style: TextStyle(
                             color: Color.fromARGB(255, 68, 65, 65),
                             fontSize: 15,
@@ -113,7 +145,7 @@ class DescPage extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      job.description,
+                      widget.job.description,
                       style: TextStyle(
                           color: Color.fromARGB(255, 68, 65, 65),
                           fontSize: 20,
@@ -123,7 +155,7 @@ class DescPage extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      job.additionalInfo,
+                      widget.job.additionalInfo,
                       style: TextStyle(
                         color: Color.fromARGB(255, 68, 65, 65),
                         fontSize: 15,
@@ -143,7 +175,7 @@ class DescPage extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Name:${job.id}",
+                      "Name:${widget.job.id}",
                       style: TextStyle(
                         color: Color.fromARGB(255, 68, 65, 65),
                         fontSize: 15,
@@ -165,14 +197,28 @@ class DescPage extends StatelessWidget {
                     Center(
                       child: MaterialButton(
                         color: Colors.deepPurple,
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MapPage(
-                                  // desLat: job.latitude,
-                                  // desLng: job.longitude,
-                                  )),
-                        ),
+                        onPressed: () async {
+                          await MapServices()
+                              .determinePosition()
+                              .then((value) => {
+                                    print(value.latitude),
+                                    sourcelat = value.latitude,
+                                    sourcelng = value.longitude,
+                                  });
+
+                          setState(() {});
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MapPage(
+                                      desLat: double.parse(widget.job.latitude),
+                                      desLng:
+                                          double.parse(widget.job.longitude),
+                                      sourcelat: sourcelat,
+                                      sourcelng: sourcelng,
+                                    )),
+                          );
+                        },
                         child: Text(
                           'Accept',
                           style: TextStyle(color: Colors.white, fontSize: 15),
