@@ -19,7 +19,6 @@ const jobPostSchema = new mongoose.Schema(
     location: {
       type: String,
       required: true,
-      index: true,
       trim: true,
     },
     description: {
@@ -35,22 +34,34 @@ const jobPostSchema = new mongoose.Schema(
     ],
 
     tags: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
 
-    latitude:{
-      type:String,
-      required:true,
+    latitude: {
+      type: String,
+      required: true,
     },
     longitude:
     {
-      type:String,
-      required:true,
+      type: String,
+      required: true,
     },
     additionalInfo: {
       type: String,
     },
+    clientemail:
+    {
+      type: String,
+      trim: true,
+      match:
+        /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+    },
+    jobStatus:
+    {
+      type: String,
+      trim: true,
+    }
   },
   schemaOptions
 );

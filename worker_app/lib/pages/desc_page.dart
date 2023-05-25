@@ -133,7 +133,7 @@ class _DescPageState extends State<DescPage> {
                           width: 5,
                         ),
                         Text(
-                          widget.job.title,
+                          widget.job.tags,
                           style: TextStyle(
                             color: Color.fromARGB(255, 68, 65, 65),
                             fontSize: 15,
@@ -185,7 +185,7 @@ class _DescPageState extends State<DescPage> {
                       height: 3,
                     ),
                     Text(
-                      "Contact:xxxxxxxxxx",
+                      "Contact:${widget.job.clientemail}",
                       style: TextStyle(
                         color: Color.fromARGB(255, 68, 65, 65),
                         fontSize: 15,

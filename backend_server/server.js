@@ -21,7 +21,7 @@ const { uploadimage } = require("./src/version1/controllers/profile.controller")
 
 // INIT
 const PORT = process.env.PORT || 4000;
-const hostname = "192.168.137.113";
+const hostname = "127.0.0.1";
 const app = express();
 
 // Connections

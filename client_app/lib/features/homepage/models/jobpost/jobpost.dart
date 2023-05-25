@@ -9,6 +9,8 @@ class JobPost {
   String additionalInfo;
   double latitude;
   double longitude;
+  String clientemail;
+  String jobStatus;
   JobPost({
     required this.title,
     required this.description,
@@ -18,6 +20,8 @@ class JobPost {
     required this.media,
     required this.latitude,
     required this.longitude,
+    required this.clientemail,
+    required this.jobStatus,
   });
 
   Map<String, dynamic> toJson() {
@@ -29,6 +33,8 @@ class JobPost {
     data['additionalInfo'] = additionalInfo;
     data['latitude'] = latitude;
     data['longitude'] = longitude;
+    data['clientemail'] = clientemail;
+    data['jobStatus'] = jobStatus;
     return data;
   }
 }

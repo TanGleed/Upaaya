@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../constants/globalVariable.dart';
-
 part 'job.freezed.dart';
 part 'job.g.dart';
 
@@ -27,6 +26,8 @@ abstract class Job with _$Job {
     required String additionalInfo,
     required String latitude,
     required String longitude,
+    required String clientemail,
+    required String jobStatus,
   }) = _Job;
 
   factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);

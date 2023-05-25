@@ -16,6 +16,8 @@ _$_Job _$$_JobFromJson(Map<String, dynamic> json) => _$_Job(
       additionalInfo: json['additionalInfo'] as String,
       latitude: json['latitude'] as String,
       longitude: json['longitude'] as String,
+      clientemail: json['clientemail'] as String,
+      jobStatus: json['jobStatus'] as String,
     );
 
 Map<String, dynamic> _$$_JobToJson(_$_Job instance) => <String, dynamic>{
@@ -28,4 +30,6 @@ Map<String, dynamic> _$$_JobToJson(_$_Job instance) => <String, dynamic>{
       'additionalInfo': instance.additionalInfo,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
+      'clientemail': instance.clientemail,
+      'jobStatus': instance.jobStatus,
     };

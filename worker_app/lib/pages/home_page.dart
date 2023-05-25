@@ -25,7 +25,7 @@ class HomePage extends ConsumerWidget {
       page: 1,
       pageSize: 10,
     )));
-    print(jobs);
+
     return jobs.when(
       data: (list) {
         return _buildJobList(list!, ref);

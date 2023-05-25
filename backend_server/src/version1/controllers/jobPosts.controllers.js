@@ -55,8 +55,8 @@ const createJobPost = async (req, res) => {
     } else {
    
         const media = req.files.map((files)=>'/'+files.path);
-        const {title, location, description,tags,additionalInfo ,latitude,longitude} = req.body;
-        
+        const {title, location, description,tags,additionalInfo ,latitude,longitude,clientemail,jobStatus} = req.body;
+       
         const jobPost = await JobPost.create({
           title,
           location,
@@ -66,6 +66,8 @@ const createJobPost = async (req, res) => {
           additionalInfo,
           latitude,
           longitude,
+          clientemail,
+          jobStatus,
         });
         res.status(201).json({ jobPost });
       }

@@ -29,6 +29,8 @@ mixin _$Job {
   String get additionalInfo => throw _privateConstructorUsedError;
   String get latitude => throw _privateConstructorUsedError;
   String get longitude => throw _privateConstructorUsedError;
+  String get clientemail => throw _privateConstructorUsedError;
+  String get jobStatus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +51,9 @@ abstract class $JobCopyWith<$Res> {
       List<String> media,
       String additionalInfo,
       String latitude,
-      String longitude});
+      String longitude,
+      String clientemail,
+      String jobStatus});
 }
 
 /// @nodoc
@@ -73,6 +77,8 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
     Object? additionalInfo = null,
     Object? latitude = null,
     Object? longitude = null,
+    Object? clientemail = null,
+    Object? jobStatus = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -111,6 +117,14 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as String,
+      clientemail: null == clientemail
+          ? _value.clientemail
+          : clientemail // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobStatus: null == jobStatus
+          ? _value.jobStatus
+          : jobStatus // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -130,7 +144,9 @@ abstract class _$$_JobCopyWith<$Res> implements $JobCopyWith<$Res> {
       List<String> media,
       String additionalInfo,
       String latitude,
-      String longitude});
+      String longitude,
+      String clientemail,
+      String jobStatus});
 }
 
 /// @nodoc
@@ -151,6 +167,8 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
     Object? additionalInfo = null,
     Object? latitude = null,
     Object? longitude = null,
+    Object? clientemail = null,
+    Object? jobStatus = null,
   }) {
     return _then(_$_Job(
       id: null == id
@@ -189,6 +207,14 @@ class __$$_JobCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$_Job>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as String,
+      clientemail: null == clientemail
+          ? _value.clientemail
+          : clientemail // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobStatus: null == jobStatus
+          ? _value.jobStatus
+          : jobStatus // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -205,7 +231,9 @@ class _$_Job implements _Job {
       required final List<String> media,
       required this.additionalInfo,
       required this.latitude,
-      required this.longitude})
+      required this.longitude,
+      required this.clientemail,
+      required this.jobStatus})
       : _media = media;
 
   factory _$_Job.fromJson(Map<String, dynamic> json) => _$$_JobFromJson(json);
@@ -234,10 +262,14 @@ class _$_Job implements _Job {
   final String latitude;
   @override
   final String longitude;
+  @override
+  final String clientemail;
+  @override
+  final String jobStatus;
 
   @override
   String toString() {
-    return 'Job(id: $id, title: $title, location: $location, description: $description, tags: $tags, media: $media, additionalInfo: $additionalInfo, latitude: $latitude, longitude: $longitude)';
+    return 'Job(id: $id, title: $title, location: $location, description: $description, tags: $tags, media: $media, additionalInfo: $additionalInfo, latitude: $latitude, longitude: $longitude, clientemail: $clientemail, jobStatus: $jobStatus)';
   }
 
   @override
@@ -258,7 +290,11 @@ class _$_Job implements _Job {
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
-                other.longitude == longitude));
+                other.longitude == longitude) &&
+            (identical(other.clientemail, clientemail) ||
+                other.clientemail == clientemail) &&
+            (identical(other.jobStatus, jobStatus) ||
+                other.jobStatus == jobStatus));
   }
 
   @JsonKey(ignore: true)
@@ -273,7 +309,9 @@ class _$_Job implements _Job {
       const DeepCollectionEquality().hash(_media),
       additionalInfo,
       latitude,
-      longitude);
+      longitude,
+      clientemail,
+      jobStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -299,7 +337,9 @@ abstract class _Job implements Job {
       required final List<String> media,
       required final String additionalInfo,
       required final String latitude,
-      required final String longitude}) = _$_Job;
+      required final String longitude,
+      required final String clientemail,
+      required final String jobStatus}) = _$_Job;
 
   factory _Job.fromJson(Map<String, dynamic> json) = _$_Job.fromJson;
 
@@ -321,6 +361,10 @@ abstract class _Job implements Job {
   String get latitude;
   @override
   String get longitude;
+  @override
+  String get clientemail;
+  @override
+  String get jobStatus;
   @override
   @JsonKey(ignore: true)
   _$$_JobCopyWith<_$_Job> get copyWith => throw _privateConstructorUsedError;

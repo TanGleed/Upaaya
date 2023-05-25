@@ -57,6 +57,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> changeImage(String contact, File imagefile) async {
+    print(contact);
     try {
       final http.BaseResponse response =
           (await UserServices.changeImage(contact, imagefile));
