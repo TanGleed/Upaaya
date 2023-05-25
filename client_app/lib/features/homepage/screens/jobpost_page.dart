@@ -120,7 +120,6 @@ class _JobPostPageState extends State<JobPostPage> {
           locationController.text = data.job.location;
           latitude = data.job.latitude;
           longitude = data.job.longitude;
-          tagController.text = data.job.tags;
 
           return data.isLoading
               ? Center(
