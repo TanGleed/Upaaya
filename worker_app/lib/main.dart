@@ -30,7 +30,7 @@ class MyApp extends HookConsumerWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Auth(),
+      home: const HomePage(),
       theme: ThemeData(primarySwatch: Colors.deepPurple),
     );
   }

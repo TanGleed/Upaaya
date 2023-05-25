@@ -4,9 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../constants/globalVariable.dart';
 
-part 'job.freezed.dart';
-part 'job.g.dart';
-
 List<Job> jobFromJson(dynamic str) {
   return List<Job>.from(
     (str).map(
@@ -22,8 +19,8 @@ abstract class Job with _$Job {
     required String title,
     required String location,
     required String description,
-    required List<String> tags,
-    required List<String> media,
+    required String tags,
+    //required List<String> media,
     required String additionalInfo,
     required String latitude,
     required String longitude,

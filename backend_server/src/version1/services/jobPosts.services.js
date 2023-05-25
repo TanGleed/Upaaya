@@ -39,6 +39,8 @@ const createJobPost = async ({
   media,
   tags,
   additionalInfo,
+  clientemail,
+  jobStatus,
 }) => {
   // Validate title, location, and tags
   if (!title) {
@@ -61,6 +63,8 @@ const createJobPost = async ({
     media,
     tags,
     additionalInfo,
+    clientemail,
+    jobStatus,
   });
 
   try {
@@ -100,6 +104,8 @@ const updateJobPost = async (body, params) => {
     additionalInfo,
     latitude,
     longitude,
+    clientemail,
+    jobStatus,
   });
 
   try {
