@@ -20,39 +20,39 @@ class _MapPageState extends State<MapPage> {
 
   List<LatLng> polylineCoordinates = [];
 
-  LocationData? currentLocation;
+  // LocationData? currentLocation;
 
-  BitmapDescriptor sourceIcon = BitmapDescriptor.defaultMarker;
-  BitmapDescriptor destinationIcon = BitmapDescriptor.defaultMarker;
-  BitmapDescriptor currentLocationIcon = BitmapDescriptor.defaultMarker;
+  // BitmapDescriptor sourceIcon = BitmapDescriptor.defaultMarker;
+  // BitmapDescriptor destinationIcon = BitmapDescriptor.defaultMarker;
+  // BitmapDescriptor currentLocationIcon = BitmapDescriptor.defaultMarker;
 
-  void getCurrentLocation() async {
-    Location location = Location();
+  // void getCurrentLocation() async {
+  //   Location location = Location();
 
-    location.getLocation().then((location) {
-      currentLocation = location;
-    });
-    GoogleMapController googleMapController = await _controller.future;
+  //   location.getLocation().then((location) {
+  //     currentLocation = location;
+  //   });
+  //   GoogleMapController googleMapController = await _controller.future;
 
-    location.onLocationChanged.listen(
-      (newLoc) {
-        currentLocation = newLoc;
+  //   location.onLocationChanged.listen(
+  //     (newLoc) {
+  //       currentLocation = newLoc;
 
-        googleMapController.animateCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(
-              zoom: 13.2,
-              target: LatLng(
-                newLoc.latitude!,
-                newLoc.longitude!,
-              ),
-            ),
-          ),
-        );
-        setState(() {});
-      },
-    );
-  }
+  //       googleMapController.animateCamera(
+  //         CameraUpdate.newCameraPosition(
+  //           CameraPosition(
+  //             zoom: 13.2,
+  //             target: LatLng(
+  //               newLoc.latitude!,
+  //               newLoc.longitude!,
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //       setState(() {});
+  //     },
+  //   );
+  // }
 
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
@@ -72,18 +72,18 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
-  void setCustomMarkerIcon() {
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration.empty, "assets/images/user.png")
-        .then((icon) {
-      currentLocationIcon = icon;
-    });
-  }
+  // void setCustomMarkerIcon() {
+  //   BitmapDescriptor.fromAssetImage(
+  //           ImageConfiguration.empty, "assets/images/user.png")
+  //       .then((icon) {
+  //     currentLocationIcon = icon;
+  //   });
+  // }
 
   @override
   void initState() {
-    getCurrentLocation();
-    setCustomMarkerIcon();
+    // getCurrentLocation();
+    // setCustomMarkerIcon();
     getPolyPoints();
     super.initState();
   }
@@ -100,47 +100,48 @@ class _MapPageState extends State<MapPage> {
             ),
           ),
         ),
-        body: currentLocation == null
-            ? const Center(
-                child: Text("Loading"),
-              )
-            : GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target:
-                      // sourceLocation,
-                      LatLng(currentLocation!.latitude!,
-                          currentLocation!.longitude!),
-                  zoom: 13.5,
-                ),
-                polylines: {
-                  Polyline(
-                    polylineId: PolylineId('route'),
-                    points: polylineCoordinates,
-                    color: Colors.purple,
-                    width: 6,
-                  ),
-                },
-                markers: {
-                  Marker(
-                    markerId: MarkerId("currentLocation"),
-                    icon: currentLocationIcon,
-                    position: LatLng(
-                      currentLocation!.latitude!,
-                      currentLocation!.longitude!,
-                    ),
-                  ),
-                  Marker(
-                    markerId: MarkerId("source"),
-                    position: sourceLocation,
-                  ),
-                  Marker(
-                    markerId: MarkerId("destination"),
-                    position: destination,
-                  ),
-                },
-                onMapCreated: (mapController) {
-                  _controller.complete(mapController);
-                },
-              ));
+        body:
+            // currentLocation == null
+            //     ? const Center(
+            //         child: Text("Loading"),
+            //       )
+            //     :
+            GoogleMap(
+          initialCameraPosition: CameraPosition(
+            target: sourceLocation,
+            // LatLng(currentLocation!.latitude!,
+            //     currentLocation!.longitude!),
+            zoom: 13.5,
+          ),
+          polylines: {
+            Polyline(
+              polylineId: PolylineId('route'),
+              points: polylineCoordinates,
+              color: Colors.purple,
+              width: 6,
+            ),
+          },
+          markers: {
+            // Marker(
+            //   markerId: MarkerId("currentLocation"),
+            //   icon: currentLocationIcon,
+            //   position: LatLng(
+            //     currentLocation!.latitude!,
+            //     currentLocation!.longitude!,
+            //   ),
+            // ),
+            Marker(
+              markerId: MarkerId("source"),
+              position: sourceLocation,
+            ),
+            Marker(
+              markerId: MarkerId("destination"),
+              position: destination,
+            ),
+          },
+          // onMapCreated: (mapController) {
+          //   _controller.complete(mapController);
+          // },
+        ));
   }
 }

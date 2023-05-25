@@ -92,7 +92,7 @@ class HomePage extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                            job.description,
+                            job.title,
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,

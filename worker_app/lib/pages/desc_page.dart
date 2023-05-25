@@ -10,22 +10,24 @@ class DescPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Description'),
-        ),
-        body: Container(
+      appBar: AppBar(
+        title: Text('Description'),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
           width: double.maxFinite,
-          height: double.maxFinite,
+          height: 950,
           child: Stack(children: [
             Positioned(
               left: 10,
               right: 10,
               child: Container(
                 width: double.maxFinite,
-                height: 300,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/car.png'),
+                      image: AssetImage(
+                        'assets/images/car.png',
+                      ),
                       fit: BoxFit.contain),
                 ),
               ),
@@ -156,23 +158,20 @@ class DescPage extends StatelessWidget {
                         color: Color.fromARGB(255, 68, 65, 65),
                         fontSize: 15,
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-                bottom: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 75),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Center(
                       child: MaterialButton(
                         color: Colors.deepPurple,
                         onPressed: () => Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MapPage()),
+                          MaterialPageRoute(
+                              builder: (context) => MapPage(
+                                  // desLat: job.latitude,
+                                  // desLng: job.longitude,
+                                  )),
                         ),
                         child: Text(
                           'Accept',
@@ -180,23 +179,36 @@ class DescPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: MaterialButton(
-                        color: Colors.deepPurple,
-                        onPressed: () {},
-                        child: Text(
-                          'Decline',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
-                        ),
-                      ),
-                    ),
                   ],
-                ))
+                ),
+              ),
+            ),
+
+            // Positioned(
+            //     bottom: 20,
+            //     right: 20,
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         Padding(
+            //           padding: const EdgeInsets.only(left: 75),
+            //           child: MaterialButton(
+            //             color: Colors.deepPurple,
+            //             onPressed: () => Navigator.push(
+            //               context,
+            //               MaterialPageRoute(builder: (context) => MapPage()),
+            //             ),
+            //             child: Text(
+            //               'Accept',
+            //               style: TextStyle(color: Colors.white, fontSize: 15),
+            //             ),
+            //           ),
+            //         ),
+            //       ],
+            //     ))
           ]),
-        ));
+        ),
+      ),
+    );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:worker_app/features/auth/screens/auth.dart';
 import 'package:worker_app/features/auth/screens/login.dart';
+import 'package:worker_app/pages/about_us.dart';
 import 'package:worker_app/pages/profile_page.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -31,7 +32,14 @@ class NavigationDrawerWidget extends StatelessWidget {
             const SizedBox(height: 16),
             buildMenuItem(text: 'Payments', icon: Icons.payment),
             const SizedBox(height: 16),
-            buildMenuItem(text: 'About us', icon: Icons.info_outlined),
+            buildMenuItem(
+              text: 'About us',
+              icon: Icons.info_outlined,
+              onClicked: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutUsPage()),
+              ),
+            ),
             const SizedBox(height: 16),
             Divider(color: Colors.white70),
             const SizedBox(height: 16),
